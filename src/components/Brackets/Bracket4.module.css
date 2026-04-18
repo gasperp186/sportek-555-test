@@ -1,0 +1,341 @@
+
+
+
+.title {
+  font-size: 1.9rem;
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+  color: #2563eb;
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 0.95rem;
+  color: #64748b;
+  margin-top: 10px;
+}
+
+.btnRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 26px;
+  margin-bottom: 26px;
+}
+
+.randomBtn,
+.secondaryBtn {
+  padding: 9px 18px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.randomBtn {
+  border: 2px solid #2563eb;
+  background: #fff;
+  color: #2563eb;
+}
+
+
+
+.secondaryBtn {
+  border: 1px solid #cbd5e1;
+  background: #fff;
+  color: #334155;
+}
+
+.locationSettings {
+  max-width: 880px;
+  margin: 24px auto 0;
+  padding: 12px 20px 14px;
+  border-radius: 14px;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.checkboxRow {
+  display: inline;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: #1e293b;
+  text-align: center;
+}
+
+.checkboxRow input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.globalLocation {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.locationInfo {
+  font-size: 0.85rem;
+  color: #0f172a;
+  padding: 7px 10px;
+  background: #e0f2fe;
+  border-radius: 8px;
+}
+
+.matchesList {
+  max-width: 960px;
+  margin: 26px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 0 20px;
+}
+
+.matchCard {
+  background: #f9fafb;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 16px 16px 14px;
+  box-shadow: 0 6px 22px rgba(15, 23, 42, 0.06);
+}
+
+.matchHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.matchRound {
+  display: inline-block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #2563eb;
+  font-weight: 700;
+}
+
+.matchTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 2px 0 0;
+  color: #0f172a;
+}
+
+.teamsRow {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.teamSlot {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.teamLabel {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.teamPlaceholder {
+  background: #fff;
+  border-radius: 10px;
+  border: 1px dashed #cbd5e1;
+  padding: 8px 10px;
+  font-size: 13px;
+  color: #334155;
+}
+
+.metaRow {
+  display: grid;
+  grid-template-columns: 0.8fr 0.8fr 1.4fr;
+  gap: 10px;
+}
+
+.datetimeBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.metaLabel {
+  font-size: 11px;
+  color: #64748b;
+}
+
+.locationBlock {
+  min-width: 0;
+}
+
+.locationInput {
+  padding: 7px 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #fff;
+  font-size: 13px;
+  font-family: "Poppins", sans-serif;
+  color: #0f172a;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+.locationInput:focus {
+  border-color: #3b82f6;
+  outline: none;
+  background: #f9fafb;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.14);
+}
+
+
+@media (max-width: 900px) {
+  .matchesList {
+    padding: 0 12px;
+  }
+
+  .locationSettings {
+    margin-left: 12px;
+    margin-right: 12px;
+  }
+}
+
+@media (max-width: 700px) {
+  .teamsRow {
+    grid-template-columns: 1fr;
+  }
+  .metaRow {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .title {
+    font-size: 1.6rem;
+  }
+  .publishBtn {
+    font-size: 13px;
+    padding: 9px 18px;
+  }
+}
+
+:global(.react-datepicker-wrapper) {
+  width: 100%;
+}
+
+:global(.react-datepicker__input-container input) {
+  width: 100%;
+  padding: 6px 8px;
+  font-size: 13px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #fff;
+  font-family: "Poppins", sans-serif;
+  color: #0f172a;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+:global(.react-datepicker__input-container input:focus) {
+  border-color: #3b82f6;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.14);
+}
+
+.matchTitle {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.locationRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* kraj | lokacija */
+  gap: 10px;
+}
+
+.locationRow input {
+  width: 100%;
+}
+
+.react-datepicker-popper {
+  position: absolute !important;
+}
+
+.actions {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.2rem;
+  margin-top: 30px;
+}
+
+
+
+.btn {
+  flex: 1;
+  background: linear-gradient(135deg, #2563eb, #3b82f6);
+  border: none;
+  padding: 0.9rem 1.4rem;
+  border-radius: 0.9rem;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s ease;
+  text-align: center;
+  max-width: 350px;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(37, 99, 235, 0.35);
+}
+
+.btnOutline {
+  flex: 1;
+  background: #ffffff;
+  border: 2px solid #2563eb;
+  color: #2563eb;
+}
+
+.btnOutline:hover {
+  background: #eff6ff;
+  box-shadow: 0 10px 22px rgba(37, 99, 235, 0.2);
+}
+
+.btn:disabled,
+.btnOutline:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+  background: #9bbbe9 !important; /* bolj sivo */
+  border-color: #94a3b8 !important;
+  color: #ffffff !important;
+}
+
+.btnOutline:disabled {
+  background: #f1f5f9 !important;
+  color: #94a3b8 !important;
+}
+
+.btn:disabled,
+.btnOutline:disabled {
+  filter: grayscale(40%);
+}
+

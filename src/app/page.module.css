@@ -17,6 +17,9 @@
   background-color: var(--background);
 }
 
+.ustvariBtn {
+  background-color: var(--color-primary-light);
+}
 .main {
   display: flex;
   min-height: 100vh;
@@ -93,7 +96,6 @@ a.secondary {
   border-color: var(--button-secondary-border);
 }
 
-/* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {
   a.primary:hover {
     background: var(--button-primary-hover);

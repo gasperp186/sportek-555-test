@@ -1,0 +1,90 @@
+.page {
+  min-height: 450px;
+  background: #0b1224; 
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px 10px;
+  font-family: 'Poppins', sans-serif;
+ 
+}
+
+.calendarwrapper {
+  max-width: 1000px;
+  margin: 1px auto;
+  align-items: center;
+  justify-content: center;
+}
+
+.calendartitle {
+  font-size: 38px;
+  font-weight: 600;
+  margin-top: 70px;
+  text-align: center;
+  margin-bottom: 0;
+
+  
+}
+
+/* Celotna vrstica z dnevi (Pon, Tor...) */
+:global(.fc-col-header) {
+    background-color: #f8f9fa; /* Svetlo siva podlaga za celo vrstico */
+    border-bottom: 2px solid #eeeeee;
+}
+
+/* Posamezna celica v glavi (npr. "Pon") */
+:global(.fc-col-header-cell) {
+    padding: 12px 0 !important; /* Več prostora zgoraj in spodaj */
+    vertical-align: middle !important;
+}
+
+/* Tekst znotraj celice (povezava/napis) */
+:global(.fc-col-header-cell-cushion) {
+    color: #444444 !important; /* Temno siva barva pisave */
+    text-transform: uppercase; /* Vse velike začetnice (PON, TOR...) */
+    font-size: 0.85rem;         /* Malo manjša, elegantna pisava */
+    font-weight: 700;           /* Krepko, da izstopa */
+    text-decoration: none !important; /* Odstrani podčrtaj */
+    letter-spacing: 1px;        /* Malo razmika med črkami */
+}
+
+
+/* Prisili orodno vrstico, da so vsi elementi v isti vrstici */
+:global(.fc-header-toolbar) {
+    display: flex !important;
+    justify-content: center !important; /* Vse postavi na sredino */
+    align-items: center !important;
+    gap: 20px; /* Razmik med puščicami in naslovom */
+    margin-bottom: 2em !important;
+}
+
+/* Prepreči, da bi se "center" blok raztegnil čez celo širino */
+:global(.fc-toolbar-chunk) {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* Če so puščice še vedno v svojem bloku, jih "poravnaj" k naslovu */
+:global(.fc-toolbar-title) {
+    margin: 0 15px !important; /* Razmik levo in desno od imena meseca */
+    font-size: 1.5rem !important;
+    display: inline-block !important;
+}
+
+/* Gumbi (puščice) naj bodo v isti liniji */
+:global(.fc-button-group) {
+    display: flex !important;
+    align-items: center !important;
+}
+
+/* 1. Obroba okoli celotne tabele (tisti del z dnevi) */
+:global(.fc-view-harness) {
+    border: 1px solid #e0e0e0 !important; /* Barva zunanje obrobe */
+    overflow: hidden !important;          /* Da vsebina ne gleda čez zaobljene robove */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Nežna senca za globino */
+}
+
+:global(.fc) {
+  margin-top: 50px
+}

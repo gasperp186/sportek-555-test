@@ -1,0 +1,40 @@
+
+.card {
+  background: #ffffff;
+  border: 2px solid #3b82f6;                  
+  border-radius: 1.2rem;
+  box-shadow: 0 12px 35px rgba(59,130,246,0.10);
+  width: 100%;
+  max-width: 800px;                            
+  padding: 2.2rem 2.6rem;                      
+  color: #1e293b;
+  animation: fadeIn 0.6s ease forwards;
+  
+}
+
+
+.checkboxRow {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.8rem;
+}
+
+.row2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem 1.4rem;
+  margin-bottom: 1.6rem;
+}
+
+.control {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.error {
+  min-height: 1.1rem;
+  margin-top: 0.1rem;
+  font-size: 0.9rem;
+  color: #b91c1c;
+}

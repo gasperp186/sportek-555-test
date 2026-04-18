@@ -1,0 +1,53 @@
+
+.exportCompTitle {
+  font-size: 60px;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  margin-bottom: 20px;
+}
+
+.exportRound {
+  font-size: 2.5rem;
+  margin-bottom: 50px;
+}
+
+.exportMatchArea {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.exportTeam h3 {
+  font-size: 40px;
+  font-weight: 800;
+  max-width: 250px;
+  text-align: center;
+}
+
+.exportScore {
+  font-size: 100px;
+  font-weight: 900;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 20px 20px;
+  border-radius: 15px;
+}
+
+.exportWatermark {
+  margin-top: 60px;
+  font-size: 1rem;
+  opacity: 0.5;
+}
+.socialCardExport {
+  width: 800px;  
+  height: 900px; 
+  background: linear-gradient(135deg, #172554 0%, #172554 100%);
+  position: relative;
+  align-items: center;
+  display: flex;
+  margin: 0 !important;
+  padding: 0 !important;
+  flex-direction: column;
+  font-family: 'Oswald', sans-serif;
+}

@@ -1,3 +1,6 @@
+@import "react-datepicker/dist/react-datepicker.css";
+
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -35,8 +38,82 @@ a {
   text-decoration: none;
 }
 
+:root {
+  /* Barve */
+  --color-primary: #2563eb;      /* taglavna modra */
+  --color-primary-light: #3b82f6; /* za pisavo in butons*/
+  --color-accent: #38bdf8;       /* svetlo modra*/
+  --color-bg: #f8fafc;           /* ozadje strani */
+  --color-surface: #ffffff;      /* kartice */
+  --color-border: #e2e8f0;       /* okvirji */
+  --color-text: #0f172a;         /* glavno besedilo */
+  --color-muted: #64748b;        /* drugo besedilo */
+  --color-danger: #ef4444;
+  --color-success: #22c55e;
+  --color-warning: #f59e0b;
+  --color-subtitle: #475569;
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
+}
+
+/* ===== FULLCALENDAR GLOBAL STYLES ===== */
+
+/* osnovni font */
+.fc {
+  font-family: inherit;
+  max-height: 550px;
+  max-width: 1000px;
+  
+    margin: 100px auto;   /* ⬅️ to je to */
+
+}
+
+/* toolbar (zgoraj) */
+.fc .fc-toolbar {
+  margin-bottom: 6px;
+}
+
+.fc .fc-toolbar-title {
+  font-size: 24px;
+}
+
+/* gumbi */
+.fc .fc-button {
+  border-radius: 8px;
+  padding: 4px 8px;
+  font-size: 0.75rem;
+}
+
+/* celice dni – NAJPOMEMBNEJŠE */
+.fc .fc-daygrid-day-frame {
+  min-height: 70px;   /* če rabiš še manj → 60px */
+  padding: 2px;
+}
+
+/* številka dneva */
+.fc .fc-daygrid-day-number {
+  font-size: 0.75rem;
+}
+
+/* eventi (tekme) */
+.fc .fc-event {
+  font-size: 0.7rem;
+  padding: 1px 4px;
+  border-radius: 6px;
+}
+
+/* razmik med eventi */
+.fc .fc-daygrid-event-harness {
+  margin-top: 1px;
+}
+
+/* odstrani nepotrebne robove */
+.fc .fc-scrollgrid,
+.fc .fc-scrollgrid-section-body > td {
+  border: none;
+  padding: 0;
 }

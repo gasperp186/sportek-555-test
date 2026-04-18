@@ -1,0 +1,99 @@
+
+
+.card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 600px;
+  padding: 2.4rem;
+  border-radius: 1.2rem;
+  border: 2px solid #3b82f6;
+  margin-top: 100px;
+}
+
+.control {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.2rem;
+}
+
+
+.teamsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 600px) {
+  .teamsGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.section {
+  margin-top: 24px;
+}
+
+.stepTitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #0f172a;
+  margin-bottom: 8px;
+}
+
+.tournamentSizeRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.sizeChip {
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid #cbd5e1;
+  background: #fff;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.sizeChipActive {
+  border-color: #2563eb;
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+.teamsList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+
+
+.seedBadge {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  background: #eff6ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #2563eb;
+}
+
+

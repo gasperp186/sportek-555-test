@@ -1,0 +1,148 @@
+:global(body.noScroll) { overflow: hidden; }
+
+.header {
+  --header-h: 80px;
+  background: linear-gradient(90deg, #0f172a, #1e3a8a);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 3rem;
+  min-height: var(--header-h);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  margin: 0;
+}
+
+.login {
+  padding-right: 20px;
+}
+
+.logoContainer { display: flex; align-items: center; gap: 0.6rem; }
+.logoImg { width: 42px; height: 42px; object-fit: contain; }
+.logoText { font-weight: 700; font-size: 1.6rem; color: #38bdf8; letter-spacing: 0.5px; user-select: none; }
+
+.navDesktop { flex: 1; display: flex; justify-content: center; margin-left: 120px; }
+.list { display: flex; list-style: none; gap: 2rem; margin: 0; padding: 0; }
+.list a {
+  position: relative;
+  text-decoration: none;
+  color: #e2e8f0;
+  font-weight: 500;
+  transition: color 0.7s ease, transform 0.7s ease;
+}
+.list a:hover { color: #3b82f6; transform: translateY(-2px); }
+.list a::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 100%; height: 2px;
+  background: #3b82f6; transform: scaleX(0);
+  transform-origin: left; transition: transform 0.6s ease; border-radius: 2px;
+}
+.list a:hover::after, .active::after { transform: scaleX(1); }
+.active { color: #3b82f6; font-weight: 600; }
+
+.authButtons { display: flex; align-items: center; gap: 1rem; }
+.loginBtn, .registerBtn { text-decoration: none; display: inline-block; cursor: pointer; }
+.loginBtn {
+  background: transparent; color: #e2e8f0; padding: 0.4rem 1rem; border-radius: 6px;
+  border: 1px solid transparent; transition: background 0.3s, border 0.3s;
+}
+.loginBtn:hover { background: rgba(255,255,255,0.1); border: 1px solid #3b82f6; }
+.registerBtn {
+  background: #3b82f6; color: white; padding: 0.4rem 1rem; border-radius: 6px; font-weight: 500; transition: background 0.3s;
+}
+.registerBtn:hover { background: #2563eb; }
+
+.logoutBtn {
+  background: #3b82f6; color: white; cursor: pointer; padding: 8px 15px; border-radius: 6px; font-weight: 500; transition: background 0.3s; border: none;
+  margin-left: 20px; font-size: 15px;
+}
+
+.logoutBtn:hover {
+  background: #2563eb;
+}
+
+.profilName {
+
+  color: white;
+  font-size: 15px;
+  background-color: var(--color-primary-light);
+  padding: 8px 12px;
+  border-radius: 5px;
+}
+
+.profilName:hover {
+  background: #2563eb;
+transition: background 0.3s;
+}
+
+
+.hamburger {
+  display: none;
+  width: 42px; height: 42px;
+  align-items: center; justify-content: center;
+  background: transparent; border: 1px solid rgba(255,255,255,.15);
+  border-radius: .6rem; cursor: pointer;
+}
+
+.mobileMenu {
+  position: fixed;
+  top: var(--header-h);
+  left: 0; right: 0;
+  transform: translateY(-12px);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform .25s ease, opacity .25s ease;
+  z-index: 1001;
+}
+.open {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobileList, .mobileAuth {
+  margin: 0; padding: 0.75rem 1rem;
+  background: #0b1223;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.mobileList { list-style: none; display: flex; flex-direction: column; gap: .25rem; }
+.mobileList a {
+  display: block; padding: .9rem 0;
+  color: #e2e8f0; text-decoration: none; font-weight: 500;
+}
+.mobileList a:active { opacity: .8; }
+.mobileAuth { display: flex; gap: .75rem; padding-top: .75rem; }
+
+.backdrop {
+  position: fixed; inset: 0; background: rgba(0,0,0,.35);
+  z-index: 1000;
+}
+
+@media (max-width: 1024px) {
+  .navDesktop { margin-left: 0; }
+}
+
+@media (max-width: 768px) {
+  .header { --header-h: 56px; padding: .9rem 1rem; }
+  .navDesktop { display: none; }       
+  .authButtons { display: none; }      
+  .hamburger { display: inline-flex; margin-left: auto; } 
+  .logoText { font-size: 1.4rem; }
+  .logoImg { width: 36px; height: 36px; }
+}
+
+
+.menuOpen .navDesktop,
+.menuOpen .authButtons {
+  display: none !important;
+}
+
+.profilDiv {
+  margin-right: 20px;
+}

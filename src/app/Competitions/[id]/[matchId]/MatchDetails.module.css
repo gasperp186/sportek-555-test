@@ -1,0 +1,403 @@
+.page {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+  background: #0f172a;
+}
+
+.card {
+  background: #1e293b;
+  padding: 2rem;
+  border-radius: 1rem;
+  max-width: 600px;
+  width: 100%;
+  color: white;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
+
+
+
+
+.dpInput {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: white;
+  color: black;
+  width: 100%;
+}
+.breadcrumb {
+  font-size: 30px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.title {
+  text-align: center;
+  font-size: 25px;
+  margin-bottom: 2rem;
+}
+
+.teams {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.team {
+  text-align: center;
+  flex: 1;
+}
+
+.score {
+  font-size: 44px;
+  margin-top: 0.4rem;
+  color: #38bdf8;
+}
+
+.vs {
+  font-size: 1.4rem;
+  margin: 0 1rem;
+  color: #94a3b8;
+}
+
+.info {
+  margin-top: 2rem;
+  color: #cbd5e1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.infoRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+  
+}
+
+
+
+.infoRow strong {
+  color: #e5e7eb;
+  margin-right: 10px;
+
+}
+
+.infoRow input {
+
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: white;
+  color: black;
+  width: 100%;
+  
+
+}
+
+.box {
+
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+
+  background: #0f172a;
+  padding: 0.6rem 0.8rem;
+  border-radius: 0.6rem;
+  margin: 0;
+  font-size: 0.95rem;
+  vertical-align: center;
+  align-items: center;
+  
+
+
+}
+
+.infoRow p {
+
+  background: #0f172a;
+
+  padding: 0.6rem 0.8rem;
+
+  border-radius: 0.6rem;
+
+  margin: 0;
+
+  font-size: 0.95rem;
+
+}
+
+.buttonDiv {
+  margin-top: 30px;
+  display: flex;
+align-items: center;  
+justify-content: space-between;
+
+}
+
+.nazajButton {
+    background: #0f172a;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 15px;
+    margin-left: 12px;
+    margin-right: 8px;
+    
+}
+
+
+.prazenDiv {
+  flex: 1;
+
+}
+
+.srednjiDiv {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+
+}
+
+.zadnjiDiv {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+
+}
+
+
+/*za editorja*/
+.scoreInput {
+  font-size: 2.5rem;
+  width: 70px;
+  text-align: center;
+  font-weight: bold;
+  padding-left: 15px;
+  margin-top: 10px;
+  background-color: rgb(60, 60, 65);
+  border: none;
+}
+
+.inlineInput {
+  margin-left: 5px;
+  padding: 2px 5px;
+  border-radius: 10px;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+/*status*/
+.statusBox {
+  display: flex;            /* To omogoči centriranje */
+  justify-content: center;  /* Horizontalno središče */
+  align-items: center;      /* Vertikalno središče */
+  width: 100%;
+  margin-top: 30px;
+}
+
+.status {
+  height: 35px;
+  width: 130px;             /* Malo povečal, da se besedilo ne stiska */
+  border-radius: 7px;
+  border: none;
+  background-color: #0f172a;
+  color: white;             /* Dodal, ker je ozadje temno */
+  padding: 5px 10px;
+  cursor: pointer;
+  text-align: start;       /* Centriranje besedila znotraj selecta */
+  font-size: 15px;
+}
+
+.viewerStatus {
+  height: 35px;
+  width: 130px;             /* Malo povečal, da se besedilo ne stiska */
+  border-radius: 7px;
+  border: none;
+  background-color: #0f172a;
+  color: white;             /* Dodal, ker je ozadje temno */
+  padding: 5px 10px;
+  text-align: center;       /* Centriranje besedila znotraj selecta */
+  font-size: 15px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+
+
+.socialCardExport {
+  width: 800px;  /* Približno A4 širina v pikslih pri 96 DPI */
+  height: 900px; /* Približno A4 višina */
+  background: linear-gradient(135deg, #172554 0%, #172554 100%);
+  position: relative;
+  align-items: center;
+  display: flex;
+  margin: 0 !important;
+  padding: 0 !important;
+  flex-direction: column;
+  font-family: 'Oswald', sans-serif;
+}
+
+.exportCompTitle {
+  font-size: 70px;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  margin-bottom: 20px;
+  margin-top: 50px;
+}
+
+.exportRound {
+  font-size: 40px;
+  margin-bottom: 50px;
+}
+
+.koncniRezultat {
+
+  font-size: 35px;
+  margin-top: 30px;
+}
+.exportMatchArea {
+  width: 100%;
+  display: flex;
+  /* Ključna sprememba: postavi elemente v stolpec */
+  flex-direction: column; 
+  
+  /* Centriranje po vodoravni osi */
+  align-items: center; 
+  
+  /* Razmik med elementi (da niso čisto skupaj) */
+  gap: 15px; 
+}
+
+.exportTeam h3 {
+  font-size: 45px;
+  font-weight: 800;
+  max-width: 100%; /* Odstrani ali povečaj, če želiš celo širino */
+  text-align: center;
+  margin: 10px 0;
+  
+}
+
+
+
+.exportScore {
+  font-size: 80px;
+  font-weight: 900;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 10px 40px;
+  border-radius: 15px;
+  text-align: center;
+  /* Da bo rezultat lepo sedel na sredini, če je številka ozka */
+  display: flex;
+  justify-content: center;
+  min-width: 150px; 
+}
+
+.exportWatermark {
+  margin-top: 60px;
+  font-size: 1rem;
+  opacity: 0.5;
+}
+
+.plakatExport {
+  width: 800px;  /* Približno A4 širina v pikslih pri 96 DPI */
+  height: 1100px; /* Približno A4 višina */
+  background: linear-gradient(135deg, #172554 0%, #172554 100%);
+  position: relative;
+  align-items: center;
+  display: flex;
+  margin: 0 !important;
+  padding: 0 !important;
+  flex-direction: column;
+  font-family: 'Oswald', sans-serif; /* Športni fonti so ponavadi bolj "ozki" in visoki */
+}
+
+.plakatTitle {
+  font-size: 70px;
+  margin-top: 100px;
+  text-transform: uppercase;
+  color: white;
+}
+
+.plakatRound {
+
+  font-size: 50px;
+  margin-top: 40px;
+  text-transform: uppercase;
+  color: white;
+}
+
+.plakatDate {
+
+  font-size: 80px;
+  margin-top: 40px;
+  text-transform: uppercase;
+  color: white;
+
+}
+
+.plakatMatchRow {
+
+  background-color: white;
+  width: 100%;           /* Zasede celo širino */
+  padding: 20px 0;       /* Odstrani padding na levo/desno, če hočeš rob-rob */
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  margin-top: 40px;
+  display: flex;         /* Da lažje centriraš ekipi in VS */
+  justify-content: center;
+  flex-direction: column;
+
+}
+
+.plakatTeam {
+  font-size: 60px;
+  color: #0f172a;
+}
+
+.plakatVs {
+  font-size: 90px;
+  color: #0f172a;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.plakatDetails {
+  margin-top: 50px;
+}
+
+.textDetails {
+  font-size: 50px;
+}
+
+.textTime {
+  font-size: 80px;
+}
+
+.screenshoot {
+  background-color: #0f172a;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 10px;
+  margin-left: 10px;
+  display: flex;           
+  justify-content: center;  
+  align-items: center;
+  cursor: pointer;
+}

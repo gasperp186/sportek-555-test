@@ -1,0 +1,110 @@
+.page {
+min-height: 400px;
+  background: #0b1224; 
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 3rem 1rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+.card {
+  max-width: 1550px; 
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  align-items: center;
+  
+  
+}
+
+.screenShotDiv {
+  
+  background-color: #0f172a;
+  margin: 0;
+  padding: 0;
+}
+
+
+.title {
+  font-size: 40px;
+  color: white;
+  margin-bottom: 0.3rem;
+  margin-top: 20px;
+}
+
+.subtitle {
+  color: #6b7280;
+}
+
+.nazajButton {
+    background: white;
+    color: #0f172a;
+    border: none;
+    border-radius: 30px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 15px;
+    margin-left: 12px;
+    margin-right: 8px;
+    
+}
+
+.actions {
+
+  margin-top: 45px;
+}
+
+
+/* Osnova za vse exporte */
+.exportDesign {
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #1a1a2e; /* Temna barva iz tvoje slike */
+  color: white;
+}
+
+/* Posebej za Bracket 4 (ozek) */
+.exportDesign4 {
+  width: 600px;
+  height: 600px;
+}
+
+/* Posebej za Bracket 8 (srednji) */
+.exportDesign8 {
+  width: 1200px;
+  height: 1200px;
+
+}
+
+/* Posebej za Bracket 16 (zelo širok) */
+.exportDesign16 {
+  width: 1200px;
+    height: 1200px;
+
+}
+
+/* NUJNO: Popravek za zamikanje vsebine */
+.exportDesign :global(.container) {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+}
+
+.naslov {
+  color: white;
+  margin-top: 50px;
+  margin-bottom: 10px; 
+  font-size: 40px;
+}
+
+.podnaslov {
+  color: white;
+  margin-top: 10px;
+  margin-bottom: 10px; 
+  font-size: 25px;
+}

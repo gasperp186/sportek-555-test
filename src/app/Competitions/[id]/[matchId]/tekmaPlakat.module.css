@@ -1,0 +1,91 @@
+
+
+.plakatExport {
+  width: 800px;  
+  height: 1100px; 
+  background: linear-gradient(135deg, #172554 0%, #172554 100%);
+  position: relative;
+  align-items: center;
+  display: flex;
+  margin: 0 !important;
+  padding: 0 !important;
+  flex-direction: column;
+  font-family: 'Oswald', sans-serif; 
+}
+
+.plakatTitle {
+  font-size: 70px;
+  margin-top: 100px;
+  text-transform: uppercase;
+  color: white;
+}
+
+.plakatRound {
+
+  font-size: 50px;
+  margin-top: 40px;
+  text-transform: uppercase;
+  color: white;
+}
+
+.plakatDate {
+
+  font-size: 80px;
+  margin-top: 40px;
+  text-transform: uppercase;
+  color: white;
+
+}
+
+.plakatMatchRow {
+
+  background-color: white;
+  width: 100%;          
+  padding: 50px 0;      
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  margin-top: 40px;
+  display: flex;         
+  justify-content: center;
+
+}
+
+.plakatTeam {
+  font-size: 60px;
+  color: #0f172a;
+  margin-top: 20px;
+}
+
+.plakatVs {
+  font-size: 90px;
+  color: #0f172a;
+  font-weight: bold;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.plakatDetails {
+  margin-top: 70px;
+}
+
+.textDetails {
+  font-size: 50px;
+}
+
+.textTime {
+  font-size: 70px;
+}
+
+
+.socialCardExport {
+  width: 800px;  
+  height: 900px; 
+  background: linear-gradient(135deg, #172554 0%, #172554 100%);
+  position: relative;
+  align-items: center;
+  display: flex;
+  margin: 0 !important;
+  padding: 0 !important;
+  flex-direction: column;
+  font-family: 'Oswald', sans-serif;
+}

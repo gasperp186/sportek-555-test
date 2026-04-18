@@ -1,0 +1,368 @@
+.dvaDela {
+   box-shadow: 0 18px 45px rgba(15, 23, 42, 0.16);
+  border: 1px solid rgba(148, 163, 184, 0.35);
+   background: #1e293b;
+max-width: 960px;
+  margin: 0 auto;
+  border-radius: 20px;
+  padding: 28px 24px;
+
+}
+.bracket {
+  padding: 40px 0;
+  font-size: 12px;
+  color: #0f172a;
+}
+
+.container {
+  
+
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+
+  align-items: stretch;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.colSemi {
+  gap: 18px;
+}
+
+.colFinals {
+  gap: 22px;
+}
+
+
+.roundDetails {
+  text-align: center;
+  color: #ffffff;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+}
+
+
+.matchup {
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  width: 100%;
+  max-width: 240px;
+  margin: 8px 0;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.10);
+  border: 1px solid #e2e8f0;
+  transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+  cursor: pointer;
+}
+
+
+
+.metaRow {
+  display: flex;
+  justify-content: space-between; /* Ura bo šla levo, datum pa desno */
+  align-items: center;
+  width: 100%;
+  list-style: none;
+  padding: 6px 0; /* Malo razmaka zgoraj in spodaj */
+}
+
+.time {
+ font-size: 12px;
+  color: #9b8b8b;
+  font-weight: 600;
+  padding-right: 10px;
+}
+
+.date {
+ font-size: 12px;
+  color: #9b8b8b;
+  font-weight: 600;
+  padding-left: 10px;
+}
+
+.metaLabel {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #64748b;
+}
+
+.topTeam,
+.downTeam {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 9px 12px;
+  font-size: 13px;
+  font-weight: bold;
+  position: relative;
+  color: #0f172a;
+}
+
+.topTeam {
+  background: #f9fafb;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.downTeam {
+  background: #ffffff;
+}
+
+.topTeam span:first-child,
+.downTeam span:first-child {
+  flex: 1;
+}
+
+.score {
+  color: #2563eb;
+  font-weight: 700;
+  margin-left: 10px;
+  min-width: 18px;
+  text-align: right;
+  font-size: 14px;
+}
+
+
+
+.trophy {
+  font-size: 26px;
+  margin-bottom: 2px;
+  color: #9ca3af;
+}
+
+.bronze {
+  font-size: 24px;
+  color: #b8860b;
+  margin-bottom: 2px;
+}
+
+@media (max-width: 800px) {
+  .container {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 20px 16px;
+  }
+
+  .matchup {
+    max-width: 100%;
+  }
+
+  .order1 {
+    order: 1 !important;
+  }
+  .order3 {
+    order: 3 !important;
+  }
+}
+
+
+
+.block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;     
+  width: 100%;
+}
+
+.legend {
+  display: flex;
+  gap: 20px;
+  justify-content: center; /* Centrirano nad bracketom */
+  margin-bottom: 25px;
+  margin-top: 20px;
+  padding: 10px;
+  background: #f8fafc; /* Rahlo sivo ozadje, da izstopa */
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #475569;
+  width: 100%;
+  max-width: 300px;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Osnovna pika */
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* Barve pik - naj se ujemajo s tvojimi borderji! */
+.dotPlanned {
+  background-color: #3b82f6; /* Modra */
+}
+
+.dotInGame {
+  background-color: #22c55e; /* Zelena */
+  
+}
+
+.dotFinished {
+  background-color: #94a3b8; /* Siva */
+}
+
+.container2 {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center !important; /* Centriramo turnir na sliki */
+  align-items: center !important;
+  gap: 30px !important;
+  width: 900px !important; /* Povečaj na 1200px */
+  border: none !important;
+  background: #1e293b !important;
+  margin-top: 50px !important;
+  padding: 20px 0 !important; /* Samo malo paddinga zgoraj/spodaj, če ga želiš */
+}
+
+/* 2. Stolpci - morajo biti dovolj široki za Matchup (ki je 220px) */
+.col2 {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  width: 200px !important; /* Stolpec mora biti ŠIRŠI od Matchupa (220px) */
+  flex-shrink: 0 !important;
+}
+
+/* 3. Dva dela - odstrani max-width za export */
+.dvaDela2 {
+  background: #1e293b !important; /* Isti odtenek kot ScreenshotButton */
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  /* Odstrani vse, kar bi lahko povzročilo zamik */
+}
+
+/* 3. Razmaki med tekmami v stolpcih (Gap) */
+/* V Bracket8.js preveri, da stolpci dobijo te razrede */
+.colRound2 {
+  
+  margin-top: 25px;
+  gap: 30px !important;
+}
+.colSemi2 {
+  justify-content: space-around !important; /* Razporedi tekme enakomerno */
+  gap: 20px !important;
+}
+
+.colFinals2 {
+  justify-content: center !important; /* Finale in 3. mesto na sredino */
+  gap: 30px !important; /* Več razmika med finalom in 3. mestom */
+}
+
+/* 4. Naslovi krogov (ČETRTFINALE, FINALE...) */
+.roundDetails2 {
+  font-size: 12px !important;
+  color: #ffffff !important;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 5px !important;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+}
+
+/* 5. Kartica tekme (Matchup) - Prisilimo širino! */
+.matchup2 {
+  width: 100% !important; /* Fiksna širina kartice */
+  max-width: 200px !important;
+  margin: 0 !important; /* Nobenih marginov, gap kontrolira razmak */
+  padding: 0 !important;
+  border-radius: 10px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+  overflow: hidden !important; /* Ključno: nič ne sme iti ven! */
+  background: #ffffff !important;
+  transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+
+
+}
+
+/* 6. Datum, Ura (Tisti zalepljen tekst na sliki) */
+.metaRow2 {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding: 1px 1px !important; /* Zelo tesen padding */
+  background: #f1f5f9 !important;
+  width: 100% !important; /* Ključno! */
+  box-sizing: border-box !important;
+  padding: 7px 10px;
+}
+
+.metaRow2 .date, 
+.metaRow2 .time {
+  font-size: 12px !important; /* Manjša pisava, da paše v 220px */
+  color: #64748b !important;
+  margin: 0 !important;
+  width: auto !important; /* Prepreči čudne širine */
+    padding: 7px 10px;
+
+}
+
+/* 7. Ekipe (Tiste zunaj okvirjev na sliki) */
+.topTeam2, .downTeam2 {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  height: 10px !important; /* Fiksna višina */
+  width: 100% !important; /* Ključno! */
+  font-size: 12px !important;
+  padding: 13px 7px !important;
+
+}
+
+/* Preprečimo dolgim imenom, da prekrijejo rezultat */
+.topTeam2 span:first-child, 
+.downTeam2 span:first-child {
+  white-space: nowrap !important; 
+  overflow: hidden !important;   
+  text-overflow: ellipsis !important;
+  flex: 1 !important; 
+}
+
+/* 8. Rezultat (Score) */
+.matchup2 .score {
+  font-size: 12px !important;
+  margin-left: 5px !important;
+  color: #2563eb !important;
+  font-weight: 700 !important;
+  min-width: 10px !important;
+  text-align: right;
+}
+
+/* 9. Statusni robovi za EXPORT (tanjši) */
+
+/* 1. Originalni debeli robovi (za spletno stran) */
+.borderInGame { border-left: 10px solid #10853b; }
+.borderPlanned { border-left: 10px solid #2a60d3; }
+.borderFinished { border-left: 10px solid #555d58; }
+
+/* 2. POSEBEN POPRAVEK ZA EXPORT (ko se srečata matchup2 in statusni razred) */
+/* To bo preglasilo debelino roba samo na sliki! */
+
+.matchup2.borderInGame {
+  border-left: 6px solid #10853b !important;
+}
+
+.matchup2.borderPlanned {
+  border-left: 6px solid #2a60d3 !important;
+}
+
+.matchup2.borderFinished {
+  border-left: 6px solid #555d58 !important;
+}

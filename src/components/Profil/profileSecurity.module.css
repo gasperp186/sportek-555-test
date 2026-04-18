@@ -1,0 +1,127 @@
+.page {
+  display: flex;
+  gap: 28px;
+  box-sizing: border-box;
+}
+
+.rightCol {
+  flex: 1;
+  min-width: 320px;
+}
+
+.headRight {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60px; /* višina da bo vedno enako visoko */
+  margin-bottom: 10px;
+}
+
+.naslov {
+  font-size: 25px;
+  font-weight: 700;
+  color: #0f172a;
+  text-align: center;
+  margin: 0; /* da ne skače zaradi margin-bottom */
+}
+
+.rightCard {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 10px 24px rgba(2, 6, 23, 0.15);
+  padding: 24px;
+}
+
+
+
+.iconCircle {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  display: grid;
+  place-items: center;
+  font-size: 1.4rem;
+}
+
+.name {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.email {
+  font-size: 0.88rem;
+  color: #64748b;
+  margin-top: 2px;
+}
+
+
+ .divider {
+  height: 1px;
+  background: rgba(2, 6, 23, 0.08);
+  margin: 14px 0;
+}
+
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-weight: 500;
+  color: #0f172a;
+}
+
+.form input {
+  background: #fff;
+  border: 1px solid rgba(2, 6, 23, 0.12);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 0.95rem;
+  color: #0f172a;
+  outline: none;
+}
+
+.form input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.18);
+}
+
+.primary {
+  margin-top: 10px;
+  align-self: flex-start;
+  background: var(--color-primary-light);
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.35);
+}
+
+.primary:hover {
+  filter: brightness(1.05);
+}
+
+.error {
+  color: #b91c1c;
+  font-size: 0.9rem;
+}
+
+.success {
+  color: #16a34a;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 980px) {
+  .page {
+    flex-direction: column;
+    padding: 28px 18px;
+  }
+}

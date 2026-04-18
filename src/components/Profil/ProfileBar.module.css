@@ -1,0 +1,111 @@
+
+
+.leftCard {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 10px 24px rgba(2, 6, 23, 0.15);
+  padding-left: 22px;
+  padding-right: 80px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.head {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  font-weight: 700;
+  color: #475569;
+}
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.name {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.email {
+  font-size: 0.88rem;
+  color: #64748b;
+  margin-top: 2px;
+}
+
+/* MENU – gumbi */
+.menu {
+  display: flex;
+  flex-direction: column;
+  margin-top: 6px;
+}
+.item {
+  width: 100%;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 12px;
+  margin-top: 8px;
+  border-radius: 10px;
+  border: 1px solid rgba(2, 6, 23, 0.06);
+  background: #fff;
+  cursor: pointer;
+  color: #0f172a;
+  text-decoration: none; /* za NavLink */
+  max-height: 45px;
+  height: 100%;
+}
+.item:hover {
+  background: #f8fafc;
+}
+.active {
+  background: #f1f5f9;
+}
+.note {
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+/* spodnja mala kartica (Settings) */
+.small {
+  padding: 14px;
+}
+.smallTitle {
+  font-weight: 600;
+  color: #0f172a;
+  margin-bottom: 6px;
+}
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 8px;
+  margin-top: 8px;
+  border-radius: 10px;
+  border: 1px solid rgba(2, 6, 23, 0.06);
+  background: #fff;
+}
+.muted {
+  opacity: 0.6;
+}
+
+/* za responsive */
+@media (max-width: 980px) {
+  .leftCol {
+    flex: unset;
+  }
+}

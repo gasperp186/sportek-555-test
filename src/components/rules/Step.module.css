@@ -1,0 +1,310 @@
+
+.page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  padding: 32px; 
+}
+
+
+
+.naslov {
+
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--color-primary-light);
+  margin: 0 0 .4rem;
+
+}
+
+.podnaslov {
+
+  text-align: center;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--color-subtitle);
+  margin: 0 0 .4rem;
+
+}
+
+.label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #1e3a8a;
+  margin-bottom: 0.4rem;
+}
+
+.actions {
+  display: flex;
+  gap: 14px; 
+  margin-top: 16px; 
+}
+
+.btn {
+  flex: 1;
+  height: 46px;
+  border-radius: 13px; 
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  color: #fff;
+  text-align: center;
+  background: linear-gradient(135deg, #2563eb, #3b82f6);
+  transition: transform .15s ease, box-shadow .25s ease, filter .25s ease;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+
+
+.btnOutline {
+  background: #ffffff;
+  color: #3b82f6;
+  border: 2px solid #3b82f6;
+}
+
+/* .btnOutline:hover {
+  background: #eff6ff;
+  box-shadow: inset 0 0 0 1px rgba(59,130,246,.35);
+} */
+
+
+.btn:disabled,
+.btnOutline:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+} 
+
+.card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 800px;
+  padding: 2.4rem;
+  border-radius: 1.2rem;
+  border: 2px solid #3b82f6;
+  box-shadow: 0 12px 35px rgba(59, 130, 246, 0.18);
+  animation: stepFadeIn 0.25s ease;
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+.grid2 {
+  display: grid;
+  gap: 1rem;
+}
+@media (min-width: 720px) {
+  .grid2 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.row {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.control {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  margin-bottom: 1.1rem;
+}
+
+.form label,
+.label {
+  font-size: 0.95rem;
+  color: #1e3a8a;
+  font-weight: 500;
+}
+
+.form input,
+.form select,
+.form textarea,
+.input,
+.select {
+  background: #f8fafc;
+  border: 2px solid #bfdbfe;
+  color: #0f172a;
+  border-radius: 0.9rem;
+  padding: 0.85rem 1rem;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease,
+    background 0.25s ease;
+  font-family: "Poppins", sans-serif;
+}
+
+.form input::placeholder,
+.form textarea::placeholder {
+  color: #94a3b8;
+}
+
+/* .form input:hover,
+.form select:hover,
+.form textarea:hover,
+.input:hover,
+.select:hover {
+  border-color: #3b82f6;
+  background: #f1f5f9;
+} */
+
+/* ✅ popravljeno: focus selectorji so zdaj omejeni */
+.form input:focus,
+.form select:focus,
+.form textarea:focus,
+.input:focus,
+.select:focus,
+.textareaLight:focus {
+  border-color: #2563eb;
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.25);
+  outline: none;
+}
+
+/* === RULES (title/subtitle/textarea) ===================== */
+.titleLight {
+  margin: 0 0 0.4rem;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #3b82f6; /* modri naslov kot Create */
+}
+
+.subtitleLight {
+  color: #475569;
+  margin: 0 0 1.2rem;
+  font-size: 1rem;
+}
+
+.title {
+  color: #3b82f6;
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 1.4rem;
+}
+
+.textareaLight {
+  width: 100%;
+  min-height: 260px;
+  background: #f8fafc;
+  border: 2px solid #bfdbfe;
+  border-radius: 14px;
+  padding: 1.1rem 1.3rem;
+  color: #1e3a8a;
+  font-size: 1rem;
+  line-height: 1.65;
+  resize: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+/* .textareaLight:hover {
+  background: #f1f5f9;
+  border-color: #3b82f6;
+} */
+
+/* Dodatni okvir za Rules (isti vizual kot card) */
+.ruleCardLight {
+  background: #ffffff;
+  border: 2px solid #dbeafe;
+  border-radius: 1.2rem;
+  box-shadow: 0 12px 35px rgba(59, 130, 246, 0.1);
+  padding: 2.2rem 2.6rem;
+}
+
+/* Akcije/gumbi (isti slog kot Create/Teams) */
+.actions,
+.ruleActions {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.2rem;
+  margin-top: 30px;
+}
+
+.btn,
+.ruleBtn {
+  height: 46px;
+  border-radius: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  color: #fff;
+  text-align: center;
+  background: linear-gradient(135deg, #2563eb, #3b82f6);
+  transition: transform 0.15s ease, box-shadow 0.25s ease, filter 0.25s ease;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1.2rem;
+  text-decoration: none;
+  max-width: 350px;
+  width: 100%;
+}
+
+/* .btn:hover,
+.ruleBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+  filter: brightness(1.05);
+} */
+
+.btnOutline,
+.ruleBtnOutline {
+  background: #ffffff;
+  color: #3b82f6;
+  border: 2px solid #3b82f6;
+}
+
+.btnOutline:hover,
+.ruleBtnOutline:hover {
+  background: #eff6ff;
+  box-shadow: inset 0 0 0 1px rgba(59, 130, 246, 0.35);
+}
+
+/* če uporabljaš CSS Modules compose, je to OK v .module.css */
+.ruleBtnPrimary {
+  composes: ruleBtn;
+}
+
+/* === TEAMS (2 ekipi v eni vrstici) ======================= */
+.teamsWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin-top: 1rem;
+}
+
+.teamRow {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.teamBox {
+  flex: 1;
+  min-width: 250px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+/* Animacija */
+@keyframes stepFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

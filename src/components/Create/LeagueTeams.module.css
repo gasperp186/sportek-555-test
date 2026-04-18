@@ -1,0 +1,97 @@
+.naslov {
+      text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--color-primary-light);
+  margin: 0 0 .4rem;
+
+}
+
+.podnaslov {
+   text-align: center;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--color-subtitle);
+  margin-bottom: 55px;
+}
+
+.dodajButton {
+margin-top: 14px;
+margin-bottom: 40px;
+margin-left: 18px;
+  padding: 8px 100px;
+  border-radius: 15px;
+  border: 1px dashed #2563eb;
+  background: #fff;
+  color: #2563eb;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.removeButton {
+
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #94a3b8;
+  padding: 4px;
+  margin-top: 10px;
+  margin-left: 10px;
+
+}
+.teamInput {
+  padding: 8px 55px;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  font-size: 0.9rem;
+  font-family: "Poppins", sans-serif;
+  transition: 0.2s ease;
+  background-color: white;
+  color: black;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.index {
+    color: black;
+    font-size: 13px;
+    margin-right: 10px;
+    margin-top: 7px;
+    
+}
+
+.teamRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dodajBtnDiv {
+
+   display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.teamInput:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.18);
+}
+
+
+
+.addTeamBtn:hover {
+  background: #eff6ff;
+}
+
+
+.removeTeamBtn:hover {
+  color: #e11d48;
+}

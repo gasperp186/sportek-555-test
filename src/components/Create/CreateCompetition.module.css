@@ -1,0 +1,223 @@
+
+.card {
+  background: #ffffff;
+  border: 2px solid #3b82f6;
+  border-radius: 19px; 
+  width: 100%;
+  max-width: 800px;
+  padding: 35px 42px; 
+  color: #1e293b;
+}
+
+.row2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px; 
+}
+@media (max-width: 680px) {
+  .row2 { grid-template-columns: 1fr; }
+}
+
+.polje {
+  display: flex;
+  flex-direction: column;
+  gap: 7px; 
+  margin-bottom: 18px; 
+}
+
+.poljecheck {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 7px; 
+  margin-top: 16px;
+  text-align: center;
+  justify-content: center;
+}
+
+.poljecheck3 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 7px; 
+  margin-top: 16px;
+  margin-bottom: 20px;
+  text-align: center;
+  justify-content: center;
+}
+
+/* .label {
+  font-size: 15px; 
+  color: #1e3a8a;
+  font-weight: bold;
+}
+
+.input, .select {
+  height: 44px;
+  padding: 0 16px; 
+  border-radius: 12px; 
+  border: 2px solid #bfdbfe;
+  background: #ffffff;
+  color: #0f172a;
+  font-size: 16px; 
+  outline: none;
+  transition: border-color .25s ease, box-shadow .25s ease, background .25s ease;
+}
+
+.input::placeholder { color: #94a3b8; }
+
+.input:focus,
+.select:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 4px rgba(59,130,246,0.25);
+  background: #ffffff;
+} */
+
+.error {
+  min-height: 18px; 
+  margin-top: 2px; 
+  font-size: 14px; 
+  color: #b91c1c;
+}
+/* 
+.actions {
+  display: flex;
+  gap: 14px; 
+  margin-top: 16px; 
+}
+
+.btn {
+  flex: 1;
+  height: 46px;
+  border-radius: 13px; 
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  color: #fff;
+  text-align: center;
+  background: linear-gradient(135deg, #2563eb, #3b82f6);
+  transition: transform .15s ease, box-shadow .25s ease, filter .25s ease;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+
+
+.btnOutline {
+  background: #ffffff;
+  color: #3b82f6;
+  border: 2px solid #3b82f6;
+}
+
+.btnOutline:hover {
+  background: #eff6ff;
+  box-shadow: inset 0 0 0 1px rgba(59,130,246,.35);
+} */
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.gridNames {
+  display: grid;
+  gap: 16px; 
+  margin-top: 8px; 
+}
+
+@media (min-width: 640px) {
+  .gridNames { grid-template-columns: 1fr 1fr; }
+}
+@media (min-width: 920px) {
+  .gridNames { grid-template-columns: 1fr 1fr 1fr; }
+}
+
+.nameItem {
+  display: flex;
+  flex-direction: column;
+  gap: 7px; 
+}
+
+.textarea {
+  width: 100%;
+  min-height: 260px;
+  padding: 16px 18px; 
+  border-radius: 14px; 
+  border: 2px solid #bfdbfe;
+  background: #f8fafc;
+  color: #0f172a;
+  font-size: 16px;
+  line-height: 1.65;
+  font-family: 'Poppins', sans-serif;
+  resize: vertical;
+  transition: border-color .25s ease, box-shadow .25s ease, background .25s ease;
+}
+
+.textarea::placeholder { color: #94a3b8; }
+
+.textarea:hover {
+  border-color: #3b82f6;
+  background: #f1f5f9;
+}
+
+.textarea:focus {
+  border-color: #3b82f6;
+  background: #ffffff;
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(59,130,246,0.25);
+}
+
+.page {
+  position: relative;
+  overflow: hidden;
+}
+
+.page::before,
+.page::after {
+  content: "";
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(59,130,246,0.15), rgba(59,130,246,0.1) 70%);
+  border: 2px solid rgba(59,130,246,0.4);
+  filter: blur(4px);
+  z-index: 0;
+  transition: transform 0.8s ease;
+}
+
+.page::before {
+  top: 40%;
+  left: -120px;
+  transform: translateY(-50%);
+}
+
+.page::after {
+  top: 70%;
+  right: -120px;
+  transform: translateY(-50%);
+}
+
+.card {
+  position: relative;
+  z-index: 2;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(48%) sepia(78%) saturate(3000%) hue-rotate(200deg) brightness(95%) contrast(90%);
+  cursor: pointer;
+}
+
+.controlcheck {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.checkbox {
+  width: 24px;
+  height: 24px;
+  accent-color: #3b82f6;
+  cursor: pointer;
+}
