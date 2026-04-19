@@ -221,7 +221,7 @@ max-width: 960px;
 .container2 {
   display: flex !important;
   flex-direction: row !important;
-  justify-content: center !important; /* Centriramo turnir na sliki */
+  justify-content: center !important; /* Centriramo turnir na slinpm run buildki */
   align-items: center !important;
   gap: 30px !important;
   width: 900px !important; /* Povečaj na 1200px */
