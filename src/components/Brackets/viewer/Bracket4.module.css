@@ -147,23 +147,41 @@ max-width: 960px;
 
 @media (max-width: 800px) {
   .container {
-    grid-template-columns: 1fr;
-    gap: 18px;
-    padding: 20px 16px;
+    display: flex !important;
+    flex-direction: column !important; /* Stolpci gredo eden pod drugega */
+    gap: 20px !important;
   }
 
-  .matchup {
-    max-width: 100%;
+  .col {
+    width: 100% !important;
   }
 
+  /* SF1 in SF2 imata oba order 1, zato skočita na vrh */
   .order1 {
     order: 1 !important;
   }
+
+  /* Finale ima order 3, zato skoči na dno */
   .order3 {
     order: 3 !important;
   }
-}
 
+  /* Skrijemo naslove znotraj Match komponente na telefonu */
+  .hideOnMobile {
+    display: none !important;
+  }
+
+  /* Prikažemo skupni naslov kroga na telefonu */
+  .onlyMobileTitle {
+    display: block !important;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+    color: #64748b;
+    margin: 10px 0;
+    text-transform: uppercase;
+  }
+}
 
 
 .block {
@@ -365,4 +383,9 @@ max-width: 960px;
 
 .matchup2.borderFinished {
   border-left: 6px solid #555d58 !important;
+}
+
+/* Skrij mobilni naslov v exportu in na PCju */
+.onlyMobileTitle {
+  display: none;
 }
