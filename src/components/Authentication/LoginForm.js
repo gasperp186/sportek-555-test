@@ -1,14 +1,23 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, Suspense } from "react";
 import { auth } from "@/lib/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import classes from "./LoginForm.module.css";
 
-
+// Glavna komponenta, ki jo Next.js pričakuje
 export default function Login() {
+  return (
+    <Suspense fallback={<div className={classes.container}>Nalaganje...</div>}>
+      <LoginForm />
+    </Suspense>
+  );
+}
+
+// Tvoja originalna logika, prestavljena v ločeno komponento
+function LoginForm() {
   const [emailIsInvalid, setEmailIsInvalid] = useState(false);
   const email = useRef();
   const password = useRef();
@@ -16,11 +25,10 @@ export default function Login() {
   const searchParams = useSearchParams();
   const [loginError, setLoginError] = useState("");
 
-
   async function handleSubmit(event) {
     event.preventDefault();
 
-    const enteredEmail = email.current.value.trim(); // da zbrišemo presledke na začetki in na konci
+    const enteredEmail = email.current.value.trim();
     const enteredPassword = password.current.value;
 
     const isInvalidEmail = !enteredEmail.includes("@");
@@ -28,25 +36,19 @@ export default function Login() {
     if (isInvalidEmail) return;
 
     try {
-    await signInWithEmailAndPassword(auth, enteredEmail, enteredPassword);
-    // uspeh
-    const next = searchParams.get("next");
-router.push(next || "/");
-
-  } catch (err) {
-        setLoginError("Napačen email ali geslo.");
-
-    console.error(err);
-
+      await signInWithEmailAndPassword(auth, enteredEmail, enteredPassword);
+      const next = searchParams.get("next");
+      router.push(next || "/");
+    } catch (err) {
+      setLoginError("Napačen email ali geslo.");
+      console.error(err);
+    }
   }
-}
 
   return (
     <div className={classes.container}>
       <form onSubmit={handleSubmit} className={classes.form}>
         <h2 className={classes.title}>Prijavi se</h2>
-
-
 
         <div className={classes.control}>
           <label htmlFor="login-email">Email</label>
