@@ -176,7 +176,7 @@ const handleSave = async () => {
     
     const newStatus = statusEl.value;
 
-    if(statusEl.value === "finished" && newHomeScore === newAwayScore) {
+    if(comp.mode === "knockout" && statusEl.value === "finished" && newHomeScore === newAwayScore) {
       setError("Končni rezultat ne sme biti neodločen!");
       return;
 

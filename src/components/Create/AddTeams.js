@@ -36,9 +36,9 @@ export default function AddTeams({ form, setForm, onBack, onNext }) {
 
         )}
 
-        {tipTekmovanja === "LIGA" || tipTekmovanja === "HYBRID"  && (
-          <LeagueTeams form={form} setForm={setForm} onValidChange={setIsValid} />
-        )}
+       {(tipTekmovanja === "LIGA" || tipTekmovanja === "HYBRID") && (
+  <LeagueTeams form={form} setForm={setForm} onValidChange={setIsValid} />
+)}
 
 {submitted && !isValid && <p style={{color: 'red'}}>Vsa imena morajo biti izpolnjena in unikatna!</p>}
 
