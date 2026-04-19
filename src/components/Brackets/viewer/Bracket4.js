@@ -51,7 +51,7 @@ export default function Bracket4({ matches, basePath = "", isExport = false }) {
             date={formatDate(sf1?.date)}          
             time={sf1?.time}
             city={sf1?.city}
-            roundTitle="Polfinale"
+            roundTitle="Polfinale 1"
             top={teamRow(sf1?.home, sf1?.homeScore)}
             bottom={teamRow(sf1?.away, sf1?.awayScore)}
             classes={classes}
@@ -112,7 +112,7 @@ export default function Bracket4({ matches, basePath = "", isExport = false }) {
             date={formatDate(sf2?.date)} 
             time={sf2?.time}
             city={sf2?.city}
-            roundTitle="Polfinale"
+            roundTitle="Polfinale 2"
             top={teamRow(sf2?.home, sf2?.homeScore)}
             bottom={teamRow(sf2?.away, sf2?.awayScore)}
             classes={classes}
