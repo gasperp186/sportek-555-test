@@ -115,6 +115,7 @@
   .row { grid-template-columns: 1fr; }
   .container {
     margin-top: 0;
+    padding: 45px 35px;
   }
   .form {
     margin-top: 0;
