@@ -16,7 +16,7 @@
   border: 2px solid #dbeafe;
   border-radius: 1rem;
   box-shadow: 0 8px 25px rgba(59,130,246,0.1);
-  padding: 2.2rem 2.5rem;
+  padding: 35px 40px;
   animation: fadeIn 0.6s ease forwards;
 }
 
@@ -119,6 +119,7 @@
   }
   .form {
     margin-top: 0;
+    padding: 40px 50px;
   }
 
   .title{
