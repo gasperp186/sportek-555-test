@@ -4,7 +4,7 @@ import classes from "./Bracket4.module.css";
 import Match from "./Match";
 
 export default function Bracket4({ matches, basePath = "", isExport = false }) {
-  // Iskanje tekem
+  // Iskanje tekem po rundah
   const sf1 = matches.find(m => m.round === "SF1");
   const sf2 = matches.find(m => m.round === "SF2");
   const f1 = matches.find(m => m.round === "F1");
@@ -35,13 +35,13 @@ export default function Bracket4({ matches, basePath = "", isExport = false }) {
     <div className={isExport ? classes.dvaDela2 : classes.dvaDela}>
       <div className={isExport ? classes.container2 : classes.container}>
         
-        {/* 1. STOLPEC: POLFINALE 1 (Na mobitelu order: 1, v Exportu prvi) */}
+        {/* 1. STOLPEC: POLFINALE 1 */}
         <div className={`
           ${isExport ? classes.col2 : classes.col} 
           ${isExport ? classes.colSemi2 : classes.colSemi} 
           ${!isExport ? classes.order1 : ""}
         `}>
-          {/* Skupni naslov samo za mobitel */}
+          {/* Skupni naslov samo za mobitel - izpiše se samo TU za oba polfinala */}
           {!isExport && <h3 className={classes.onlyMobileTitle}>Polfinale</h3>}
           
           <Match
@@ -51,7 +51,7 @@ export default function Bracket4({ matches, basePath = "", isExport = false }) {
             date={formatDate(sf1?.date)}          
             time={sf1?.time}
             city={sf1?.city}
-            roundTitle="Polfinale 1"
+            roundTitle={isExport ? "Polfinale 1" : null} // Na mobiju null, ker imamo onlyMobileTitle
             top={teamRow(sf1?.home, sf1?.homeScore)}
             bottom={teamRow(sf1?.away, sf1?.awayScore)}
             classes={classes}
@@ -59,7 +59,7 @@ export default function Bracket4({ matches, basePath = "", isExport = false }) {
           />
         </div>
 
-        {/* 2. STOLPEC: FINALA (Na mobitelu order: 3 - pridejo zadnja, v Exportu sredina) */}
+        {/* 2. STOLPEC: FINALE (Na mobiju pride zadnji zaradi order3) */}
         <div className={`
           ${isExport ? classes.col2 : classes.col} 
           ${isExport && t3 ? classes.colFinals2 : (!isExport && t3 ? classes.colFinals : "")}
@@ -74,7 +74,7 @@ export default function Bracket4({ matches, basePath = "", isExport = false }) {
             date={formatDate(f1?.date)} 
             time={f1?.time}
             city={f1?.city}
-            roundTitle="Finale za 1. mesto"
+            roundTitle={isExport ? "Finale" : "Finale"} // Tukaj lahko pustimo, ker je ena tekma
             top={teamRow(f1?.home, f1?.homeScore)}
             bottom={teamRow(f1?.away, f1?.awayScore)}
             classes={classes}
@@ -89,7 +89,7 @@ export default function Bracket4({ matches, basePath = "", isExport = false }) {
               date={formatDate(t3?.date)} 
               time={t3?.time}
               city={t3?.city}
-              roundTitle="Tekma za 3. mesto"
+              roundTitle={isExport ? "Tekma za 3. mesto" : "Tekma za 3. mesto"}
               top={teamRow(t3?.home, t3?.homeScore)}
               bottom={teamRow(t3?.away, t3?.awayScore)}
               classes={classes}
@@ -98,13 +98,13 @@ export default function Bracket4({ matches, basePath = "", isExport = false }) {
           )}
         </div>
 
-        {/* 3. STOLPEC: POLFINALE 2 (Na mobitelu order: 1, v Exportu zadnji) */}
+        {/* 3. STOLPEC: POLFINALE 2 */}
         <div className={`
           ${isExport ? classes.col2 : classes.col} 
           ${isExport ? classes.colSemi2 : classes.colSemi} 
           ${!isExport ? classes.order1 : ""}
         `}>
-          {/* Tukaj ne dodamo onlyMobileTitle, ker sta sf1 in sf2 skupaj pod prvim */}
+          {/* TUKAJ NE dodamo onlyMobileTitle, da bo na telefonu samo eden naslov za obe tekmi */}
           <Match
             id={sf2?.id}
             basePath={basePath}
@@ -112,7 +112,7 @@ export default function Bracket4({ matches, basePath = "", isExport = false }) {
             date={formatDate(sf2?.date)} 
             time={sf2?.time}
             city={sf2?.city}
-            roundTitle="Polfinale 2"
+            roundTitle={isExport ? "Polfinale 2" : null}
             top={teamRow(sf2?.home, sf2?.homeScore)}
             bottom={teamRow(sf2?.away, sf2?.awayScore)}
             classes={classes}
