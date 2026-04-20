@@ -136,7 +136,7 @@ const [profile, setProfile] = useState(null);  //profil iz Firestore
           <Link href="/Login" className={classes.loginBtn} onClick={closeMenu}>
             Prijavi se
           </Link>
-          <Link href="/Signup" className={classes.registerBtn} onClick={closeMenu}>
+          <Link href="/SignUp" className={classes.registerBtn} onClick={closeMenu}>
             Registriraj se
           </Link>
         </div>

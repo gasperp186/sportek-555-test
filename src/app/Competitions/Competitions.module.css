@@ -61,12 +61,22 @@
     grid-template-columns: 1fr;
   }
 
-  .filters {
+ .filters {
+  display: flex;
+  flex-wrap: wrap;  
+  flex-direction: column;       /* Da na mobitelu ne pobegne iz zaslona */
+  justify-content: center; /* To dejansko postavi celoten sklop na sredino */
+  gap: 20px;
+  width: 100%;
+  max-width: 300px;       /* POVEČAJ TO! 200px je bilo premalo. */
+  margin: auto;          /* To centrirra kontejner, če je stran širša od max-width */
+}
 
-    width: 100%;
-    max-width: 250px;
-    margin: auto;
-  
+.filterBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 150px;        /* Da imajo inputi lepo minimalno širino */
 }
 
 .reset {
