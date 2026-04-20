@@ -123,7 +123,7 @@ const [profile, setProfile] = useState(null);  //profil iz Firestore
           <ul className={classes.mobileList}>
             <li><Link href="/" onClick={closeMenu}>Domov</Link></li>
             <li><Link href="/Competitions" onClick={closeMenu}>Tekmovanja</Link></li>
-            <li><Link href="/koledar" onClick={closeMenu}>Koledar</Link></li>
+            <li><Link href="/Calendar" onClick={closeMenu}>Koledar</Link></li>
             <li>
             <Link href="/Profil" className={isActive("/Profil") ? classes.active : ""}>
               Moj profil
