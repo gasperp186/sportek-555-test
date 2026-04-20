@@ -60,6 +60,21 @@
   .grid {
     grid-template-columns: 1fr;
   }
+
+  .filters {
+
+    width: 100%;
+    max-width: 250px;
+    margin: auto;
+  
+}
+
+.reset {
+  margin: auto;
+  margin-top: 10px;
+}
+
+
 }
 
 .item {

@@ -133,10 +133,10 @@ const [profile, setProfile] = useState(null);  //profil iz Firestore
         </nav>
 
         <div className={classes.mobileAuth}>
-          <Link href="/login" className={classes.loginBtn} onClick={closeMenu}>
+          <Link href="/Login" className={classes.loginBtn} onClick={closeMenu}>
             Prijavi se
           </Link>
-          <Link href="/signup" className={classes.registerBtn} onClick={closeMenu}>
+          <Link href="/Signup" className={classes.registerBtn} onClick={closeMenu}>
             Registriraj se
           </Link>
         </div>

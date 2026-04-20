@@ -1,11 +1,11 @@
 .container {
-  min-height: 100vh;
+  min-height: 600px;
   display: flex;
   justify-content: center;
   align-items: center;
   background: #fff;
   font-family: 'Poppins', sans-serif;
-  padding: 2rem;
+  padding: 40px 35px;
 }
 
 /* === Obrazec ================================================ */
@@ -111,6 +111,12 @@
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
 }
-@media (max-width: 680px) {
+@media (max-width: 800px) {
   .row { grid-template-columns: 1fr; }
+  .container {
+    margin-top: 0;
+  }
+  .form {
+    margin-top: 0;
+  }
 }
