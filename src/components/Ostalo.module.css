@@ -1,13 +1,4 @@
-.vrsta {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap; /* Omogoči, da gredo pravila v novo vrsto, ko se odprejo */
-  width: 100%;
-  max-width: 955px;
-  margin: 30px auto;
-  gap: 15px; /* Doda malce prostora, če se okno zoža */
-}
+
 
 .legend {
   display: flex;
@@ -67,3 +58,17 @@
 .dotPlanned { background-color: #3b82f6; }
 .dotInGame { background-color: #22c55e; }
 .dotFinished { background-color: #94a3b8; }
+
+
+@media (max-width: 800px) {
+
+
+  .rulesButton {
+    margin: auto;
+  }
+
+  .legend {
+    margin: auto;
+  }
+ }
+

@@ -108,3 +108,14 @@ min-height: 400px;
   margin-bottom: 10px; 
   font-size: 25px;
 }
+
+.vrsta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap; /* Omogoči, da gredo pravila v novo vrsto, ko se odprejo */
+  width: 100%;
+  max-width: 955px;
+  margin: 30px auto;
+  gap: 15px; /* Doda malce prostora, če se okno zoža */
+}

@@ -3,9 +3,9 @@ import { doc, getDoc } from "firebase/firestore";
 import CompetitionDetails from "@/components/Competitions/CompetitionDetails";
 import ScreenshotButton from "./ScreenshotButton"; // <--- Uvozi gumb
 import classes from "./Id.module.css";
-import classes2 from "@/components/Ostalo.module.css"
 import RulesButton from "@/components/RulesButton";
 import BackButton from "@/components/BackButton";
+import Legenda from "@/components/Legenda";
 
 export default async function Page({ params }) {
   const { id } = await params; 
@@ -56,25 +56,11 @@ export default async function Page({ params }) {
     
   }
 />
-        <div className={classes2.vrsta}>
+        <div className={classes.vrsta}>
 
- <div className={classes2.legend}>
-  <div className={classes2.legendItem}>
-    <span className={`${classes2.dot} ${classes2.dotPlanned}`}></span>
-    <span>Načrtovano</span>
-  </div>
-  <div className={classes2.legendItem}>
-    <span className={`${classes2.dot} ${classes2.dotInGame}`}></span>
-    <span>V teku</span>
-  </div>
-  <div className={classes2.legendItem}>
-    <span className={`${classes2.dot} ${classes2.dotFinished}`}></span>
-    <span>Zaključeno</span>
-  </div>
- 
-</div>
+          <Legenda />
 
- <RulesButton rules={comp.rulesText}/>
+          <RulesButton rules={comp.rulesText}/>
 
         </div>
        
