@@ -119,10 +119,12 @@
   }
   .form {
     margin-top: 0;
-    padding: 50px 50px;
+    padding: 40px 40px;
+    max-width: 320px;
   }
 
   .title{
     font-size: 25px;
   }
+  
 }
