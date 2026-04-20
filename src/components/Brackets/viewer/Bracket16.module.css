@@ -130,7 +130,98 @@ max-width: 1800px;
   flex: 1;
 }
 
-/* responsive */
+
+.roundTitle {
+   text-align: center;
+  color: #ffffff;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+}
+
+.onlyMobileTitle {
+  display: none; /* Skrito na računalniku in Exportu */
+}
+
+@media (max-width: 1100px) {
+  .container {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 20px 16px;
+    margin: auto;
+  }
+
+  .matchup {
+    max-width: 100%;
+  }
+
+  .roundTitle {
+    display: none !important;
+  }
+
+  .order1 {
+    order: 1 !important;
+  }
+
+  .order2 {
+    order: 2 !important;
+  }
+
+  .order3 {
+    order: 3 !important;
+  }
+
+   .order4 {
+    order: 4 !important;
+  }
+
+  
+.col {
+  margin: auto;
+  max-width: 300px;
+  width: 100%;
+  
+}
+
+.colSemi {
+  margin: auto;
+  max-width: 300px;
+  width: 100%;
+}
+
+.colFinals {
+  margin: auto;
+  max-width: 300px;
+  width: 100%;
+}
+
+.colRound {
+  margin: auto;
+  max-width: 300px;
+  width: 100%;
+}
+
+  /* Prikažemo skupni naslov kroga na telefonu */
+  .onlyMobileTitle {
+    display: block !important;
+    text-align: center;
+    font-size: 13px;
+    font-weight: bold;
+    color: white;
+    margin: 10px 0 10px 0; /* Malo več zgornjega odmika za preglednost */
+    text-transform: uppercase;
+  }
+}
+
+
+@media (min-width: 801px) {
+  .roundTitle {
+    display: block; 
+  }
+}
+/* 
+
 @media (max-width: 1200px) {
   .container { grid-template-columns: repeat(4, minmax(0, 1fr)); }
  
@@ -145,9 +236,9 @@ max-width: 1800px;
   .container { grid-template-columns: 1fr; padding: 20px 16px; }
   .matchup { max-width: 100%; }
   
-}
+} 
 
-
+*/
 
 .legend {
   display: flex;

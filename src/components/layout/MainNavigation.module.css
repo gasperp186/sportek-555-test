@@ -124,6 +124,10 @@ transition: background 0.3s;
   z-index: 1000;
 }
 
+.buttons {
+  display: block;
+}
+
 @media (max-width: 1024px) {
   .navDesktop { margin-left: 0; }
 }
@@ -135,6 +139,10 @@ transition: background 0.3s;
   .hamburger { display: inline-flex; margin-left: auto; } 
   .logoText { font-size: 1.4rem; }
   .logoImg { width: 36px; height: 36px; }
+
+  .buttons {
+  display: none;
+}
 }
 
 
@@ -146,3 +154,4 @@ transition: background 0.3s;
 .profilDiv {
   margin-right: 20px;
 }
+

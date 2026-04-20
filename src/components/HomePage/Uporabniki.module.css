@@ -1,6 +1,6 @@
 .section {
   width: 100%;
-  padding: 138px 16px;
+  padding: 80px 16px;
   background: #cacdd3; 
   font-family: var(--font-main);
 }
@@ -73,6 +73,16 @@
   .card {
     grid-template-columns: 1fr;
   }
+
+  .naslov {
+    font-size: 35px;
+  }
+
+  .section {
+  
+  padding: 50px 16px;
+  
+}
 }
 
 .media {

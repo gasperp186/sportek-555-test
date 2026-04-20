@@ -1,6 +1,6 @@
 .wrap {
   background: #0b1224; 
-  padding: 138px 16px;
+  padding: 80px 16px;
 }
 .inner {
   margin: 0 auto;
@@ -39,8 +39,17 @@
 
 }
 
-@media (max-width: 900px) {
+@media (max-width: 800px) {
   .grid { grid-template-columns: 1fr; }
+
+  .wrap {
+  padding: 50px 16px;
+}
+
+.naslov {
+  
+  font-size: 35px;
+}
 }
 
 .card {
