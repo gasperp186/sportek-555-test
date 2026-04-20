@@ -7,8 +7,6 @@ export default function Match({
 }) {
   const href = `${basePath}/${id}`.replace(/\/+/g, "/");
   
-  // Vedno uporabi originalna imena razredov iz CSS
-  
   const statusClass = 
     status === "live" ? classes.borderInGame : 
     status === "scheduled" ? classes.borderPlanned : 
@@ -16,12 +14,17 @@ export default function Match({
 
   const blockCls = isExport ? `${classes.block} ${classes.block2}` : classes.block;
   const matchupCls = isExport ? `${classes.matchup} ${classes.matchup2}` : classes.matchup;
-  const roundCls = isExport ? `${classes.roundDetails} ${classes.roundDetails2}` : classes.roundDetails;
+  
+  // Tukaj dodamo classes.roundTitle razred
+  const roundCls = isExport 
+    ? `${classes.roundDetails} ${classes.roundDetails2} ${classes.roundTitle}` 
+    : `${classes.roundDetails} ${classes.roundTitle}`;
 
   return (
     <div className={blockCls}>
+      {/* Naslov kroga izpišemo vedno, če obstaja */}
       {roundTitle && <div className={roundCls}>{roundTitle}</div>}
-      {/* Dodamo matchupCls IN statusClass hkrati */}
+      
       <Link className={`${matchupCls} ${statusClass}`} href={href}>
         <ul>
           <li className={isExport ? `${classes.metaRow} ${classes.metaRow2}` : classes.metaRow}>

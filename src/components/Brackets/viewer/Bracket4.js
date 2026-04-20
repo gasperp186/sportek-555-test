@@ -51,7 +51,7 @@ export default function Bracket4({ matches, basePath = "", isExport = false }) {
             date={formatDate(sf1?.date)}          
             time={sf1?.time}
             city={sf1?.city}
-            roundTitle={isExport ? "Polfinale 1" : null} // Na mobiju null, ker imamo onlyMobileTitle
+            roundTitle={"Polfinale 1"} // Na mobiju null, ker imamo onlyMobileTitle
             top={teamRow(sf1?.home, sf1?.homeScore)}
             bottom={teamRow(sf1?.away, sf1?.awayScore)}
             classes={classes}
@@ -65,7 +65,7 @@ export default function Bracket4({ matches, basePath = "", isExport = false }) {
           ${isExport && t3 ? classes.colFinals2 : (!isExport && t3 ? classes.colFinals : "")}
           ${!isExport ? classes.order3 : ""}
         `}>
-          {!isExport && <h3 className={classes.onlyMobileTitle}>Finalni boji</h3>}
+          {!isExport && <h3 className={classes.onlyMobileTitle}>Finale</h3>}
           
           <Match
             id={f1?.id}
@@ -80,8 +80,8 @@ export default function Bracket4({ matches, basePath = "", isExport = false }) {
             classes={classes}
             isExport={isExport}
           /> 
-
-          {t3 && (
+          {t3 && !isExport && <h3 className={classes.onlyMobileTitle}>Tekma za 3. mesto</h3>}
+          {t3 &&  (
             <Match
               id={t3?.id}
               basePath={basePath}
@@ -112,7 +112,7 @@ export default function Bracket4({ matches, basePath = "", isExport = false }) {
             date={formatDate(sf2?.date)} 
             time={sf2?.time}
             city={sf2?.city}
-            roundTitle={isExport ? "Polfinale 2" : null}
+            roundTitle={"Polfinale 2"}
             top={teamRow(sf2?.home, sf2?.homeScore)}
             bottom={teamRow(sf2?.away, sf2?.awayScore)}
             classes={classes}

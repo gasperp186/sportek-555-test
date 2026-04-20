@@ -14,6 +14,7 @@ max-width: 960px;
   color: #0f172a;
 }
 
+
 .container {
   
 
@@ -144,45 +145,59 @@ max-width: 960px;
   color: #b8860b;
   margin-bottom: 2px;
 }
+/* --- OSNOVA --- */
+.roundTitle {
+   text-align: center;
+  color: #ffffff;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+}
 
+.onlyMobileTitle {
+  display: none; /* Skrito na računalniku in Exportu */
+}
+
+/* --- TELEFON --- */
 @media (max-width: 800px) {
   .container {
     display: flex !important;
-    flex-direction: column !important; /* Stolpci gredo eden pod drugega */
+    flex-direction: column !important;
     gap: 20px !important;
   }
 
-  .col {
-    width: 100% !important;
+  /* KLJUČNI POPRAVEK: Skrijemo posamezne naslove tekem */
+  .roundTitle {
+    display: none !important;
   }
 
-  /* SF1 in SF2 imata oba order 1, zato skočita na vrh */
   .order1 {
     order: 1 !important;
   }
 
-  /* Finale ima order 3, zato skoči na dno */
   .order3 {
     order: 3 !important;
-  }
-
-  /* Skrijemo naslove znotraj Match komponente na telefonu */
-  .hideOnMobile {
-    display: none !important;
   }
 
   /* Prikažemo skupni naslov kroga na telefonu */
   .onlyMobileTitle {
     display: block !important;
     text-align: center;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: bold;
-    color: #64748b;
-    margin: 10px 0;
+    color: white;
+    margin: 10px 0 10px 0; /* Malo več zgornjega odmika za preglednost */
     text-transform: uppercase;
   }
 }
 
+/* --- RAČUNALNIK (nad 800px) --- */
+@media (min-width: 801px) {
+  .roundTitle {
+    display: block; 
+  }
+}
 
 .block {
   display: flex;
