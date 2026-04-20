@@ -147,7 +147,7 @@ max-width: 960px;
 }
 /* --- OSNOVA --- */
 .roundTitle {
-   text-align: center;
+  text-align: center;
   color: #ffffff;
   text-transform: uppercase;
   font-weight: 700;
@@ -175,6 +175,8 @@ max-width: 960px;
   .order1 {
     order: 1 !important;
   }
+
+  
 
   .order3 {
     order: 3 !important;
