@@ -16,7 +16,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr); 
   gap: 20px;
-  padding: 10px;
+  padding: 30px;
   max-width: 1100px;
   width: 100%;
   margin: auto; 
@@ -29,6 +29,7 @@
   .container {
     grid-template-columns: 1fr;
     gap: 0px;
+    padding: 10px;
     
   }
 
@@ -38,6 +39,19 @@
   
 }
 
+@media (max-width: 699px) {
+  .container {
+    grid-template-columns: 1fr;
+    gap: 0px;
+    padding: 1px;
+    
+  }
+
+  .card {
+    border: none;
+  }
+  
+}
 
 
 
