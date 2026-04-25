@@ -1,15 +1,15 @@
 export const sports = {
   nogomet: {
     naslov: "Nogomet",
-    image: "/sports/football.jpg",
+    image: "/sports/nogomet.jpg",
   },
   kosarka: {
     naslov: "Košarka",
-    image: "/sports/basketball.jpg",
+    image: "/sports/kosarka.jpg",
   },
   odbojka: {
     naslov: "Odbojka",
-    image: "/sports/volleyball.jpg",
+    image: "/sports/odbojka.jpg",
   },
   pikado: {
     naslov: "Pikado",

@@ -22,14 +22,14 @@ export default function StepSport({ setForm, onNext }) {
         
 
         <div className={sportClasses.container}>
-          <SportCard sport="nogomet"  onSelect={selectSport} />
-          <SportCard sport="kosarka"  onSelect={selectSport} />
-          <SportCard sport="odbojka"  onSelect={selectSport} />
-          <SportCard sport="pikado"   onSelect={selectSport} />
-          <SportCard sport="futsal"   onSelect={selectSport} />
+          <SportCard sport="nogomet" onSelect={selectSport} />
+          <SportCard sport="kosarka" onSelect={selectSport} />
+          <SportCard sport="odbojka" onSelect={selectSport} />
+          <SportCard sport="pikado" onSelect={selectSport} />
+          <SportCard sport="futsal" onSelect={selectSport} />
           <SportCard sport="namizni tenis" onSelect={selectSport} />
           <SportCard sport="namizni nogomet" onSelect={selectSport} />
-          <SportCard sport="biljard"  onSelect={selectSport} />
+          <SportCard sport="biljard" onSelect={selectSport} />
         </div>
       </div>
     </div>
