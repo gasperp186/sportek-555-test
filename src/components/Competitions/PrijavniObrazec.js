@@ -8,10 +8,10 @@ import { db, auth } from "@/lib/firebase";
 import { collection, addDoc, serverTimestamp, doc, getDoc } from "firebase/firestore";
 
 
-export default function PrijavniObrazec() {
+export default function PrijavniObrazec({ competition }) {
 
   const [name, setName] = useState("");
-
+  const comp = competition;
   const [userName, setUsername] = useState("");
 
   const params = useParams();
@@ -73,9 +73,6 @@ export default function PrijavniObrazec() {
       console.log(error);
     }
 
-   
-
-    
   }
 
 
@@ -100,14 +97,20 @@ export default function PrijavniObrazec() {
 
           <div className={classes.control}>
             <label className={classes.label}>E-MAIL</label>
-            <p>{userEmail}</p>
+            <p style={{marginTop: '13px'}}>{userEmail}</p>
           </div>
         </div>
 
-        {/* CHECKBOX */}
-        <div className={classes.checkboxRow}>
+        
+        {/* <div className={classes.checkboxRow}>
           <input type="checkbox" id="agree" />
           <label htmlFor="agree">Strinjam se s pogoji prijave</label>
+        </div> */}
+
+        <div className={classes.checkboxRow}>
+          
+            <label> Prijave zbiramo do {comp?.registrationDeadline || "Datum ni določen"}</label>        
+        
         </div>
 
         {/* GUMB */}

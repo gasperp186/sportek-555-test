@@ -191,7 +191,7 @@ export default function CompetitionEditPage() {
         {tab === "tekme" && (
           <>
             <h3>Tekme</h3>
-    <CompetitionDetails id={id} initialData={comp} isEditMode={true} />
+            <CompetitionDetails id={id} initialData={comp} isEditMode={true} />
           </>
         )}
 

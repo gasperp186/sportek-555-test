@@ -71,7 +71,7 @@ const [profile, setProfile] = useState(null);  //profil iz Firestore
             </Link>
           </li>
            <li>
-            <Link href="/Create" className={isActive("/") ? classes.active : ""}>
+            <Link href="/Create" className={isActive("/Create") ? classes.active : ""}>
               Ustvari tekmovanje
             </Link>
           </li>
@@ -100,7 +100,7 @@ const [profile, setProfile] = useState(null);  //profil iz Firestore
 )}
 
 {authUser && (
-  <div>
+  <div className={classes.prijavljenDiv}>
     <Link href="/Profil" className={classes.profilName}>{profile?.name} {profile?.surname}  &#8595;</Link>
     <button className={
       classes.logoutBtn

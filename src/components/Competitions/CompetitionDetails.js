@@ -8,7 +8,8 @@ import Bracket4 from "@/components/Brackets/viewer/Bracket4";
 import Bracket8 from "@/components/Brackets/viewer/Bracket8";
 import Bracket16 from "@/components/Brackets/viewer/Bracket16";
 import PrijavniObrazec from "@/components/Competitions/PrijavniObrazec";
-import SeznamPrijav from "@/components/Competitions/SeznamPrijav";
+import KonecPrijav from "@/components/Competitions/KonecPrijav";
+import MestaZapolnjena from "@/components/Competitions/MestaZapolnjena";
 import { useRouter, usePathname } from "next/navigation";
 import LeagueRound from "./LeagueMatchRow";
 import { db } from "@/lib/firebase";
@@ -30,10 +31,14 @@ export default function CompetitionDetails({ id, initialData, basePath = "", isE
   const isEdit = isEditMode || pathName.endsWith("/edit");
 
   const bracketLink = isEdit ? `/Competitions/${id}` : `/Competitions/${id}/edit`;
-  const maxMest = comp?.maxTeams || 0;
+  const aktivnePrijaveCount = applications.filter(a => a.status !== "zavrnjeno").length;
+
+const maxMest = comp?.maxTeams || 0;
   const trenutnoPrijavljenih = applications.length;
-  const isFull = maxMest > 0 && trenutnoPrijavljenih >= maxMest;
-  const prostaMesta = maxMest - trenutnoPrijavljenih;
+
+
+  const isFull = aktivnePrijaveCount >= maxMest;
+  const prostaMesta = Math.max(0, maxMest - aktivnePrijaveCount);
 
   const lestvica = teams.map((team) => ({
     team: team, P: 0, PTS: 0, W: 0, D: 0, L: 0, GD: 0,
@@ -137,13 +142,21 @@ export default function CompetitionDetails({ id, initialData, basePath = "", isE
 
   if (loading) return <div className={classes.page}>Nalagam podatke...</div>;
 
+
   const isLeague = comp?.mode === "ligaski";
   const isHybrid = comp?.mode === "hybrid";
-  const mode = comp?.publishMode || "FORM";
-  const showForm = !isEdit && mode === "FORM" && !isFull;
-  const showSchedule = isEdit || mode === "SCHEDULE";
-  const showFullMessage = !isEdit && mode === "FORM" && isFull;
+  const mode = comp.publishMode;
+  const showForm = mode === "FORM_ONLY" && !isFull;
+  const showSchedule = mode === "SCHEDULE_ONLY";
+  const mestaZapolnjena = mode === "FORM_ONLY" && isFull;
   const isBracket = showSchedule && !isLeague && matches.length > 0;
+
+  const today = new Date().setHours(0, 0, 0, 0); // Danes ob polnoči
+  const deadLine = comp?.registrationDeadline 
+  ? new Date(comp.registrationDeadline).setHours(0, 0, 0, 0) 
+  : null;
+
+  const konecPrijav = deadLine ? deadLine < today : false;
   
   const maxRound = ligaskeTekme.length > 0 ? Math.max(...ligaskeTekme.map(m => m.round)) : 1;
   const matchesThisRound = matches.filter((m) => m.round === selectedRound);
@@ -170,15 +183,17 @@ if (isExport) {
   return (
     <div className={classes.page}>
       <div className={`${isBracket ? classes.bracketCard : classes.card}`}>
-        {showFullMessage && (
-          <div className={classes.fullBadge}>
-            <h3>Prijave so zaključene</h3>
-            <p>Vsa mesta ({maxMest}) so zasedena.</p>
-          </div>
+        {mestaZapolnjena && (
+          <MestaZapolnjena /> 
+          
+        )}
+
+        {konecPrijav && (
+          <KonecPrijav />
         )}
 
         {showForm && (
-          <PrijavniObrazec prostaMesta={prostaMesta} onSuccess={() => {}} />
+          <PrijavniObrazec competition={comp} onSuccess={() => {}} />
         )}
 
         {showSchedule && (

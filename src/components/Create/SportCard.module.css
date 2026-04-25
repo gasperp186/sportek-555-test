@@ -51,3 +51,13 @@
     rgba(37, 99, 235, 0.15)
   );
 }
+
+@media (max-width: 699px) {
+  .container {
+    grid-template-columns: 1fr;
+    
+  }
+  .card {
+    margin: 20px 20px;
+  }
+}

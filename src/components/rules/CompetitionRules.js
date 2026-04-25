@@ -63,6 +63,8 @@ const rulesValue = form.rulesText ?? DEFAULT_RULES[form.sport] ?? "";
         createdBy: userId,
         editors: [],
         publishMode: form.publicSignups ? "FORM_ONLY" : "SCHEDULE_ONLY",
+        registrationDeadline: form.registrationDeadline,
+        thirdPlaceMatch: form.thirdPlaceMatch,
 
       };
 

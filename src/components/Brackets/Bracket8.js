@@ -94,16 +94,16 @@ export default function Bracket8({ teams, matches, onChangeMatches, isHybrid, th
     if (!onChangeMatches) return;
 
     const matchesToSave = [
-      { id: "QF1", round: "QF1", phase: "knockout", home: matchData.QF1.home, away: matchData.QF1.away, date: matchData.QF1.date, time: matchData.QF1.time, nextPosition: "home" },
-      { id: "QF2", round: "QF2", phase: "knockout", home: matchData.QF2.home, away: matchData.QF2.away, date: matchData.QF2.date, time: matchData.QF2.time, nextPosition: "away" },
-      { id: "QF3", round: "QF3", phase: "knockout", home: matchData.QF3.home, away: matchData.QF3.away, date: matchData.QF3.date, time: matchData.QF3.time, nextPosition: "home" },
-      { id: "QF4", round: "QF4", phase: "knockout", home: matchData.QF4.home, away: matchData.QF4.away, date: matchData.QF4.date, time: matchData.QF4.time, nextPosition: "away" },
-      { id: "SF1", round: "SF1", phase: "knockout", home: "", away: "", date: matchData.SF1.date, time: matchData.SF1.time, nextPosition: "home" },
-      { id: "SF2", round: "SF2", phase: "knockout", home: "", away: "", date: matchData.SF2.date, time: matchData.SF2.time, nextPosition: "away" },
-      { id: "F1",  round: "F1",  phase: "knockout", home: "", away: "", date: matchData.F1.date,  time: matchData.F1.time },
+      { id: "QF1", round: "QF1", phase: "knockout", home: matchData.QF1.home, away: matchData.QF1.away, date: matchData.QF1.date, time: matchData.QF1.time, nextPosition: "home", status: "scheduled" },
+      { id: "QF2", round: "QF2", phase: "knockout", home: matchData.QF2.home, away: matchData.QF2.away, date: matchData.QF2.date, time: matchData.QF2.time, nextPosition: "away", status: "scheduled" },
+      { id: "QF3", round: "QF3", phase: "knockout", home: matchData.QF3.home, away: matchData.QF3.away, date: matchData.QF3.date, time: matchData.QF3.time, nextPosition: "home", status: "scheduled" },
+      { id: "QF4", round: "QF4", phase: "knockout", home: matchData.QF4.home, away: matchData.QF4.away, date: matchData.QF4.date, time: matchData.QF4.time, nextPosition: "away", status: "scheduled" },
+      { id: "SF1", round: "SF1", phase: "knockout", home: "", away: "", date: matchData.SF1.date, time: matchData.SF1.time, nextPosition: "home", status: "scheduled" },
+      { id: "SF2", round: "SF2", phase: "knockout", home: "", away: "", date: matchData.SF2.date, time: matchData.SF2.time, nextPosition: "away", status: "scheduled" },
+      { id: "F1",  round: "F1",  phase: "knockout", home: "", away: "", date: matchData.F1.date,  time: matchData.F1.time, status: "scheduled" },
       thirdPlaceMatch ? { 
         id: "T3", round: "T3", phase: "knockout", home: "", away: "", 
-        date: matchData.T3.date, time: matchData.T3.time 
+        date: matchData.T3.date, time: matchData.T3.time, status: "scheduled"
       } : null,
     ].filter(Boolean);
 

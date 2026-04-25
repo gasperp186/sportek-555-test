@@ -83,6 +83,7 @@ useEffect(() => {
   const next = () => {
   setStep((s) => {
     if (s === 1) return form.publicSignups ? 2 : 3;
+    if (s === 2) return 5;
     
     return s + 1;
   });

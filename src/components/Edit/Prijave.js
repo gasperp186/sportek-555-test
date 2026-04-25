@@ -17,6 +17,8 @@ import classes from "./Prijave.module.css";
 
 // Uvoz generatorja (create), ki ima gumbe za žreb in dropdown liste
 import Bracket4Generator from "@/components/Brackets/Bracket4"; 
+import Bracket8Generator from "@/components/Brackets/Bracket8"; 
+import Bracket16Generator from "@/components/Brackets/Bracket16"; 
 
 export default function Prijave() {
   const [applications, setApplications] = useState([]);
@@ -102,7 +104,7 @@ export default function Prijave() {
       // C) PREKLOP NA SCHEDULE MODE
       const compRef = doc(db, "competitions", id);
       await updateDoc(compRef, { 
-        publishMode: "SCHEDULE", // Usklajeno z CompetitionDetails
+        publishMode: "SCHEDULE_ONLY", // Usklajeno z CompetitionDetails
         status: "v_teku"
       });
 
@@ -217,12 +219,43 @@ export default function Prijave() {
             </button>
           </div>
 
-          <div className={classes.bracketBox}>
+          {maxMest === 4 && (
+
+            <div className={classes.bracketBox}>
             <Bracket4Generator 
               teams={teamsForBracket} 
               onChangeMatches={handleMatchesChange} 
+              isHybrid={comp.mode === "hybrid"}
+              thirdPlaceMatch={comp.thirdPlaceMatch}
             />
           </div>
+          )}
+
+           {maxMest === 8 && (
+            
+            <div className={classes.bracketBox}>
+            <Bracket8Generator 
+              teams={teamsForBracket} 
+              onChangeMatches={handleMatchesChange} 
+              isHybrid={comp.mode === "hybrid"}
+              thirdPlaceMatch={comp.thirdPlaceMatch}
+            />
+          </div>
+          )}
+
+           {maxMest === 16 && (
+            
+            <div className={classes.bracketBox}>
+            <Bracket16Generator 
+              teams={teamsForBracket} 
+              onChangeMatches={handleMatchesChange} 
+              isHybrid={comp.mode === "hybrid"}
+              thirdPlaceMatch={comp.thirdPlaceMatch}
+            />
+          </div>
+          )}
+
+          
 
           <div className={classes.footerPublish}>
             <button onClick={objaviZreb} className={classes.btnPublish}>
