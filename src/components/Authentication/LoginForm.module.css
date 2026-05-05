@@ -110,21 +110,32 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
-}
-@media (max-width: 699px) {
-  .row { grid-template-columns: 1fr; }
-  .container {
-    margin-top: 0;
-    padding: 45px 35px;
-  }
-  .form {
-    margin-top: 0;
-    padding: 40px 40px;
-    max-width: 320px;
+}@media (max-width: 699px) {
+  .row { 
+    grid-template-columns: 1fr; 
   }
 
-  .title{
-    font-size: 25px;
+  .container {
+    margin-top: 0;
+    /* Uporabimo manjši stranski padding, da pridobimo prostor */
+    padding: 30px 15px; 
   }
-  
+
+  .form {
+    margin-top: 0;
+    /* Zmanjšamo padding, da vsebina ne bo stisnjena */
+    padding: 30px 20px; 
+    
+    /* KLJUČNI POPRAVEK: Namesto fiksne širine uporabimo procente */
+    width: 95%; 
+    max-width: 400px; /* Lahko ostane, a width: 95% bo preprečil overflow */
+    
+    /* Prepričamo se, da padding ne poveča širine elementa */
+    box-sizing: border-box; 
+  }
+
+  .title {
+    font-size: 25px;
+    margin-bottom: 1.5rem; /* Malo manj razmika na mobitelu */
+  }
 }

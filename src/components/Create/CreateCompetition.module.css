@@ -126,11 +126,14 @@
   margin-top: 8px; 
 }
 
-@media (min-width: 640px) {
+@media (max-width: 640px) {
   .gridNames { grid-template-columns: 1fr 1fr; }
+  .card { border: none; }
 }
-@media (min-width: 920px) {
+@media (max-width: 920px) {
   .gridNames { grid-template-columns: 1fr 1fr 1fr; }
+  .card { border: none; }
+
 }
 
 .nameItem {
