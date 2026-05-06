@@ -2,6 +2,7 @@
 
 import classes from "./Bracket4.module.css";
 import Match from "./Match";
+import { formatDate } from "@/components/formatDate";
 
 export default function Bracket4({ matches, basePath = "", isExport = false }) {
   // Iskanje tekem po rundah
@@ -10,14 +11,7 @@ export default function Bracket4({ matches, basePath = "", isExport = false }) {
   const f1 = matches.find(m => m.round === "F1");
   const t3 = matches.find(m => m.round === "T3");
 
-  function formatDate(dateStr) {
-    if (!dateStr) return "\u00A0"; 
-    if (typeof dateStr === "string" && dateStr.includes("-")) {
-      const [year, month, day] = dateStr.split("-");
-      return `${day}.${month}.${year}`;
-    }
-    return dateStr;
-  }
+ 
 
   function teamRow(name, score, status) {
     const teamName = name?.name || name || "";

@@ -6,6 +6,7 @@ import classes from "./Id.module.css";
 import RulesButton from "@/components/RulesButton";
 import BackButton from "@/components/BackButton";
 import Legenda from "@/components/Legenda";
+import { formatDate } from "@/components/formatDate";
 
 export default async function Page({ params }) {
   const { id } = await params; 
@@ -33,7 +34,7 @@ export default async function Page({ params }) {
           <strong>Šport:</strong> {comp.sport} | <strong>Kraj:</strong> {comp.city} | {
   comp.mode === "bracket" || comp.mode === "knockout" ? (
     <>
-      <strong>Datum:</strong> {comp.startDate} - {comp.endDate}
+      <strong>Datum:</strong> {formatDate(comp.startDate)} - {comp.endDate}
     </>
   ) : (
     <>

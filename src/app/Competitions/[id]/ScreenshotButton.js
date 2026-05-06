@@ -6,6 +6,8 @@ import { Camera } from 'lucide-react';
 import { ClassNames } from '@emotion/react';
 import classes from './Id.module.css';
 
+import { formatDate }  from "@/components/formatDate";
+
 export default function ScreenshotButton({ comp, contentToExport, width = "", height = ""}) {
   const ref = useRef(null);
 
@@ -50,7 +52,7 @@ export default function ScreenshotButton({ comp, contentToExport, width = "", he
     alignItems: 'center'
   }}>
     <h2 className={classes.naslov}>{comp.title}</h2>
-    <h3 className={classes.podnaslov}>{comp.startDate}</h3>
+    <h3 className={classes.podnaslov}>{formatDate(comp.startDate)}</h3>
     <h3 className={classes.podnaslov}>{comp.city}</h3>
     
     {contentToExport}
