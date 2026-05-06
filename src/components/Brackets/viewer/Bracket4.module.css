@@ -165,10 +165,10 @@
     gap: 20px !important;
   }
 
-  /* KLJUČNI POPRAVEK: Skrijemo posamezne naslove tekem */
-  /* .roundTitle {
+  
+    .roundTitle:not(.roundDetails2) {
     display: none !important;
-  } */
+  }
 
   .order1 {
     order: 1 !important;
@@ -403,4 +403,8 @@
 /* Skrij mobilni naslov v exportu in na PCju */
 .onlyMobileTitle {
   display: none;
+}
+
+.roundDetails2.roundTitle {
+  display: block !important;
 }
