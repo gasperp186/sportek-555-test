@@ -45,19 +45,34 @@ function LoginForm() {
     }
   }
 
+  async function handleResetPassword() {
+    // Admin SDK API to generate the password reset link.
+const userEmail = email.current.value.trim();
+    getAuth()
+  .generatePasswordResetLink(userEmail, actionCodeSettings)
+  .then((link) => {
+    // Construct password reset email template, embed the link and send
+    // using custom SMTP server.
+    return sendCustomPasswordResetEmail(userEmail, displayName, link);
+  })
+  .catch((error) => {
+    // Some error occurred.
+  });
+  }
+
   return (
     <div className={classes.container}>
       <form onSubmit={handleSubmit} className={classes.form}>
         <h2 className={classes.title}>Prijavi se</h2>
 
         <div className={classes.control}>
-          <label htmlFor="login-email">Email</label>
+          <label htmlFor="login-email">Elektronski naslov</label>
           <input
             id="login-email"
             type="email"
             name="email"
             ref={email}
-            placeholder="you@example.com"
+            placeholder=""
             required
           />
           <p className={classes.error}>
@@ -72,7 +87,7 @@ function LoginForm() {
             type="password"
             name="password"
             ref={password}
-            placeholder="••••••••"
+            placeholder=""
             minLength={6}
             required
           />
@@ -85,6 +100,9 @@ function LoginForm() {
           </button>
           <p className={classes.switch}>
             Nimaš še računa? <a href="/SignUp">Registriraj se</a>
+          </p>
+          <p className={classes.switch}>
+           <a href="/EmailReset">Pozabljeno geslo</a>
           </p>
         </div>
       </form>

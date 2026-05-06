@@ -75,6 +75,7 @@
   border-radius: .8rem;
   background: linear-gradient(135deg, #2563eb, #3b82f6);
   color: #fff;
+  font-size: 15px;
   font-weight: 600;
   cursor: pointer;
   transition: transform .15s, box-shadow .25s, filter .25s;

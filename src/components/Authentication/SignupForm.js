@@ -66,9 +66,9 @@ try {
         <h2 className={classes.title}>Registriraj se</h2>
 
         <div className={classes.control}>
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">Elektronski naslov</label>
           <input id="email" type="email" value={email}   onChange={(e) => setEmail(e.target.value)}
- placeholder="you@example.com" required />
+ placeholder="" required />
           {errors.emailInvalid && <p className={classes.error}>Prosim vnesite pravilen e-naslov</p>}
         </div>
 
@@ -117,6 +117,7 @@ try {
             Že imaš račun? <a href="/Login">Prijavi se</a>
           </p>
         </div>
+        
       </form>
     </div>
   );
