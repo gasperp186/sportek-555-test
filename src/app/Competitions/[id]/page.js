@@ -34,7 +34,7 @@ export default async function Page({ params }) {
           <strong>Šport:</strong> {comp.sport} | <strong>Kraj:</strong> {comp.city} | {
   comp.mode === "bracket" || comp.mode === "knockout" ? (
     <>
-      <strong>Datum:</strong> {formatDate(comp.startDate)} - {comp.endDate}
+      <strong>Datum:</strong> {formatDate(comp.startDate)} - {formatDate(comp.endDate)}
     </>
   ) : (
     <>

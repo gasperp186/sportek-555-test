@@ -5,7 +5,7 @@ import LeagueRound from "./LeagueMatchRow";
 import classes from "./League.module.css";
 import { useState, useMemo } from "react";
 
-export default function LeagueView({ matches, teams, id }) {
+export default function LeagueView({ matches, teams, id, isExport }) {
   // 1. Izračun začetnega kroga (prvi nekončan krog ali zadnji krog)
   const initialRound = useMemo(() => {
     if (!matches || matches.length === 0) return 1;
@@ -127,7 +127,7 @@ export default function LeagueView({ matches, teams, id }) {
       <div className={classes.right}>
         <div className={classes.roundToolbar}>
           <h4 className={classes.roundTitle}>Krog {selectedRound} / {maxRound}</h4>
-          <div className={classes.roundBtns}>
+          <div className={ isExport ? classes.roundBtns2 : classes.roundBtns}>
             <button 
               onClick={() => setSelectedRound(s => Math.max(1, s - 1))} 
               disabled={selectedRound === 1} 

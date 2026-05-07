@@ -1,3 +1,13 @@
+
+
+
+.dvaDela2 .onlyMobileTitle {
+  display: block !important;
+  color: white;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
 .dvaDela {
    box-shadow: 0 18px 45px rgba(15, 23, 42, 0.16);
   border: 1px solid rgba(148, 163, 184, 0.35);
@@ -177,6 +187,11 @@ max-width: 1300px;
     gap: 18px;
     padding: 20px 16px;
     margin: auto;
+  }
+
+  
+    .roundTitle:not(.roundDetails2) {
+    display: none !important;
   }
 
   .matchup {
@@ -437,4 +452,13 @@ max-width: 1300px;
 
 .matchup2.borderFinished {
   border-left: 6px solid #555d58 !important;
+}
+
+/* Skrij mobilni naslov v exportu in na PCju */
+.onlyMobileTitle {
+  display: none;
+}
+
+.roundDetails2.roundTitle {
+  display: block !important;
 }

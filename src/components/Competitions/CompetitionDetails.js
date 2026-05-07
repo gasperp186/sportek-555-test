@@ -170,12 +170,22 @@ const maxMest = comp?.maxTeams || 0;
 if (teamCount === 8) ExportBracket = Bracket8;
 if (teamCount === 16) ExportBracket = Bracket16;
 
-// 2. Če gumb ScreenshotButton zahteva export, vrnemo samo tole
+// 2. Če gumb ScreenshotButton zahteva export, preverimo mode
 if (isExport) {
   return (
-    <div>
-      {/* Tu zdaj uporabimo ExportBracket, ki smo ga zgoraj določili */}
-      <ExportBracket matches={prikazaneTekme} isExport={true} />
+    <div style={{ background: '#1e293b', padding: '20px' }}>
+      {/* 1. Če je liga ali hibrid, exportamo lestvico/tekme lige */}
+      {(isLeague || isHybrid) && (
+        <LeagueView matches={matches} teams={teams} id={id} isExport={true} />
+      )}
+
+      {/* 2. Razmik, če gre za hibrid */}
+      {isHybrid && <div style={{ height: '40px' }} />}
+
+      {/* 3. Če ni liga (torej turnir ali hibrid), exportamo še bracket */}
+      {!isLeague && (
+        <ExportBracket matches={prikazaneTekme} isExport={true} />
+      )}
     </div>
   );
 }
