@@ -6,9 +6,13 @@
 }
 
 .title {
-  margin: 0;
-  font-size: 1.2rem;
-  font-weight: 600;
+  text-align: center;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: black !important;
+  margin-top: 20px;
+  margin-bottom: 20px;
+
 }
 
 .row {
@@ -23,20 +27,30 @@
 }
 
 .field label {
-  font-size: 0.9rem;
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: 600;
   opacity: 0.85;
+  color: black;
 }
 
 .field input,
 .field textarea {
   padding: 10px 12px;
   border-radius: 10px;
-  border: 1px solid #ddd;
-  font-size: 0.95rem;
+  border: 2px solid #ddd;
+  font-size: 16px;
   font-family: inherit;
+  
+  /* DODAJ TI DVE VRSTICI */
+  background-color: #ffffff; /* Prisili belo ozadje */
+  color: #0f172a;            /* Prisili temno barvo besedila */
 }
 
+/* Opcijsko: dodaj še barvo za placeholder, če je preveč svetel */
+.field input::placeholder,
+.field textarea::placeholder {
+  color: #94a3b8;
+}
 .field textarea {
   resize: vertical;
 }
@@ -44,5 +58,17 @@
 .field input:focus,
 .field textarea:focus {
   outline: none;
-  border-color: #3b82f6; /* modri accent */
+}
+
+@media (max-width: 600px) {
+
+
+  .field input,
+.field textarea {
+  padding: 8px 10px;
+ 
+ 
+  font-size: 14px;
+  
+}
 }

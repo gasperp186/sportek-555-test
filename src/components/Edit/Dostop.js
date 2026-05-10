@@ -93,44 +93,58 @@ useEffect(() => {
     }
 
 
-    return(
-       <div className={classes.wrapper}>
-      <h3 className={classes.title}>Dostop</h3>
+    return (
+  <div className={classes.wrapper}>
+    <h2 className={classes.title}>Dostop</h2>
 
-      <div>
-        <input 
+    {/* Iskalni del */}
+    <div className={classes.inputGroup}>
+      <label className={classes.text} style={{fontWeight: '600'}}>Dodaj novega urednika</label>
+      <input
         type="email"
+        placeholder="Vpišite e-poštni naslov uporabnika..."
         value={newEmail}
         onChange={(e) => setNewEmail(e.target.value)}
-        />
-            {foundUser && (
-  <div>
-    <p className={classes.text}>Najden: {foundUser.name} {foundUser.surname}</p>
-    <button onClick={addEditor}>Dodaj</button>
-  </div>
-)}
+      />
 
-{/* 2. Če je email v celoti vpisan, uporabnika pa NI v foundUser */}
-{newEmail.includes('@') && newEmail.includes('.') && !foundUser && (
-  <div>
-    <p>Uporabnik s tem naslovom še ni registriran.</p>
-  </div>
-)}
-      </div>
+      {foundUser && (
+        <div className={classes.foundBox}>
+          <p className={classes.text} style={{margin: 0}}>
+            <strong>Najden:</strong> {foundUser.name} {foundUser.surname}
+          </p>
+          <button className={classes.addButton} onClick={addEditor}>Dodaj</button>
+        </div>
+      )}
 
-      <div>
-        <h2 className={classes.text}>Seznam urednikov</h2>
-        {editors.map((editor) => (
-            <div className={classes.text} key={editor.id}>
-                <li>{editor.email} - {editor.name} {editor.surname}</li> <button onClick={() => removeEditor(editor.id)}>Odstrani</button>
-            </div>
-            
-        ))}
-      </div>
-
-      
+      {newEmail.includes('@') && newEmail.includes('.') && !foundUser && (
+        <div className={classes.text} style={{color: '#d32f2f', fontSize: '14px'}}>
+          <p>Uporabnik s tem naslovom še ni registriran.</p>
+        </div>
+      )}
     </div>
-    )
+
+    {/* Seznam urednikov */}
+    <div style={{marginTop: '20px'}}>
+      <h3 className={classes.text} style={{fontWeight: '700', borderBottom: '1px solid #eee', paddingBottom: '10px'}}>
+        Seznam trenutnih urednikov
+      </h3>
+      <ul className={classes.editorList}>
+        {editors.length === 0 && <p className={classes.text} style={{opacity: 0.5}}>Ni dodanih urednikov.</p>}
+        {editors.map((editor) => (
+          <li className={classes.editorItem} key={editor.id}>
+            <div className={classes.teamInfo}>
+              <span className={classes.teamName}>{editor.name} {editor.surname}</span>
+              <small className={classes.userName}>{editor.email}</small>
+            </div>
+            <button className={classes.removeButton} onClick={() => removeEditor(editor.id)}>
+              Odstrani
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+);
 
 
 }

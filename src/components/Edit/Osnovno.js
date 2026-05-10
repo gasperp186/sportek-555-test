@@ -12,7 +12,7 @@ export default function Osnovno({data, onChange}) {
 
   return (
     <div className={classes.wrapper}>
-      <h3 className={classes.title}>Osnovno</h3>
+      <h2 className={classes.title}>Osnovno</h2>
 
       <div className={classes.field}>
         <label>Ime turnirja</label>

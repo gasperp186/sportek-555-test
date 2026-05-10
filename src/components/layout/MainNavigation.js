@@ -101,7 +101,7 @@ const [profile, setProfile] = useState(null);  //profil iz Firestore
 
 {authUser && (
   <div className={classes.prijavljenDiv}>
-    <Link href="/Profil" className={classes.profilName}>{profile?.name} {profile?.surname}  &#8595;</Link>
+    <Link href="/Profil" className={classes.profilName}>Moj profil</Link>
     <button className={
       classes.logoutBtn
     } onClick={handleLogout} href="/">Odjava</button>

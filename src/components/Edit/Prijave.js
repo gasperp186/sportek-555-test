@@ -135,10 +135,9 @@ export default function Prijave() {
       {!pripravljenNaZreb ? (
         /* --- 1. DEL: UPRAVLJANJE PRIJAV --- */
         <>
-          <div className={classes.headerRow}>
-            <h3 className={classes.title}>Upravljanje prijav</h3>
-            <span className={classes.modeBadge}>Trenutni način: {comp?.publishMode || "FORM"}</span>
-          </div>
+          
+            <h2 className={classes.title}>Upravljanje prijav</h2>
+          
 
           <div className={classes.statusBox}>
             <div className={classes.statItem}>
@@ -204,9 +203,7 @@ export default function Prijave() {
             >
               Nadaljuj na žreb ({potrjeneEkipe.length} ekip)
             </button>
-            <p className={classes.hint}>
-              * Ko objaviš žreb, se prijave samodejno zaprejo za javnost.
-            </p>
+            
           </div>
         </>
       ) : (
