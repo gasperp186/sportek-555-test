@@ -12,7 +12,7 @@ export default function RulesToggle({ rules }) {
         onClick={() => setShowRules(!showRules)} 
         className={classes.rulesButton}
       >
-        {showRules ? "Skrij pravila" : "Prikaži pravila tekmovanja"}
+        {showRules ? "      Skrij pravila      " : "Prikaži pravila tekmovanja"}
       </button>
 
       {showRules && (

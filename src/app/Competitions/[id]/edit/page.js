@@ -176,10 +176,6 @@ export default function CompetitionEditPage() {
           Osnovno
         </button>
 
-       
-
-       
-
       </div>
       )}
 

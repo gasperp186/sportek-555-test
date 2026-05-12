@@ -34,7 +34,12 @@ export default async function Page({ params }) {
           <strong>Šport:</strong> {comp.sport} | <strong>Kraj:</strong> {comp.city} | {
   comp.mode === "bracket" || comp.mode === "knockout" ? (
     <>
-      <strong>Datum:</strong> {formatDate(comp.startDate)} - {formatDate(comp.endDate)}
+     {/* Vstavi v svoj JSX del */}
+<strong>Datum:</strong> {
+  !comp.endDate || comp.startDate === comp.endDate 
+    ? formatDate(comp.startDate) 
+    : `${formatDate(comp.startDate)} - ${formatDate(comp.endDate)}`
+}
     </>
   ) : (
     <>
@@ -44,32 +49,34 @@ export default async function Page({ params }) {
 }
         </p> 
         <CompetitionDetails id={id} initialData={comp} isEditMode={true} />
-        <div>
-        {/* Gumb uporabiš tukaj in mu poveš, kaj naj "slika" */}
         
-        <ScreenshotButton 
-  comp={comp} 
-  width="900px" // Malo več kot container2 (1200px + padding)
-  height="700px" 
-  contentToExport={
-    
-       <CompetitionDetails id={id} initialData={comp} isExport={true} />
-    
-  }
-/>
+        
+        
+          
         <div className={classes.vrsta}>
+  <Legenda />
+    <div className={classes.screenShotDiv}>
+   <ScreenshotButton 
+      comp={comp}
+      className={classes.screenshootButton} 
+      width="900px" 
+      height="700px" 
+      contentToExport={
+        <CompetitionDetails id={id} initialData={comp} isExport={true} />
+      }
+    />
+    </div>
+   
 
-          <Legenda />
 
-          <RulesButton rules={comp.rulesText}/>
-
-        </div>
+  <RulesButton rules={comp.rulesText}/>
+</div>
        
  
       
 
        
-      </div>
+      
       <BackButton/>
       
       </div>

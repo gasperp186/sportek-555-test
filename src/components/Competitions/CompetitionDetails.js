@@ -190,43 +190,41 @@ if (isExport) {
   );
 }
 
-  return (
-    <div className={classes.page}>
-      <div className={`${isBracket ? classes.bracketCard : classes.card}`}>
-        {mestaZapolnjena && (
-          <MestaZapolnjena /> 
-          
-        )}
+ return (
+  <div className={classes.page}>
+    <div className={`${isBracket ? classes.bracketCard : classes.card}`}>
+      
+      {/* 1. DEL: Logika za prijave - prikažemo SAMO, če ni razporeda */}
+      {!showSchedule && (
+        <>
+          {mestaZapolnjena && <MestaZapolnjena />}
+          {konecPrijav && <KonecPrijav />}
+          {showForm && (
+            <PrijavniObrazec competition={comp} onSuccess={() => {}} />
+          )}
+        </>
+      )}
 
-        {konecPrijav && (
-          <KonecPrijav />
-        )}
+      {/* 2. DEL: Razpored - ko je showSchedule true, se zgornji del skrije */}
+      {showSchedule && (
+        <section>
+          <div style={{ marginTop: "1rem" }}>
+            {(isHybrid || isLeague) && (
+              <LeagueView matches={matches} teams={teams} id={id} />
+            )}
 
-        {showForm && (
-          <PrijavniObrazec competition={comp} onSuccess={() => {}} />
-        )}
+            {isHybrid && <hr style={{ margin: '2rem 0' }} />}
 
-        {showSchedule && (
-          <section>
-            <div style={{ marginTop: "1rem" }}>
-              {(isHybrid || isLeague) && (
-                  <LeagueView matches={matches} teams={teams} id={id} />              )}
-
-              {isHybrid && <hr style={{margin: '2rem 0'}} />}
-
-              {!isLeague && (
-                <div style={{marginTop: '2rem'}}>
-                  <Bracket matches={prikazaneTekme} basePath={bracketLink}/>
-                </div>
-              )}
-            </div>
-          </section>
-        )}
-
-        {/* <div className={classes.actions}>
-          <button onClick={() => router.back()} className={classes.nazajButton}>Nazaj</button>
-        </div> */}
-      </div>
+            {!isLeague && (
+              <div style={{ marginTop: '2rem' }}>
+                <Bracket matches={prikazaneTekme} basePath={bracketLink} />
+              </div>
+            )}
+          </div>
+        </section>
+      )}
+      
     </div>
-  )
+  </div>
+)
 }

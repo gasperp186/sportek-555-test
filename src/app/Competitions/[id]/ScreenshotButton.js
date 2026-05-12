@@ -37,8 +37,8 @@ export default function ScreenshotButton({ comp, contentToExport, width = "", he
 
   return (
   <>
-    <button onClick={shraniPng}>
-      <Camera size={18} />
+    <button onClick={shraniPng} className={classes.screenshotButton}>
+      <Camera size={22} />
     </button>
 
    <div style={{ position: 'absolute', left: '-9999px', top: '0', backgroundColor: '#1e293b' }}>

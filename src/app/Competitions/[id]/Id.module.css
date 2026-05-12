@@ -19,12 +19,24 @@ min-height: 400px;
 }
 
 .screenShotDiv {
-  
-  background-color: #0f172a;
-  margin: 0;
-  padding: 0;
+  background-color: transparent; /* ni več potrebno ozadje tukaj */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1; /* zasede ves preostali prostor med legendo in rules */
 }
 
+.screenshotButton {
+  padding: 5px 8px;
+  border: none;
+  border-radius: 5px;
+  background-color: white;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
 
 .title {
   font-size: 40px;
@@ -35,6 +47,7 @@ min-height: 400px;
 
 .subtitle {
   color: #6b7280;
+  margin-top: 20px;
 }
 
 .nazajButton {
@@ -115,7 +128,7 @@ min-height: 400px;
   justify-content: space-between;
   flex-wrap: wrap; /* Omogoči, da gredo pravila v novo vrsto, ko se odprejo */
   width: 100%;
-  max-width: 955px;
+  max-width: 1300px;
   margin: 30px auto;
   gap: 15px; /* Doda malce prostora, če se okno zoža */
 }
