@@ -90,13 +90,7 @@ export default function ProfileBar({ activeTab, onSelectTab }) {
             Varnost
           </button>
 
-          <button
-            type="button"
-            className={itemClass("varnost")}
-            onClick={() => alert("Kasneje: Firebase signOut()")}
-          >
-            Odjava
-          </button>
+         
         </nav>
       </div>
     </div>

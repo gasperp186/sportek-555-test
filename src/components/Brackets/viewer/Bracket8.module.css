@@ -181,7 +181,7 @@ max-width: 1300px;
   display: none; /* Skrito na računalniku in Exportu */
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1100px) {
   .container {
     grid-template-columns: 1fr;
     gap: 18px;

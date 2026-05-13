@@ -132,3 +132,25 @@ min-height: 400px;
   margin: 30px auto;
   gap: 15px; /* Doda malce prostora, če se okno zoža */
 }
+
+/* --- PRILAGODITEV ZA TELEFONE --- */
+@media (max-width: 730px) {
+  .vrsta {
+    flex-direction: column; /* Elementi gredo en pod drugega */
+    justify-content: center;
+    text-align: center;
+    gap: 25px; /* Povečamo razmik med elementi na mobilcu */
+  }
+
+  /* Poskrbimo, da so vsi gumbi/elementi na sredini */
+  .vrsta > * {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  /* Če imaš znotraj elementov gumbe, naj ne bodo čez celo širino, če ne želiš */
+  .vrsta button {
+    width: fit-content;
+  }
+}
