@@ -28,9 +28,7 @@ function Footer() {
         </div>
       </div>
 
-      <div className={classes.bottom}>
-        <p>© {new Date().getFullYear()} Sportek</p>
-      </div>
+    
     </footer>
   );
 }

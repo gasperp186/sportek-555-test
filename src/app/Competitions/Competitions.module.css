@@ -168,6 +168,7 @@
   background: #fff;
   font-size: 16px;
   outline: none;
+  color: black;
 }
 
 .select:focus,
