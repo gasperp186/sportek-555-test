@@ -161,6 +161,8 @@ justify-content: space-between;
   flex: 1;
   display: flex;
   justify-content: center;
+  align-items: center;
+
 
 }
 
@@ -400,4 +402,28 @@ justify-content: space-between;
   justify-content: center;  
   align-items: center;
   cursor: pointer;
+}
+@media (max-width: 500px) {
+  .buttonDiv {
+    flex-wrap: wrap;
+  }
+
+  .prazenDiv {
+    display: none;
+  }
+
+  .srednjiDiv {
+    flex: unset;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .zadnjiDiv {
+    flex: unset;
+    width: 100%;
+    justify-content: center;
+    margin-top: 12px;
+    margin-right: 10px;
+    gap: 12px;
+  }
 }

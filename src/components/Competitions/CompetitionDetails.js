@@ -140,7 +140,7 @@ const maxMest = comp?.maxTeams || 0;
 
   // --- KONEC IZRAČUNOV ---
 
-  if (loading) return <div className={classes.page}>Nalagam podatke...</div>;
+  if (loading) return <div className={classes.loading}>Nalagam podatke...</div>;
 
 
   const isLeague = comp?.mode === "ligaski";

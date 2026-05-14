@@ -145,7 +145,7 @@
     flex: none;
     margin-top: 20px; /* Zmanjšamo odmik z vrha na telefonu */
     margin: auto;
-    width: 880px;
+    max-width: 880px;
     
   }
 
