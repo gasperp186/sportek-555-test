@@ -31,9 +31,11 @@ export default function CompetitionsPublic() {
   const [timeFilter, setTimeFilter] = useState("all"); // 'all', 'today', 'upcoming', 'past'
 
   useEffect(() => {
+
     async function fetchMyData() {
       const snapshot = await getDocs(collection(db, "competitions"));
-      const dataFromFirebase = snapshot.docs.map(doc => ({
+
+      const competitionsData = snapshot.docs.map(doc => ({
         id: doc.id,
         ...doc.data()
       }));
@@ -46,7 +48,7 @@ export default function CompetitionsPublic() {
       const upcomingComps = [];
       const pastComps = [];
 
-      dataFromFirebase.forEach(c => {
+      competitionsData.forEach(c => {
         const compDate = new Date(c.startDate);
         compDate.setHours(0, 0, 0, 0);
 

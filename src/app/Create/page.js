@@ -26,18 +26,13 @@ const initialForm = {
   mode: "",
   publicSignups: false,
   thirdPlaceMatch: true,
-
-  
   // ekipe
   teams: [],
   maxTeams: 4,
   registrationDeadline: "",  
   knockoutTeamCount: null,
-
-
   // tekme
   matches: [],
-
   //pravila
   rulesText: "",
   // pointsWin: 3,

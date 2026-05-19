@@ -79,7 +79,7 @@ export default function Bracket4({ teams, matches, onChangeMatches, isHybrid, th
   useEffect(() => {
   if (!onChangeMatches) return;
 
-  // Ustvarimo seznam tekem
+  
   const matchesToSave = [
     { 
       id: "SF1", round: "SF1", phase: "knockout",

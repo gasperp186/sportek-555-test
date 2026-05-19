@@ -14,7 +14,6 @@ export default async function Page({ params }) {
   const docRef = doc(db, "competitions", id);
   const docSnap = await getDoc(docRef);
 
-
   if(!docSnap.exists()) return <div>Tekmovanje ni bilo najdeno</div>;
   
   const rawData = docSnap.data();
@@ -24,65 +23,61 @@ export default async function Page({ params }) {
     createdAt: rawData.createdAt?.toDate().toISOString() || null
   };
 
- 
+  // Preverimo, če je način nastavljen na form_only
+  const isFormOnly = comp.publishMode === "FORM_ONLY";
 
-  return(
+  return (
     <div className={classes.page}>
       <div className={classes.card}>
         <h2 className={classes.title}>{comp.title}</h2>
         <p className={classes.subtitle}>
           <strong>Šport:</strong> {comp.sport} | <strong>Kraj:</strong> {comp.city} | {
-  comp.mode === "bracket" || comp.mode === "knockout" ? (
-    <>
-     {/* Vstavi v svoj JSX del */}
-<strong>Datum:</strong> {
-  !comp.endDate || comp.startDate === comp.endDate 
-    ? formatDate(comp.startDate) 
-    : `${formatDate(comp.startDate)} - ${formatDate(comp.endDate)}`
-}
-    </>
-  ) : (
-    <>
-      <strong>Sezona:</strong> {comp.season}
-    </>
-  )
-}
+            comp.mode === "bracket" || comp.mode === "knockout" ? (
+              <>
+                <strong>Datum:</strong> {
+                  !comp.endDate || comp.startDate === comp.endDate 
+                    ? formatDate(comp.startDate) 
+                    : `${formatDate(comp.startDate)} - ${formatDate(comp.endDate)}`
+                }
+              </>
+            ) : (
+              <>
+                <strong>Sezona:</strong> {comp.season}
+              </>
+            )
+          }
         </p> 
+        
         <CompetitionDetails id={id} initialData={comp} isEditMode={true} />
         
-        
-        
+        {/* Če je form_only, z inline stilom preglasimo flex postavitev na center */}
+        <div 
+          className={classes.vrsta} 
+          style={isFormOnly ? { justifyContent: 'center' } : {}}
+        >
+          {/* Legenda se prikaže samo, če NI form_only */}
+          {!isFormOnly && <Legenda />}
           
-        <div className={classes.vrsta}>
-  <Legenda />
-    <div className={classes.screenShotDiv}>
-   <ScreenshotButton 
-      comp={comp}
-      className={classes.screenshootButton} 
-      width="900px" 
-      height="700px" 
-      contentToExport={
-        <CompetitionDetails id={id} initialData={comp} isExport={true} />
-      }
-    />
-    </div>
-   
+          {/* Screenshot gumb se prikaže samo, če NI form_only */}
+          {!isFormOnly && (
+            <div className={classes.screenShotDiv}>
+              <ScreenshotButton 
+                comp={comp}
+                className={classes.screenshootButton} 
+                width="900px" 
+                height="700px" 
+                contentToExport={
+                  <CompetitionDetails id={id} initialData={comp} isExport={true} />
+                }
+              />
+            </div>
+          )}
 
-
-  <RulesButton rules={comp.rulesText}/>
-</div>
+          <RulesButton rules={comp.rulesText}/>
+        </div>
        
- 
-      
-
-       
-      
-      <BackButton/>
-      
+        <BackButton/>
       </div>
-      
-
-      
     </div>
   );
 }
