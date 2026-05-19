@@ -145,7 +145,6 @@ const rulesValue = form.rulesText ?? DEFAULT_RULES[form.sport] ?? "";
     <div className={createClasses.page}>
       <form className={stepClasses.card} onSubmit={(e) => e.preventDefault()}>
         <h2 className={createClasses.naslov}>Pravila tekmovanja</h2>
-        <p className={createClasses.podnaslov}>Po potrebi uredi pravila tekmovanja.</p>
 
         <div className={stepClasses.control}>
           <textarea

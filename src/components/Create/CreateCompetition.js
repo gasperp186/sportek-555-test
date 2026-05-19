@@ -31,7 +31,7 @@ export default function StepCreateCompetition({ form, setForm, onNext, onBack })
               name="name"
               type="text"
               className={createClasses.input}
-              placeholder="npr. Turnir Sežana 2025"
+              placeholder=""
               value={form.title}
               onChange={(e) => setForm((f) => ({ ...f, title: e.target.value }))}
               required
@@ -49,7 +49,7 @@ export default function StepCreateCompetition({ form, setForm, onNext, onBack })
               name="city"
               type="text"
               className={createClasses.input}
-              placeholder="Koper, Ljubljana"
+              placeholder=""
               value={form.city}
               onChange={(e) => setForm((f) => ({ ...f, city: e.target.value }))}
               required
@@ -65,7 +65,7 @@ export default function StepCreateCompetition({ form, setForm, onNext, onBack })
               name="location"
               type="text"
               className={createClasses.input}
-              placeholder="Bonifika - velika dvorana"
+              placeholder=""
               value={form.location}
               onChange={(e) => setForm((f) => ({ ...f, location: e.target.value }))}
             />

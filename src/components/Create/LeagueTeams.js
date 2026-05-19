@@ -3,19 +3,25 @@
 import { useEffect } from "react";
 import classes from "./LeagueTeams.module.css";
 
-// Nastavimo pravila
-
-
 export default function LeagueTeams({ form, setForm, onValidChange }) {
 
   let MIN_EKIP = 3; 
   const MAX_EKIP = 10;
 
-  if(form.mode === "hybrid") {
+  if (form.mode === "hybrid") {
     MIN_EKIP = 4;
   }
+  
   // Če teams še ne obstaja, vzamemo prazen seznam
   const teams = form.teams || [];
+
+  // AVTOMATSKO POLNJENJE NA ZAČETKU: Če je seznam prazen, dodamo prazna polja glede na MIN_EKIP
+  useEffect(() => {
+    if (teams.length === 0) {
+      const zacetneEkipe = Array.from({ length: MIN_EKIP }, () => ({ name: "" }));
+      setForm({ ...form, teams: zacetneEkipe });
+    }
+  }, [form.mode, MIN_EKIP, setForm, form, teams.length]);
 
   // Preverjanje, če je vse izpolnjeno (Validacija)
   useEffect(() => {
@@ -24,7 +30,7 @@ export default function LeagueTeams({ form, setForm, onValidChange }) {
       teams.every(ekipa => ekipa.name.trim() !== "");
 
     onValidChange(aliJeVseIzpolnjeno);
-  }, [teams, onValidChange]);
+  }, [teams, onValidChange, MIN_EKIP]);
 
   // Funkcija za posodobitev imena
   const posodobiIme = (index, novoIme) => {
@@ -46,7 +52,6 @@ export default function LeagueTeams({ form, setForm, onValidChange }) {
     setForm({ ...form, teams: filtriraneEkipe });
   };
 
-
   return (
     <>
       <h2 className={classes.naslov}>Vnos ekip</h2>
@@ -55,7 +60,7 @@ export default function LeagueTeams({ form, setForm, onValidChange }) {
       <div className={classes.teamsList}>
         {teams.map((team, index) => (
           <div key={index} className={classes.teamRow}>
-           <span className={classes.index}>{index + 1}</span>
+            <span className={classes.index}>{index + 1}</span>
             <input
               className={classes.teamInput}
               placeholder={`Ime ekipe ${index + 1}`}
@@ -63,27 +68,23 @@ export default function LeagueTeams({ form, setForm, onValidChange }) {
               onChange={(e) => posodobiIme(index, e.target.value)}
             />
             
-            {/* Gumb za brisanje pokažemo samo, če jih je več kot MIN */}
+            {/* Gumb za brisanje pokažemo samo, če jih je trenutno več kot MIN_EKIP */}
             {teams.length > MIN_EKIP && (
               <button className={classes.removeButton} onClick={() => izbrisiEkipo(index)}>
                 ✕
               </button>
             )}
-
-          
           </div>
         ))}
-       
       </div>
-      <div className={classes.dodajBtnDiv}>
-           {teams.length < MAX_EKIP && (
-        <button className={classes.dodajButton} onClick={dodajEkipo}>
-          + Dodaj ekipo
-        </button>
-      )}
-      </div>
-
       
+      <div className={classes.dodajBtnDiv}>
+        {teams.length < MAX_EKIP && (
+          <button className={classes.dodajButton} onClick={dodajEkipo}>
+            + Dodaj ekipo
+          </button>
+        )}
+      </div>
     </>
   );
 }

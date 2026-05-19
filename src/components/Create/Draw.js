@@ -51,7 +51,7 @@ export default function Draw({ form, setForm, onBack, onNext }) {
     return (
       <div className={createClasses.page}>
         <div className={drawClasses.card}>
-          <h1 className={createClasses.naslov}>Ligaški žreb</h1>
+          <h1 className={createClasses.naslov}>Žreb lige</h1>
           <LeagueDraw teams={teams} onChangeMatches={setMatches} isHybrid={false} />
           <div className={createClasses.actions}>
             <button onClick={onBack} className={createClasses.btnOutline}>Nazaj</button>
@@ -66,7 +66,7 @@ export default function Draw({ form, setForm, onBack, onNext }) {
     return (
       <div className={createClasses.page}>
         <div className={drawClasses.card}>
-          <h1 className={createClasses.naslov}>Žreb (knockout)</h1>
+          <h1 className={createClasses.naslov}>Žreb knockout</h1>
           <div className={drawClasses.bracketWide}>
             {/* TUKAJ uporabimo SelectedBracket, ki je varna referenca */}
             <SelectedBracket teams={teams} matches={form.matches} onChangeMatches={setMatches} isHybrid={false} thirdPlaceMatch={form.thirdPlaceMatch}/>
@@ -87,14 +87,13 @@ export default function Draw({ form, setForm, onBack, onNext }) {
           <h1 className={createClasses.naslov}>Hibridni žreb</h1>
           
           <div className={drawClasses.section}>
-            <h3>1. del: Skupinska faza</h3>
+            <h3 className={drawClasses.podnaslov}>1. del: Skupinska faza</h3>
             <LeagueDraw teams={teams} onChangeMatches={handleHybridChange} isHybrid={true} />
           </div>
 
-          <hr style={{ margin: "30px 0", border: "1px solid #eee" }} />
 
           <div className={drawClasses.section}>
-            <h3>2. del: Zaključni boji</h3>
+            <h3 className={drawClasses.podnaslov2}>2. del: Zaključni boji</h3>
             <div className={drawClasses.bracketWide}>
               {/* ISTA varna referenca */}
               <SelectedBracket teams={teams} matches={form.matches} onChangeMatches={handleHybridChange} isHybrid={true} />

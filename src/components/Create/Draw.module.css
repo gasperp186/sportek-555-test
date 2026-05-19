@@ -263,3 +263,15 @@
   box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
 }
 
+.podnaslov {
+  font-size: 16px;
+  color: black;
+  margin-bottom: 10px;
+}
+
+.podnaslov2 {
+  font-size: 16px;
+  color: black;
+  margin-bottom: 20px;
+  margin-top: 30px;
+}

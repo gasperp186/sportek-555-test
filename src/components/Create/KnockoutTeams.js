@@ -99,7 +99,7 @@ for (let i = 0; i < teamCount; i++) {
 }
   return (
     <>
-      <h2 className={createClasses.naslov}>Dodaj ekipe (knockout)</h2>
+      <h2 className={createClasses.naslov}>Dodaj ekipe</h2>
 
       <div className={addClasses.control}>
         <label className={createClasses.label}>Število ekip</label>
