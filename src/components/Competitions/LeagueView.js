@@ -48,6 +48,10 @@ const roundKeys = Object.keys(matchesByRound)
     }));
 
     matches.forEach((match) => {
+
+      if (typeof match.round !== 'number' && isNaN(Number(match.round))) {
+      return;
+    }
       // Tekma mora biti končana in imeti rezultat, da šteje za lestvico
       if (match.status !== "finished" || match.homeScore === null || match.awayScore === null) return;
       
