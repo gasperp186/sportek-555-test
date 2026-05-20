@@ -18,8 +18,12 @@ export default function LeagueView({ matches, teams, id, isExport }) {
       return acc;
     }, {});
 
-    const roundKeys = Object.keys(matchesByRound).map(Number).sort((a, b) => a - b);
-    
+// Izoliraj samo tiste ključe, ki so dejansko številke
+const roundKeys = Object.keys(matchesByRound)
+  .map(Number)
+  .filter(num => !isNaN(num)) // TUKAJ: Odstranimo SF1, SF2 itd., ki so postali NaN
+  .sort((a, b) => a - b);
+
     let lastFinished = 0;
     for (const r of roundKeys) {
       if (matchesByRound[r].every(m => m.completed)) {
@@ -83,15 +87,19 @@ export default function LeagueView({ matches, teams, id, isExport }) {
     return [...table].sort((a, b) => b.PTS - a.PTS || b.GD - a.GD);
   }, [matches, teams]);
 
-  // 3. Priprava podatkov za kroge
   const matchesByRound = useMemo(() => {
-    return matches.reduce((acc, match) => {
-      const r = match.round || 1;
-      if (!acc[r]) acc[r] = [];
-      acc[r].push(match);
+  return matches.reduce((acc, match) => {
+    // Če krog ni številka (ampak je npr. "SF1"), ga ignoriramo v tem pogledu
+    if (typeof match.round !== 'number' && isNaN(Number(match.round))) {
       return acc;
-    }, {});
-  }, [matches]);
+    }
+    
+    const r = match.round || 1;
+    if (!acc[r]) acc[r] = [];
+    acc[r].push(match);
+    return acc;
+  }, {});
+}, [matches]);
 
   const roundKeys = Object.keys(matchesByRound).map(Number).sort((a, b) => a - b);
   const maxRound = roundKeys.length > 0 ? Math.max(...roundKeys) : 1;
@@ -104,10 +112,13 @@ export default function LeagueView({ matches, teams, id, isExport }) {
         <table className={classes.table}>
           <thead>
             <tr>
-              <th>Ekipa</th>
-              <th className={classes.num}>OD</th>
-              <th className={classes.num}>Z</th>
-              <th className={classes.num}>Toč</th>
+             <th>Ekipa</th>
+<th className={classes.num} title="Odigrane tekme">OT</th>
+<th className={classes.num} title="Točke">T</th>              
+<th className={classes.num} title="Zmage">Z</th>
+<th className={classes.num} title="Neodločeno">N</th>
+<th className={classes.num} title="Porazi">P</th>
+<th className={classes.num} title="Razlika točk">RT</th>
             </tr>
           </thead>
           <tbody>
@@ -115,8 +126,11 @@ export default function LeagueView({ matches, teams, id, isExport }) {
               <tr key={row.team.id}>
                 <td>{row.team.name}</td>
                 <td className={classes.num}>{row.P}</td>
+                <td className={classes.num} style={{ fontWeight: 'bold' }}>{row.PTS}</td>
                 <td className={classes.num}>{row.W}</td>
-                <td className={classes.num}>{row.PTS}</td>
+                <td className={classes.num}>{row.D}</td>
+                <td className={classes.num}>{row.L}</td>
+                <td className={classes.num}>{row.GD}</td>
               </tr>
             ))}
           </tbody>

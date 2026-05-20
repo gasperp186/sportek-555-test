@@ -13,31 +13,14 @@ import UrediPrijave from "@/components/Create/UrediPrijave";
 import StepRules from "@/components/Create/StepRules";
 
 const initialForm = {
-   //šport
-  sport: "",
 
-  // create
-  title: "",
-  city: "",
-  location: "",
-  startDate: "",
-  endDate: "",
-  season:  "",
-  mode: "",
-  publicSignups: false,
-  thirdPlaceMatch: true,
-  // ekipe
-  teams: [],
-  maxTeams: 4,
-  registrationDeadline: "",  
-  knockoutTeamCount: null,
-  // tekme
+  sport: "",
+  title: "", city: "", location: "", startDate: "", endDate: "", season:  "",
+  mode: "", publicSignups: false, thirdPlaceMatch: true, teams: [], maxTeams: 4,
+  registrationDeadline: "", knockoutTeamCount: null,
   matches: [],
-  //pravila
   rulesText: "",
-  // pointsWin: 3,
-  // pointsDraw: 1,
-  // pointsLoss: 0,
+  
 };
 
 export default function CreatePage() {

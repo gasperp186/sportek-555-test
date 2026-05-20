@@ -24,7 +24,7 @@ const DEFAULT_RULES = {
   
   "namizni nogomet": `Igra se do doseženih 10 golov ali na dva dobljena niza do 5. Prepovedano je 'vrtenje' ročk (spinning). Ekipo sestavljata en ali dva igralca.`,
   
-  "namizni tenis": `Tekma se igra na tri ali štiri dobljene sete. Posamezen set se igra do 11. točke. Servis se menja na vsaki dve točki. Pri rezultatu 10:10 se igra na dve točki razlike.`
+  "namizni tenis": `Tekma se igra na tri dobljene sete. Posamezen set se igra do 11. točke. Servis se menja na vsaki dve točki. Pri rezultatu 10:10 se igra na dve točki razlike.`
 };
 
 export default function CompetitionRules({ form, setForm, onBack }) {

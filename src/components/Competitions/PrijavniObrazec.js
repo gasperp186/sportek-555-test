@@ -58,8 +58,8 @@ export default function PrijavniObrazec({ competition }) {
       
       userName: userName,
       teamName: name,
-      leaderId: userId,
-      leaderEmail: userEmail,
+      applicantId: userId,
+      applicantEmail: userEmail,
       status: "pending",
       createdAt: serverTimestamp()
     };

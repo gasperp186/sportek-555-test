@@ -29,14 +29,20 @@ export default function Osnovno({data, onChange}) {
           <label>Datum od</label>
           <input
             type="date"
-            name="dateFrom"
-            value={data.dateFrom}
+            name="startDate"
+            value={data.startDate}
             onChange={onChange}
           />
         </div>
 
         <div className={classes.field}>
-         
+         <label>Datum do</label>
+          <input
+            type="date"
+            name="endDate"
+            value={data.endDate}
+            onChange={onChange}
+          />
         </div>
       </div>
 

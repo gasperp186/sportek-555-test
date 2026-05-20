@@ -167,7 +167,17 @@ export default function CompetitionsPublic() {
                     <p className={classes.itemInfo}>
                       <strong>Šport:</strong> {c.sport} <br />
                       <strong>Kraj:</strong> {c.city} <br />
-                      <strong>Datum:</strong> { !c.endDate || c.startDate === c.endDate ? formatDate(c.startDate) : `${formatDate(c.startDate)} - ${formatDate(c.endDate)}` }
+                     { !c.startDate && !c.endDate ? (
+  <strong>Sezona: {c.season}</strong>
+) : (
+  <>
+    <strong>Datum:</strong>{' '}
+    { !c.endDate || c.startDate === c.endDate 
+      ? formatDate(c.startDate) 
+      : `${formatDate(c.startDate)} - ${formatDate(c.endDate)}`
+    }
+  </>
+)}
                     </p>
                     <Link href={`/Competitions/${c.id}`} className={classes.btn}>Odpri</Link>
                   </div>
