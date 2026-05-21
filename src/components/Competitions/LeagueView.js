@@ -143,40 +143,43 @@ const roundKeys = Object.keys(matchesByRound)
 
       {/* DESNA STRAN: Tekme po krogih */}
       <div className={classes.right}>
-        <div className={classes.roundToolbar}>
-          <h4 className={classes.roundTitle}>Krog {selectedRound} / {maxRound}</h4>
-          <div className={ isExport ? classes.roundBtns2 : classes.roundBtns}>
-            <button 
-              onClick={() => setSelectedRound(s => Math.max(1, s - 1))} 
-              disabled={selectedRound === 1} 
-              className={classes.smallBtn}
-            >
-              Nazaj
-            </button>
-            <button 
-              onClick={() => setSelectedRound(s => Math.min(maxRound, s + 1))} 
-              disabled={selectedRound === maxRound} 
-              className={classes.smallBtn}
-            >
-              Naprej
-            </button>
-          </div>
-        </div>
+  <div className={classes.roundToolbar}>
+    {/* Gumb Nazaj gre na prvo mesto */}
+    <button 
+      onClick={() => setSelectedRound(s => Math.max(1, s - 1))} 
+      disabled={selectedRound === 1} 
+      className={`${classes.smallBtn} ${isExport ? classes.hideOnExport : ""}`}
+    >
+      Nazaj
+    </button>
 
-        <div className={classes.allRoundsContainer}>
-          {matchesByRound[selectedRound] ? (
-            <div className={classes.roundWrapper}>
-              <LeagueRound 
-                matchesThisRound={matchesByRound[selectedRound]} 
-                basePath={`/Competitions/${id}`} 
-                classes={classes} 
-              />
-            </div>
-          ) : (
-            <p className={classes.noMatches}>Za ta krog ni razpisanih tekem.</p>
-          )}
-        </div>
+    {/* Naslov za krog je na sredini */}
+    <h4 className={classes.roundTitle}>Krog {selectedRound} / {maxRound}</h4>
+
+    {/* Gumb Naprej gre na zadnje mesto */}
+    <button 
+      onClick={() => setSelectedRound(s => Math.min(maxRound, s + 1))} 
+      disabled={selectedRound === maxRound} 
+      className={`${classes.smallBtn} ${isExport ? classes.hideOnExport : ""}`}
+    >
+      Naprej
+    </button>
+  </div>
+
+  <div className={classes.allRoundsContainer}>
+    {matchesByRound[selectedRound] ? (
+      <div className={classes.roundWrapper}>
+        <LeagueRound 
+          matchesThisRound={matchesByRound[selectedRound]} 
+          basePath={`/Competitions/${id}`} 
+          classes={classes} 
+        />
       </div>
+    ) : (
+      <p className={classes.noMatches}>Za ta krog ni razpisanih tekem.</p>
+    )}
+  </div>
+</div>
     </div>
   );
 }

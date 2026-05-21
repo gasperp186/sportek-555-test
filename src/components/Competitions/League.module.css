@@ -2,6 +2,7 @@
   margin-top: 50px;
   margin-bottom: 50px;
 }
+
 .leagueGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -25,9 +26,9 @@
   padding: 30px;
   box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
   min-height: 330px;
-
 }
 
+/* NOVO: Trije simetrični stolpci (Nazaj | Krog | Naprej) */
 .roundToolbar {
   display: grid;
   grid-template-columns: 1fr auto 1fr; 
@@ -36,33 +37,32 @@
   border-bottom: 1px solid #eef2f7;
   margin-bottom: 1rem;
   color: black;
-
 }
 
+/* Naslov fiksno v sredinskem stolpcu */
 .roundTitle, .tableTitle {
   grid-column: 2; 
   margin: 0;
   text-align: center;
   color: black;
-   font-size: 1.05rem;
-
+  font-size: 1.05rem;
   font-weight: 800;
 }
 
-.roundBtns {
-  grid-column: 3; 
-  display: flex;
-  justify-content: flex-end;
-  gap: 0.8rem;
+/* Prvi gumb (Nazaj) povsem na levo */
+.roundToolbar button:first-of-type {
+  justify-self: start;
 }
 
-.roundBtns2 {
-  grid-column: 3; 
-  display: none;
-  justify-content: flex-end;
-  gap: 0.8rem;
+/* Drugi gumb (Naprej) povsem na desno */
+.roundToolbar button:last-of-type {
+  justify-self: end;
 }
 
+/* Varno skrij gumba med izvozom */
+.hideOnExport {
+  display: none !important;
+}
 
 .table {
   width: 100%;
@@ -110,14 +110,6 @@
   color: #64748b;
 }
 
-
-
-
-.roundBtns {
-  display: inline-flex;
-  gap: 0.5rem;
-}
-
 .smallBtn {
   border: 1px solid #cbd5e1;
   background: #ffffff;
@@ -148,9 +140,6 @@
 
 .matchRow {
   display: grid;
-  /* 1. stolpec: Ura (avtomatsko glede na vsebino) */
-  /* 2. stolpec: Tekma (zasede ves preostali prostor) */
-  /* 3. stolpec: Prazno ali lokacija (da ostane tekma res v sredini) */
   grid-template-columns: 80px 1fr 80px; 
   gap: 0.8rem;
   align-items: center;
@@ -162,23 +151,20 @@
   margin-bottom: 8px;
 }
 
-/* Ura na začetku */
 .matchTime {
   font-weight: 600;
   color: #64748b;
   text-align: center;
 }
 
-/* Sredinski del z ekipami in rezultatom */
 .matchContent {
-  grid-column: 2; /* Prisili vsebino v sredinski stolpec */
+  grid-column: 2; 
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 1rem;
 }
-.teamLeft { text-align: right; flex: 1; }
-.teamRight { text-align: left; flex: 1; }
+
 .teamLeft,
 .teamRight {
   font-weight: 800;
@@ -190,20 +176,19 @@
 
 .teamLeft {
   text-align: right;
+  flex: 1;
 }
 
 .teamRight {
   text-align: left;
+  flex: 1;
 }
 
 .score {
   text-align: center;
   font-weight: 900;
-  color: #2563eb;
-  font-variant-numeric: tabular-nums;
+  color: #000000;
   padding: 6px 10px;
-  border-radius: 999px;
-  background: #eff6ff;
 }
 
 /* Responsive */
@@ -215,17 +200,40 @@
 
 @media (max-width: 620px) {
   .matchRow {
-    grid-template-columns: 1fr;
-    text-align: center;
+    /* Preklopimo iz grid v flex, da lažje centriramo sredino */
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    position: relative; /* Nujno za absolutno pozicioniranje ure */
+    padding: 12px 10px; /* Malo več navpičnega prostora za telefon */
   }
-  .teamLeft,
+
+  .matchTime {
+    position: absolute;
+    left: 12px; /* Uro fiksiramo čisto na levi rob vrstice */
+    font-size: 14px;
+  }
+
+  .matchContent {
+    grid-column: unset; /* Ponastavimo grid pravilo iz namiznega pogleda */
+    width: 100%;
+    max-width: calc(100% - 100px); /* Preprečimo, da bi dolga imena ekip prekrila uro */
+    justify-content: center;
+  }
+
+  .teamLeft {
+    text-align: right; /* Na mobilcu ohranimo desno poravnavo leve ekipe */
+    font-size: 14px;
+  }
+
   .teamRight {
-    text-align: center;
+    text-align: left;  /* In levo poravnavo desne ekipe */
+    font-size: 14px;
   }
 }
 
 .leagueDate {
-  color:black;
+  color: black;
 }
 
 .date {
@@ -235,34 +243,29 @@
 }
 
 .nazajButton {
-    background: white;
-    color: #0f172a;
-    border: none;
-    border-radius: 30px;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 15px;
-    margin-left: 12px;
-    margin-right: 8px;
-    
+  background: white;
+  color: #0f172a;
+  border: none;
+  border-radius: 30px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 15px;
+  margin-left: 12px;
+  margin-right: 8px;
 }
 
 .actions {
-
   margin-top: 45px;
 }
+
 .borderInGame {
   border-left: 10px solid #10853b;
-  
 }
 
-/* Status: Tekma je načrtovana */
 .borderPlanned {
   border-left: 10px solid #2a60d3;
- 
 }
 
-/* Status: Tekma je končana */
 .borderFinished {
   border-left: 10px solid #555d58;
 }

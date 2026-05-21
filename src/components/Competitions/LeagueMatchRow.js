@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { formatDate } from '@/components/formatDate';
 
 export default function LeagueRound({ matchesThisRound, basePath, classes }) {
   return (
@@ -19,11 +20,11 @@ export default function LeagueRound({ matchesThisRound, basePath, classes }) {
         return (
           <div key={m.id}>
             {/* Izpis datuma, če se spremeni */}
-            {showDate && (
-              <div className={classes.date}>
-                {m.date || "Datum ni določen"}
-              </div>
-            )}
+           {showDate && (
+  <div className={classes.date}>
+    {m.date ? formatDate(m.date) : "Datum ni določen"}
+  </div>
+)}
 
             <Link href={href} className={`${classes.matchRow} ${statusClass}`}>
               <span className={classes.matchTime}>{m.time || "--:--"}</span>

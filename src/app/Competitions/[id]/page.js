@@ -30,23 +30,35 @@ export default async function Page({ params }) {
     <div className={classes.page}>
       <div className={classes.card}>
         <h2 className={classes.title}>{comp.title}</h2>
-        <p className={classes.subtitle}>
-          <strong>Šport:</strong> {comp.sport} | <strong>Kraj:</strong> {comp.city} | {
-            comp.mode === "bracket" || comp.mode === "knockout" ? (
-              <>
-                <strong>Datum:</strong> {
-                  !comp.endDate || comp.startDate === comp.endDate 
-                    ? formatDate(comp.startDate) 
-                    : `${formatDate(comp.startDate)} - ${formatDate(comp.endDate)}`
-                }
-              </>
-            ) : (
-              <>
-                <strong>Sezona:</strong> {comp.season}
-              </>
-            )
-          }
-        </p> 
+<div className={classes.subtitle}>
+  <div>
+    <strong>Šport:</strong> {comp.sport}
+  </div>
+  
+  <span className={classes.separator}>|</span>
+  
+  <div>
+    <strong>Kraj:</strong> {comp.city}
+  </div>
+  
+  <span className={classes.separator}>|</span>
+  
+  <div>
+    {comp.mode === "bracket" || comp.mode === "knockout" ? (
+      <>
+        <strong>Datum:</strong> {
+          !comp.endDate || comp.startDate === comp.endDate 
+            ? formatDate(comp.startDate) 
+            : `${formatDate(comp.startDate)} - ${formatDate(comp.endDate)}`
+        }
+      </>
+    ) : (
+      <>
+        <strong>Sezona:</strong> {comp.season}
+      </>
+    )}
+  </div>
+</div>
         
         <CompetitionDetails id={id} initialData={comp} isEditMode={true} />
         

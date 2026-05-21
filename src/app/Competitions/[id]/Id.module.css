@@ -37,7 +37,6 @@ min-height: 400px;
   justify-content: center;
   cursor: pointer;
 }
-
 .title {
   font-size: 40px;
   color: white;
@@ -48,8 +47,32 @@ min-height: 400px;
 .subtitle {
   color: #6b7280;
   margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px; /* Razmik med elementi na velikem zaslonu */
+  justify-content: center;
 }
 
+/* Stil za navpično črto */
+.separator {
+  color: #4b5563;
+}
+
+/* --- Prilagoditev za mobilne zaslone pod 700px --- */
+@media (max-width: 500px) {
+  .subtitle {
+    flex-direction: column;   /* Vsak podatek gre striktno v svojo vrstico */
+    align-items: center;  /* Poravnava besedila na levo stran */
+    gap: 8px;                 /* Navpični razmik med vrsticami na telefonu */
+  }
+
+  /* Na telefonu skrijemo pokončne črte, ker ima vsak podatek svojo vrstico */
+  .separator {
+    display: none;
+  }
+}
 .nazajButton {
     background: white;
     color: #0f172a;
