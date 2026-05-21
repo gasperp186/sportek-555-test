@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { db, auth } from "@/lib/firebase";
 import { collection, addDoc, serverTimestamp, doc, getDoc } from "firebase/firestore";
+import { formatDate } from "@/components/formatDate";
 
 
 export default function PrijavniObrazec({ competition }) {
@@ -90,7 +91,7 @@ export default function PrijavniObrazec({ competition }) {
               name="name"
               type="text"
               className={classes.input}
-              placeholder="npr. Ekipa Thunder"
+              placeholder=""
               onChange={(e) => setName(e.target.value)}
             />
           </div>
@@ -109,7 +110,7 @@ export default function PrijavniObrazec({ competition }) {
 
         <div className={classes.checkboxRow}>
           
-            <label> Prijave zbiramo do {comp?.registrationDeadline || "Datum ni določen"}</label>        
+            <label className={classes.label}> Prijave zbiramo do {formatDate(comp?.registrationDeadline) || "Datum ni določen"}</label>        
         
         </div>
 

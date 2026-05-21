@@ -168,3 +168,7 @@
   outline: none;
   box-shadow: none;
 }
+
+.label {
+  color: black;
+}

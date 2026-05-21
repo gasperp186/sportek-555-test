@@ -89,6 +89,14 @@ export default function ProfileBar({ activeTab, onSelectTab }) {
           >
             Varnost
           </button>
+          <button
+            type="button"
+            className={itemClass("varnost")}
+            onClick={() => onSelectTab("varnost")}
+          >
+            Odjava
+          </button>
+
 
          
         </nav>
