@@ -140,7 +140,7 @@
 
 .matchRow {
   display: grid;
-  grid-template-columns: 80px 1fr 80px; 
+  grid-template-columns: 20px 1fr 20px; 
   gap: 0.8rem;
   align-items: center;
   padding: 8px 10px;
