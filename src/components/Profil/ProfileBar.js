@@ -52,8 +52,8 @@ export default function ProfileBar({ activeTab, onSelectTab }) {
         <header className={classes.head}>
           
           <div>
-            <div className={classes.name}>{dbUser?.name} {dbUser?.surname}</div>
-            <div className={classes.email}>{dbUser?.email}</div>
+            {/* <div className={classes.name}>{dbUser?.name} {dbUser?.surname}</div> */}
+            {/* <div className={classes.email}>{dbUser?.email}</div> */}
           </div>
         </header>
 
@@ -82,13 +82,13 @@ export default function ProfileBar({ activeTab, onSelectTab }) {
             Uredi profil
           </button>
 
-          <button
+          {/* <button
             type="button"
             className={itemClass("varnost")}
             onClick={() => onSelectTab("varnost")}
           >
             Varnost
-          </button>
+          </button> */}
           <button
             type="button"
             className={itemClass("varnost")}

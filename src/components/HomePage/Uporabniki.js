@@ -1,30 +1,23 @@
 import React from "react";
 import classes from "./Uporabniki.module.css";
 
+
+
 const podatki = [
   {
     chip: "Organizator",
-    title: "Učinkovito vodenje turnirjev",
-    // imgSrc:
-    // organizator,
-    text:
-      "Ustvari turnir v minutah, avtomatsko generiraj žreb in deli urnike. Poudarek je na hitrem pregledu ekip, rezultatov in obveščanju brez ročnega dela.",
+    title: "Enostavno vodenje tekmovanj",
+    text: "Hitro odpri javne prijave z omejitvijo ekip, avtomatsko generiraj ligaški žreb in brez truda upravljaj razpored po krogih.",
   },
   {
     chip: "Igralec",
-    title: "Rezultati in žreb na dosegu roke",
-    // imgSrc:
-    // igralci,
-    text:
-      "Hiter vpogled v napredovanje, naslednje tekme in lokacije. Brez zmede — vse ključne informacije so na mobilniku, vedno ažurne.",
+    title: "Urnik in rezultati vedno pri roki",
+    text: "Spremljaj svoje prihajajoče in odigrane tekme preko koledarja. Vsi podatki so vedno ažurni.",
   },
   {
     chip: "Gledalec",
-    title: "Spremljanje v živo in deljenje",
-    // imgSrc:
-    // gledalci,
-    text:
-      "Preprosto najdi termin, teren in izid. Rezultate lahko deliš z enim klikom — idealno za prijatelje in navijače na tribunah.",
+    title: "Spremljanje v živo",
+    text: "Preprosto izberi šport in si oglej trenutno lestvico lige, točke ter izide tekem. Idealno za navijače in spremljanje rezultatov.",
   },
 ];
 
@@ -51,15 +44,15 @@ export default function Uporabniki({
   return (
     <section className={classes.section}>
       <div className={classes.inner}>
-      <div className={classes.header}>
-        <h1 className={classes.naslov}>Uporabniki</h1>
-      </div>
+        <div className={classes.header}>
+          <h1 className={classes.naslov}>{title}</h1>
+        </div>
 
-      <div className={classes.grid}>
-        {personas.map((p, idx) => (
-          <Card key={idx} p={p} />
-        ))}
-      </div>
+        <div className={classes.grid}>
+          {personas.map((p, idx) => (
+            <Card key={idx} p={p} />
+          ))}
+        </div>
       </div>
     </section>
   );

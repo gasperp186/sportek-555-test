@@ -9,6 +9,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { useState, useEffect } from "react";
 import { auth, db } from "@/lib/firebase";
 import { QrCode2Rounded } from "@mui/icons-material";
+import { formatDate } from "@/components/formatDate";
 
 
 export default function MyCompetitions() {
@@ -62,7 +63,6 @@ useEffect(() => {
             <h2 className={classes.naslov}>Moja tekmovanja</h2>
           </div>
 
-          <div className={classes.divider} />
 
           <div className={classes.list}>
             {competitions.length === 0 ? (
@@ -74,17 +74,29 @@ useEffect(() => {
                     <h3 className={classes.title}>{comp.title}</h3>
 
                     <p className={classes.meta}>
-                      <Calendar size={20} strokeWidth={2} className={classes.icon} />
-                      {comp.date}
-
+                      {/* <Calendar size={20} strokeWidth={2} className={classes.icon} /> */}
+                      {comp.mode === "bracket" || comp.mode === "knockout" ? (
+  <div>
+    <strong>Datum: </strong> {
+      !comp.endDate || comp.startDate === comp.endDate 
+        ? formatDate(comp.startDate) 
+        : `${formatDate(comp.startDate)} - ${formatDate(comp.endDate)}`
+    }
+  </div>
+) : (
+  <div>
+    <strong>Sezona: </strong> {comp.season}
+  </div>
+)}
                       <span className={classes.metaSpacer} />
-
-                      <MapPin size={20} strokeWidth={2} className={classes.icon} />
+                    
+<strong>Kraj: </strong>
+                      {/* <MapPin size={20} strokeWidth={2} className={classes.icon} /> */}
                       {comp.city}
                     </p>
 
                     <p className={classes.metaSmall}>
-                      Šport: <b>{comp.sport}</b>
+                     <strong>Šport: </strong> {comp.sport}
                     </p>
                   </div>
 
@@ -96,8 +108,8 @@ useEffect(() => {
 
                     {/* edit */}
                     <Link className={classes.urediBtn} href={`/Competitions/${comp.id}/edit`}>
-                     
-                       Uredi <Pencil size={18} />
+                     Uredi
+                       {/* Uredi <Pencil size={18} /> */}
                     </Link>
                   </div>
                 </div>
