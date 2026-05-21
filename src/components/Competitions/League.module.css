@@ -151,10 +151,19 @@
   margin-bottom: 8px;
 }
 
+.timeDiv {
+  justify-content: start;
+  text-align: start;
+    margin-bottom: 5px;
+
+}
+
 .matchTime {
+  margin-top: 10px;
   font-weight: 600;
   color: #64748b;
-  text-align: center;
+  text-align: start;
+  margin-left: 10px;
 }
 
 .matchContent {
@@ -209,7 +218,7 @@
   }
 
   .matchTime {
-    position: absolute;
+    position: start;
     left: 12px; /* Uro fiksiramo čisto na levi rob vrstice */
     font-size: 14px;
   }

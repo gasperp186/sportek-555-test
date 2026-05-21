@@ -25,20 +25,21 @@ export default function LeagueRound({ matchesThisRound, basePath, classes }) {
     {m.date ? formatDate(m.date) : "Datum ni določen"}
   </div>
 )}
+<div className={classes.timeDiv}><span className={classes.matchTime}>{m.time || "--:--"}</span></div>
 
             <Link href={href} className={`${classes.matchRow} ${statusClass}`}>
-              <span className={classes.matchTime}>{m.time || "--:--"}</span>
-              
-              <div className={classes.matchContent}>
-                <span className={classes.teamLeft}>{m.home}</span>
-                <span className={classes.score}>
-                  {m.homeScore ?? "-"} : {m.awayScore ?? "-"}
-                </span>
-                <span className={classes.teamRight}>{m.away}</span>
-              </div>
-
-              
-            </Link>
+  {/* Ura je zdaj na vrhu */}
+  
+  
+  {/* Pod njo sta ekipi in rezultat */}
+  <div className={classes.matchContent}>
+    <span className={classes.teamLeft}>{m.home}</span>
+    <span className={classes.score}>
+      {m.homeScore ?? "-"} : {m.awayScore ?? "-"}
+    </span>
+    <span className={classes.teamRight}>{m.away}</span>
+  </div>
+</Link>
           </div>
         );
       })}
