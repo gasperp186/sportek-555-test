@@ -224,9 +224,7 @@
   }
 
   .matchContent {
-    grid-column: unset; /* Ponastavimo grid pravilo iz namiznega pogleda */
     width: 100%;
-    max-width: calc(100% - 100px); /* Preprečimo, da bi dolga imena ekip prekrila uro */
     justify-content: center;
   }
 
