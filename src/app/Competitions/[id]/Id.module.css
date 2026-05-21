@@ -43,29 +43,49 @@ min-height: 400px;
   margin-bottom: 0.3rem;
   margin-top: 20px;
 }
-
+/* --- Privzeti stili za velik zaslon (vse v eni vrsti) --- */
 .subtitle {
   color: #6b7280;
   margin-top: 20px;
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
   align-items: center;
-  gap: 12px; /* Razmik med elementi na velikem zaslonu */
+  flex-wrap: wrap;
+  gap: 16px;
   justify-content: center;
 }
 
-/* Stil za navpično črto */
+.metaGroup {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .separator {
   color: #4b5563;
 }
 
-/* --- Prilagoditev za mobilne zaslone pod 700px --- */
+/* --- Prilagoditev za male zaslone (pod 500px) --- */
 @media (max-width: 500px) {
   .subtitle {
-    flex-direction: column;   /* Vsak podatek gre striktno v svojo vrstico */
-    align-items: center;  /* Poravnava besedila na levo stran */
-    gap: 8px;                 /* Navpični razmik med vrsticami na telefonu */
+    flex-direction: column;   /* Poravna metaGroup in dateGroup enega pod drugega */
+    align-items: center;      /* Centrira celotno vsebino (če želiš na levo, spremeni v flex-start) */
+    gap: 8px;                 /* Razmik med prvo vrstico (šport/kraj) in drugo vrstico (datum) */
+  }
+
+  .metaGroup {
+    display: flex;
+    flex-direction: row;      /* Šport in kraj ostaneta trdno v isti vrstici */
+    align-items: center;
+    gap: 12px;
+  }
+
+  .separator {
+    display: inline;          /* Navpična črta ostane vidna, ker sta šport in kraj še vedno skupaj */
+  }
+
+  .title {
+    font-size: 30px;
   }
 
   /* Na telefonu skrijemo pokončne črte, ker ima vsak podatek svojo vrstico */

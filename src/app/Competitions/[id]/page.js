@@ -31,19 +31,19 @@ export default async function Page({ params }) {
       <div className={classes.card}>
         <h2 className={classes.title}>{comp.title}</h2>
 <div className={classes.subtitle}>
-  <div>
-    <strong>Šport:</strong> {comp.sport}
+  {/* Prva vrstica: Šport in Kraj ostaneta vedno skupaj */}
+  <div className={classes.metaGroup}>
+    <div>
+      <strong>Šport:</strong> {comp.sport}
+    </div>
+    <span className={classes.separator}>|</span>
+    <div>
+      <strong>Kraj:</strong> {comp.city}
+    </div>
   </div>
   
-  <span className={classes.separator}>|</span>
-  
-  <div>
-    <strong>Kraj:</strong> {comp.city}
-  </div>
-  
-  <span className={classes.separator}>|</span>
-  
-  <div>
+  {/* Druga vrstica: Datum ali Sezona */}
+  <div className={classes.dateGroup}>
     {comp.mode === "bracket" || comp.mode === "knockout" ? (
       <>
         <strong>Datum:</strong> {
@@ -58,6 +58,9 @@ export default async function Page({ params }) {
       </>
     )}
   </div>
+
+  
+  
 </div>
         
         <CompetitionDetails id={id} initialData={comp} isEditMode={true} />
