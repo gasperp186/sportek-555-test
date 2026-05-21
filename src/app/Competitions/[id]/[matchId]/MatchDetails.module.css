@@ -404,6 +404,10 @@ justify-content: space-between;
   cursor: pointer;
 }
 @media (max-width: 600px) {
+  
+ .page {
+  padding: 1rem;
+ }
   .buttonDiv {
     flex-wrap: wrap;
   }
