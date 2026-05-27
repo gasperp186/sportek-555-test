@@ -276,3 +276,29 @@
 .borderFinished {
   border-left: 10px solid #555d58;
 }
+
+/* ==========================================
+   EXPORT STILI (Uravnoteženo levo-desno brez uhajanja čez rob)
+   ========================================== */
+
+/* Prisilimo grid, da ima VEDNO dva stolpca in se ne prelomi pod 980px */
+.leagueGridExport {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important; 
+  width: 100% !important;
+  max-width: 1300px !important;
+  gap: 1.4rem !important;
+}
+
+/* Vsak stolpec vzame točno polovico in prepreči raztegovanje v prazno */
+.colExport {
+  flex: 1 !important;
+  min-width: 0 !important;
+  width: 100% !important;
+}
+
+/* Prisilno stiskanje tabele na levo polovico */
+.leagueGridExport table {
+  width: 100% !important;
+  table-layout: fixed !important; /* Enakomerno porazdeli kratice stolpcev (OT, T, Z...) */
+}
