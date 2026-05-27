@@ -118,7 +118,6 @@
   cursor: pointer;
   font-weight: 800;
   color: #334155;
-  transition: 0.2s ease;
 }
 
 .smallBtn:hover {

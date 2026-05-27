@@ -1,7 +1,8 @@
 "use client";
 
 import { useMemo, useState, useEffect } from "react";
-import classes from "./Draw.module.css"; "./Create.module.css";
+import classes from "./Draw.module.css"; 
+import "./Create.module.css";
 
 function pripraviEkipe(teams) {
   const result = [];
@@ -23,7 +24,6 @@ function pripraviEkipe(teams) {
   return result;
 }
 
-
 function generirajKroge(teams) {
   const list = [...teams];
 
@@ -40,6 +40,7 @@ function generirajKroge(teams) {
 
   for (let r = 0; r < n - 1; r++) {
     const roundMatches = [];
+    let byeTeamName = null;
 
     const left = [fixed];
     for (let i = 0; i < n / 2 - 1; i++) {
@@ -56,7 +57,15 @@ function generirajKroge(teams) {
       const a = left[i];
       const b = right[i];
 
-      if (a.id === "BYE" || b.id === "BYE") continue;
+      // POPRAVEK: Če je katera od ekip BYE, takoj vemo, katera ekipa počiva v tem krogu
+      if (a.id === "BYE") {
+        byeTeamName = b.name;
+        continue;
+      }
+      if (b.id === "BYE") {
+        byeTeamName = a.name;
+        continue;
+      }
 
       const isEvenRound = r % 2 === 0;
       const home = isEvenRound ? a : b;
@@ -70,29 +79,13 @@ function generirajKroge(teams) {
         away: away.name,
         scoreHome: null,
         scoreAway: null,
+        phase: "league"
       });
-    }
-
-    let byeTeamName = null;
-    if (liho) {
-      const playedIds = [];
-
-      for (let i = 0; i < roundMatches.length; i++) {
-        playedIds.push(roundMatches[i].homeTeamId);
-        playedIds.push(roundMatches[i].awayTeamId);
-      }
-
-      for (let i = 0; i < teams.length; i++) {
-        if (!playedIds.includes(teams[i].id)) {
-          byeTeamName = teams[i].name;
-          break;
-        }
-      }
     }
 
     rounds.push({
       matches: roundMatches,
-      byeTeamName,
+      byeTeamName: liho ? byeTeamName : null,
     });
 
     rotating = [rotating[rotating.length - 1], ...rotating.slice(0, -1)];
@@ -100,7 +93,6 @@ function generirajKroge(teams) {
 
   return rounds;
 }
-
 
 function dvokrozno(rounds) {
   const secondHalf = [];
@@ -113,14 +105,15 @@ function dvokrozno(rounds) {
       const m = roundObj.matches[i];
 
       newMatches.push({
-    round: rounds.length + (r + 1),
-    homeTeamId: m.awayTeamId,
-    awayTeamId: m.homeTeamId,
-    home: m.away, 
-    away: m.home, 
-    scoreHome: null,
-    scoreAway: null,
-});
+        round: rounds.length + (r + 1),
+        homeTeamId: m.awayTeamId,
+        awayTeamId: m.homeTeamId,
+        home: m.away, 
+        away: m.home, 
+        scoreHome: null,
+        scoreAway: null,
+        phase: "league"
+      });
     }
 
     secondHalf.push({
@@ -132,7 +125,6 @@ function dvokrozno(rounds) {
   return [...rounds, ...secondHalf];
 }
 
-
 export default function LeagueDraw({ teams, onChangeMatches, isHybrid }) {
   const [isDouble, setIsDouble] = useState(false);
 
@@ -143,59 +135,17 @@ export default function LeagueDraw({ teams, onChangeMatches, isHybrid }) {
     return isDouble ? dvokrozno(firstHalf) : firstHalf;
   }, [safeTeams, isDouble]);
 
-
   useEffect(() => {
+    const vseTekme = rounds.flatMap(roundObj => roundObj.matches);
 
-    let vseTekme = rounds.flatMap(roundObj => roundObj.matches);
-
-    if (isHybrid) {
-
-      const knockoutTekme = [
-        {
-          round: "SF1", 
-          home: "1. uvrščeni", away: "4. uvrščeni", 
-          homeTeamId: "TBD1", awayTeamId: "TBD4", 
-          phase: "knockout"
-        },
-         {
-          round: "SF2", 
-          home: "1. uvrščeni", away: "4. uvrščeni", 
-          homeTeamId: "TBD1", awayTeamId: "TBD4", 
-          phase: "knockout"
-        },
-         {
-          round: "F1", 
-          home: "1. uvrščeni", away: "4. uvrščeni", 
-          homeTeamId: "TBD1", awayTeamId: "TBD4", 
-          phase: "knockout"
-        },
-         {
-          round: "T3", 
-          home: "1. uvrščeni", away: "4. uvrščeni", 
-          homeTeamId: "TBD1", awayTeamId: "TBD4", 
-          phase: "knockout"
-        },
-
-      ];
-      vseTekme = [...vseTekme, ...knockoutTekme];
-    }
-
-    
-
-    if(vseTekme.length > 0) {
+    if (vseTekme.length > 0) {
       onChangeMatches(vseTekme);
     }
-
-    
-  }, [rounds, onChangeMatches])
+  }, [rounds, onChangeMatches]);
 
   if (!safeTeams || safeTeams.length < 2) {
     return <div className={classes.infoBox}>Najprej dodaj ekipe.</div>;
   }
-
-  
-
- 
 
   return (
     <>

@@ -10,20 +10,21 @@ export default function LeagueTeams({ form, setForm, onValidChange }) {
 
   if (form.mode === "hybrid") {
     MIN_EKIP = 4;
+
   }
   
-  // Če teams še ne obstaja, vzamemo prazen seznam
   const teams = form.teams || [];
 
-  // AVTOMATSKO POLNJENJE NA ZAČETKU: Če je seznam prazen, dodamo prazna polja glede na MIN_EKIP
+  // POPRAVLJENO: Odstranjen 'form' iz dependency array-a, da preprečimo neskončno zanko
   useEffect(() => {
     if (teams.length === 0) {
       const zacetneEkipe = Array.from({ length: MIN_EKIP }, () => ({ name: "" }));
-      setForm({ ...form, teams: zacetneEkipe });
+      // Uporabimo funkcijsko posodobitev stanja, da ne rabimo celotnega 'form' objekta v odvisnostih
+      setForm((prevForm) => ({ ...prevForm, teams: zacetneEkipe }));
     }
-  }, [form.mode, MIN_EKIP, setForm, form, teams.length]);
+  }, [MIN_EKIP, setForm, teams.length]);
 
-  // Preverjanje, če je vse izpolnjeno (Validacija)
+  // Preverjanje validacije
   useEffect(() => {
     const aliJeVseIzpolnjeno = 
       teams.length >= MIN_EKIP && 
