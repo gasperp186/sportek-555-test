@@ -1,4 +1,3 @@
-// components/Competitions/LeagueView.js
 "use client";
 
 import LeagueRound from "./LeagueMatchRow";
@@ -96,10 +95,9 @@ export default function LeagueView({ matches, teams, id, isExport }) {
   const roundKeys = Object.keys(matchesByRound).map(Number).sort((a, b) => a - b);
   const maxRound = roundKeys.length > 0 ? Math.max(...roundKeys) : 1;
 
-  return (
-    /* POPRAVLJENO: Dinamični razredi glede na isExport, enako kot prej pri Bracketu */
-    <div className={isExport ? `${classes.leagueGrid} ${classes.leagueGridExport}` : classes.leagueGrid}>
-      
+  // Render vsebine
+  const renderGridContent = () => (
+    <>
       {/* LEVA STRAN: Lestvica */}
       <div className={isExport ? `${classes.left} ${classes.colExport}` : classes.left}>
         <h4 className={classes.tableTitle}>Lestvica</h4>
@@ -160,6 +158,7 @@ export default function LeagueView({ matches, teams, id, isExport }) {
                 matchesThisRound={matchesByRound[selectedRound]} 
                 basePath={`/Competitions/${id}`} 
                 classes={classes} 
+                isExport={isExport}
               />
             </div>
           ) : (
@@ -167,6 +166,23 @@ export default function LeagueView({ matches, teams, id, isExport }) {
           )}
         </div>
       </div>
+    </>
+  );
+
+  // Če izvažamo, ovijemo v centriran kontejner za ozadje, sicer vrnemo standarden grid
+  if (isExport) {
+    return (
+      <div className={classes.exportWrapper}>
+        <div className={classes.leagueGridExport}>
+          {renderGridContent()}
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className={classes.leagueGrid}>
+      {renderGridContent()}
     </div>
   );
 }

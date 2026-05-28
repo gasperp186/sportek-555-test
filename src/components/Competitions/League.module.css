@@ -49,6 +49,9 @@
   font-weight: 800;
 }
 
+.roundTitle {
+  margin-left: 30px;
+}
 /* Prvi gumb (Nazaj) povsem na levo */
 .roundToolbar button:first-of-type {
   justify-self: start;
@@ -134,35 +137,43 @@
 .matchList {
   display: flex;
   flex-direction: column;
-  gap: 0.65rem;
+  gap: 5px;
 }
 
 .matchRow {
   display: grid;
-  grid-template-columns: 20px 1fr 20px; 
-  gap: 0.8rem;
+  /* 55px za uro, 1fr za celotno tekmo v sredini, 10px lufta na desni */
+  grid-template-columns: 30px 1fr 10px; 
+  gap: 0.5rem;
   align-items: center;
-  padding: 8px 10px;
+  padding: 8px 12px;
   border: 1px solid #e2e8f0;
   border-radius: 14px;
   text-decoration: none;
   color: inherit;
-  margin-bottom: 8px;
+  margin-bottom: 15px;
 }
+
+.matchTime {
+  font-weight: 700;
+  color: #64748b;
+  font-size: 12px;
+  text-align: left;
+}
+
 
 .timeDiv {
   justify-content: start;
   text-align: start;
-    margin-bottom: 5px;
-
 }
 
-.matchTime {
-  margin-top: 10px;
-  font-weight: 600;
-  color: #64748b;
-  text-align: start;
-  margin-left: 10px;
+
+.matchTimeExport {
+  font-size: 12px;
+  color: #0f172a;
+  text-align: left;
+
+
 }
 
 .matchContent {
@@ -172,6 +183,8 @@
   align-items: center;
   gap: 1rem;
 }
+
+
 
 .teamLeft,
 .teamRight {
@@ -185,18 +198,71 @@
 .teamLeft {
   text-align: right;
   flex: 1;
+  font-size: 14px;
 }
 
 .teamRight {
   text-align: left;
   flex: 1;
+  font-size: 14px;
+
 }
+
+
 
 .score {
   text-align: center;
   font-weight: 900;
   color: #000000;
   padding: 6px 10px;
+}
+
+.matchRowExport {
+  composes: matchRow;
+  grid-template-columns: 30px 1fr 10px !important; /* Še malo bolj stisnemo stolpce */
+  padding-top: 6px !important;
+  padding-bottom: 6px !important;
+  margin-bottom: 6px !important;
+}
+
+.matchTimeExport {
+  font-weight: 700;
+  color: #64748b;
+  font-size: 11px;
+  text-align: left;
+}
+
+.dateExport {
+  font-size: 11px !important;
+  margin-top: 6px !important;
+  margin-bottom: 3px !important;
+}
+.matchContentExport {
+  grid-column: 2; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;      /* Zmanjšan razmik med ekipo in rezultatom iz 1rem na 0.5rem */
+  font-size: 13px;   /* Manjša pisava za celoten tekst */
+  line-height: 1.1;
+}
+
+.teamLeftExport {
+  composes: teamLeft; /* Prevzame pisavo, barvo, skrivanje dolgih imen in flex: 1 */
+  font-size: 12px;
+  font-weight: 300;
+}
+
+.teamRightExport {
+  composes: teamRight; /* Prevzame pisavo, barvo, skrivanje dolgih imen in flex: 1 */
+  font-size: 12px;
+  font-weight: 300;
+}
+
+.scoreExport {
+  composes: score;    /* Prevzame centriranje, črno barvo in debelo pisavo */
+  font-size: 13px;
+  padding: 2px 6px;   /* Močno stisnjeni odmiki okoli rezultata (prej 6px 10px) */
 }
 
 /* Responsive */
@@ -229,12 +295,12 @@
 
   .teamLeft {
     text-align: right; /* Na mobilcu ohranimo desno poravnavo leve ekipe */
-    font-size: 14px;
+    font-size: 13px;
   }
 
   .teamRight {
     text-align: left;  /* In levo poravnavo desne ekipe */
-    font-size: 14px;
+    font-size: 13px;
   }
 }
 
@@ -246,6 +312,8 @@
   color: black;
   margin-bottom: 5px;
   margin-top: 5px;
+  margin-left: 30px;
+  font-size: 15px;
 }
 
 .nazajButton {
@@ -275,29 +343,42 @@
 .borderFinished {
   border-left: 10px solid #555d58;
 }
-
 /* ==========================================
-   EXPORT STILI (Uravnoteženo levo-desno brez uhajanja čez rob)
+   EXPORT STILI (Popolnoma centrirano navpično in vodoravno)
    ========================================== */
 
-/* Prisilimo grid, da ima VEDNO dva stolpca in se ne prelomi pod 980px */
+/* Nov krovni kontejner, ki prisili vsebino točno na sredino ekrana/slike */
+.exportWrapper {
+  display: flex !important;
+  align-items: center !important;       /* Centriranje po VIŠINI (navpično) */
+  justify-content: center !important;   /* Centriranje po ŠIRINI (vodoravno) */
+  min-height: 70vh !important;          /* Zagotovi dovolj prostora pod in nad, da ne lepi na vrh */
+  width: 100% !important;
+  margin: 0 auto !important;
+  padding: 20px 0 !important;
+}
+
+/* Prisilimo grid, da ohrani 2 stolpca, se ne razteguje čez vso višino in se centrira */
 .leagueGridExport {
   display: grid !important;
   grid-template-columns: 1fr 1fr !important; 
   width: 100% !important;
-  max-width: 1300px !important;
-  gap: 1.4rem !important;
+  max-width: 1200px !important; /* Rahlo stisnjeno, da izgleda bolj kompaktno */
+  gap: 1.5rem !important;
+  align-items: start !important; /* Prepreči stolpcema, da bi se umetno raztegovala navzdol */
 }
 
-/* Vsak stolpec vzame točno polovico in prepreči raztegovanje v prazno */
+/* Vsak stolpec vzame polovično širino */
 .colExport {
   flex: 1 !important;
   min-width: 0 !important;
   width: 100% !important;
+  height: auto !important; /* Prepreči praznino spodaj znotraj same kartice */
+  min-height: 0 !important; /* Preglasi fiksnih 330px, če je malo ekip */
 }
 
 /* Prisilno stiskanje tabele na levo polovico */
 .leagueGridExport table {
   width: 100% !important;
-  table-layout: fixed !important; /* Enakomerno porazdeli kratice stolpcev (OT, T, Z...) */
+  table-layout: fixed !important;
 }

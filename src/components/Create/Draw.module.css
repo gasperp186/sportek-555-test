@@ -275,3 +275,62 @@
   margin-bottom: 20px;
   margin-top: 30px;
 }
+
+/* Posodobljena vrstica tekme, da gresta ekipa in vnos lepo skupaj */
+.matchRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 10px 14px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  margin-bottom: 8px;
+}
+
+/* Kontejner za imena ekip */
+.teamsInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex: 1;
+}
+
+/* Kontejner za vnosna polja */
+.matchInputs {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+/* Lepši izgled za koledar in uro */
+.dateInput,
+.timeInput {
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  padding: 5px 8px;
+  font-size: 0.85rem;
+  color: #334155;
+  background: #ffffff;
+  outline: none;
+  font-family: inherit;
+}
+
+.dateInput:focus,
+.timeInput:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.15);
+}
+
+/* Prilagoditev za manjše zaslone */
+@media (max-width: 640px) {
+  .matchRow {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+  .matchInputs {
+    justify-content: flex-start;
+  }
+}

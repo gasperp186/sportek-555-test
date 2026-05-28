@@ -3,7 +3,7 @@
 import Link from "next/link";
 import classes from "./MyCompetitions.module.css";
 import { MapPin, Calendar, Pencil, Eye } from "lucide-react";
-import { competitions } from "@/data/Competitions";
+import { competitions as localCompetitions } from "@/data/Competitions"; // Preimenovano, da ne javi konflikta z usestate
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 import { useState, useEffect } from "react";
@@ -11,49 +11,48 @@ import { auth, db } from "@/lib/firebase";
 import { QrCode2Rounded } from "@mui/icons-material";
 import { formatDate } from "@/components/formatDate";
 
-
 export default function MyCompetitions() {
+  const [competitions, setCompetitions] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-const [competitions, setCompetitions] = useState([]);
-const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        try {
+          const q = query(collection(db, "competitions"), where("createdBy", "==", user.uid));
+          const querySnapshot = await getDocs(q);
 
-useEffect(() => {
-  const unsubscribe = onAuthStateChanged(auth, async (user) => {
-    if (user) {
-      try {
-        const q = query(collection(db, "competitions"), where("createdBy", "==", user.uid));
-        const querySnapshot = await getDocs(q);
+          const q2 = query(collection(db, "competitions"), where("editors", "array-contains", user.uid));
+          const querySnapshot2 = await getDocs(q2);
 
-        const q2 = query(collection(db, "competitions"), where("editors", "array-contains", user.uid));
-        const querySnapshot2 = await getDocs(q2);
+          const list = querySnapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data()
+          }));
 
-        
-        const list = querySnapshot.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data()
-        }));
+          const list2 = querySnapshot2.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data()
+          }));
 
-        const list2 = querySnapshot2.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data()
-        }));
+          const zdruzeniSeznam = [...list, ...list2];
 
-        const zdruzeniSeznam = [...list, ...list2];
-
-        setCompetitions(zdruzeniSeznam);
-      } catch (error) {
-        console.error("Napaka:", error);
+          setCompetitions(zdruzeniSeznam);
+        } catch (error) {
+          console.error("Napaka:", error);
+        }
+        setLoading(false);
+      } else {
+        setLoading(false);
       }
-      setLoading(false); // Ko končaš, ustavi nalaganje
-    } else {
-      setLoading(false);
-    }
-  });
+    });
 
-  return () => unsubscribe();
-}, []); // <--- TA DEL JE NUJEN ZA ZAČETNIKA (pomeni: zaženi samo ob nalaganju strani)
+    return () => unsubscribe();
+  }, []);
 
-
+  if (loading) {
+    return <div className={classes.page}><p className={classes.empty}>Nalaganje...</p></div>; // Opcijsko dodano za lepši UX
+  }
 
   return (
     <div className={classes.page}>
@@ -62,7 +61,6 @@ useEffect(() => {
           <div className={classes.headRight}>
             <h2 className={classes.naslov}>Moja tekmovanja</h2>
           </div>
-
 
           <div className={classes.list}>
             {competitions.length === 0 ? (
@@ -73,43 +71,46 @@ useEffect(() => {
                   <div className={classes.info}>
                     <h3 className={classes.title}>{comp.title}</h3>
 
-                    <p className={classes.meta}>
-                      {/* <Calendar size={20} strokeWidth={2} className={classes.icon} /> */}
+                    {/* POPRAVEK: <p> spremenjen v <div>, kar prepreči hydration error */}
+                    <div className={classes.meta}>
                       {comp.mode === "bracket" || comp.mode === "knockout" ? (
-  <div>
-    <strong>Datum: </strong> {
-      !comp.endDate || comp.startDate === comp.endDate 
-        ? formatDate(comp.startDate) 
-        : `${formatDate(comp.startDate)} - ${formatDate(comp.endDate)}`
-    }
-  </div>
-) : (
-  <div>
-    <strong>Sezona: </strong> {comp.season}
-  </div>
-)}
+                        <div classesName={classes.majhnNaslov}>
+                          <strong>Datum: </strong> {
+                            !comp.endDate || comp.startDate === comp.endDate 
+                              ? formatDate(comp.startDate) 
+                              : `${formatDate(comp.startDate)} - ${formatDate(comp.endDate)}`
+                          }
+                        </div>
+                      ) : (
+                        <div className={classes.majhnNaslov}>
+                          <strong>Sezona: </strong> {comp.season}
+                        </div>
+                      )}
+                      
                       <span className={classes.metaSpacer} />
-                    
-<strong>Kraj: </strong>
-                      {/* <MapPin size={20} strokeWidth={2} className={classes.icon} /> */}
-                      {comp.city}
-                    </p>
+                      
+                      <div className={classes.majhnNaslov}>
+                        <strong>Kraj: </strong> {comp.city}
+                      </div>
+                       <div className={classes.majhnNaslov}>
+                         <strong>Šport: </strong> {comp.sport}
+                       </div>
+                     
+                  
+                    </div>
 
-                    <p className={classes.metaSmall}>
-                     <strong>Šport: </strong> {comp.sport}
-                    </p>
+                   
                   </div>
 
                   <div className={classes.actions}>
-                    {/* (opcijsko) ogled */}
+                    {/* Ogled tekmovanja */}
                     <Link className={classes.ghostBtn} href={`/Competitions/${comp.id}`}>
-                      
+                      Ogled
                     </Link>
 
-                    {/* edit */}
+                    {/* Urejanje tekmovanja */}
                     <Link className={classes.urediBtn} href={`/Competitions/${comp.id}/edit`}>
-                     Uredi
-                       {/* Uredi <Pencil size={18} /> */}
+                      Uredi
                     </Link>
                   </div>
                 </div>

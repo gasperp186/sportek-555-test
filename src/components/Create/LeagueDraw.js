@@ -2,7 +2,6 @@
 
 import { useMemo, useState, useEffect } from "react";
 import classes from "./Draw.module.css"; 
-import "./Create.module.css";
 
 function pripraviEkipe(teams) {
   const result = [];
@@ -57,7 +56,6 @@ function generirajKroge(teams) {
       const a = left[i];
       const b = right[i];
 
-      // POPRAVEK: Če je katera od ekip BYE, takoj vemo, katera ekipa počiva v tem krogu
       if (a.id === "BYE") {
         byeTeamName = b.name;
         continue;
@@ -72,6 +70,8 @@ function generirajKroge(teams) {
       const away = isEvenRound ? b : a;
 
       roundMatches.push({
+        // Dodan unikaten id za vsako generirano tekmo, da lažje posodabljamo datum/uro
+        id: `m-r${r + 1}-${i}`, 
         round: r + 1,
         homeTeamId: home.id,
         awayTeamId: away.id,
@@ -79,7 +79,9 @@ function generirajKroge(teams) {
         away: away.name,
         scoreHome: null,
         scoreAway: null,
-        phase: "league"
+        phase: "league",
+        date: "",  // <-- NOVO: Nastavimo privzeto vrednost za datum
+        time: ""   // <-- NOVO: Nastavimo privzeto vrednost za uro
       });
     }
 
@@ -105,6 +107,7 @@ function dvokrozno(rounds) {
       const m = roundObj.matches[i];
 
       newMatches.push({
+        id: `m-r${rounds.length + (r + 1)}-${i}`,
         round: rounds.length + (r + 1),
         homeTeamId: m.awayTeamId,
         awayTeamId: m.homeTeamId,
@@ -112,7 +115,9 @@ function dvokrozno(rounds) {
         away: m.home, 
         scoreHome: null,
         scoreAway: null,
-        phase: "league"
+        phase: "league",
+        date: "",  // <-- NOVO
+        time: ""   // <-- NOVO
       });
     }
 
@@ -127,21 +132,48 @@ function dvokrozno(rounds) {
 
 export default function LeagueDraw({ teams, onChangeMatches, isHybrid }) {
   const [isDouble, setIsDouble] = useState(false);
+  
+  // Lokalno stanje za hranjenje krogov z vnosi za datume in ure
+  const [localRounds, setLocalRounds] = useState([]);
 
   const safeTeams = useMemo(() => pripraviEkipe(teams), [teams]);
 
-  const rounds = useMemo(() => {
+  // Generiranje krogov ob spremembi ekip ali načina igranja (eno/dvokrožno)
+  const generiraniKrogi = useMemo(() => {
     const firstHalf = generirajKroge(safeTeams);
     return isDouble ? dvokrozno(firstHalf) : firstHalf;
   }, [safeTeams, isDouble]);
 
+  // Ko se generirajo novi krogi, osvežimo lokalno stanje
   useEffect(() => {
-    const vseTekme = rounds.flatMap(roundObj => roundObj.matches);
+    setLocalRounds(generiraniKrogi);
+  }, [generiraniKrogi]);
 
+  // Sprožimo onChangeMatches navzgor vsakič, ko se spremeni lokalno stanje (tudi ko uporabnik vpiše datum/uro)
+  useEffect(() => {
+    const vseTekme = localRounds.flatMap(roundObj => roundObj.matches);
     if (vseTekme.length > 0) {
       onChangeMatches(vseTekme);
     }
-  }, [rounds, onChangeMatches]);
+  }, [localRounds, onChangeMatches]);
+
+  // Funkcija, ki posodobi polje (date ali time) za določeno tekmo
+  const handleMatchMetaChange = (roundIdx, matchIdx, field, value) => {
+    setLocalRounds(prevRounds => {
+      const noviKrogi = [...prevRounds];
+      const novaTekma = { ...noviKrogi[roundIdx].matches[matchIdx], [field]: value };
+      
+      const noveTekmeUKrogu = [...noviKrogi[roundIdx].matches];
+      noveTekmeUKrogu[matchIdx] = novaTekma;
+      
+      noviKrogi[roundIdx] = {
+        ...noviKrogi[roundIdx],
+        matches: noveTekmeUKrogu
+      };
+      
+      return noviKrogi;
+    });
+  };
 
   if (!safeTeams || safeTeams.length < 2) {
     return <div className={classes.infoBox}>Najprej dodaj ekipe.</div>;
@@ -152,9 +184,7 @@ export default function LeagueDraw({ teams, onChangeMatches, isHybrid }) {
       <div className={classes.toggleRow}>
         <button
           type="button"
-          className={`${classes.toggleBtn} ${
-            !isDouble ? classes.toggleBtnActive : ""
-          }`}
+          className={`${classes.toggleBtn} ${!isDouble ? classes.toggleBtnActive : ""}`}
           onClick={() => setIsDouble(false)}
         >
           Enokrožni
@@ -162,9 +192,7 @@ export default function LeagueDraw({ teams, onChangeMatches, isHybrid }) {
 
         <button
           type="button"
-          className={`${classes.toggleBtn} ${
-            isDouble ? classes.toggleBtnActive : ""
-          }`}
+          className={`${classes.toggleBtn} ${isDouble ? classes.toggleBtnActive : ""}`}
           onClick={() => setIsDouble(true)}
         >
           Dvokrožni
@@ -172,9 +200,9 @@ export default function LeagueDraw({ teams, onChangeMatches, isHybrid }) {
       </div>
 
       <div className={classes.roundList}>
-        {rounds.map((round, idx) => (
-          <section key={idx} className={classes.roundCard}>
-            <h3 className={classes.roundTitle}>Krog {idx + 1}</h3>
+        {localRounds.map((round, roundIdx) => (
+          <section key={roundIdx} className={classes.roundCard}>
+            <h3 className={classes.roundTitle}>Krog {roundIdx + 1}</h3>
 
             {round.byeTeamName && (
               <div className={classes.roundMeta}>
@@ -183,11 +211,30 @@ export default function LeagueDraw({ teams, onChangeMatches, isHybrid }) {
             )}
 
             <div className={classes.roundMatches}>
-              {round.matches.map((m, i) => (
-                <div key={i} className={classes.matchRow}>
-                  <span className={classes.teamName}>{m.home}</span>
-                  <span className={classes.vs}>vs</span>
-                  <span className={classes.teamName}>{m.away}</span>
+              {round.matches.map((m, matchIdx) => (
+                <div key={m.id || matchIdx} className={classes.matchRow}>
+                  {/* Imena ekip */}
+                  <div className={classes.teamsInfo}>
+                    <span className={classes.teamName}>{m.home}</span>
+                    <span className={classes.vs}>vs</span>
+                    <span className={classes.teamName}>{m.away}</span>
+                  </div>
+
+                  {/* NOVO: Polja za vnos datuma in ure */}
+                  <div className={classes.matchInputs}>
+                    <input
+                      type="date"
+                      className={classes.dateInput}
+                      value={m.date || ""}
+                      onChange={(e) => handleMatchMetaChange(roundIdx, matchIdx, "date", e.target.value)}
+                    />
+                    <input
+                      type="time"
+                      className={classes.timeInput}
+                      value={m.time || ""}
+                      onChange={(e) => handleMatchMetaChange(roundIdx, matchIdx, "time", e.target.value)}
+                    />
+                  </div>
                 </div>
               ))}
             </div>
