@@ -91,8 +91,6 @@
   padding: 2.4rem;
   border-radius: 1.2rem;
   border: 2px solid #3b82f6;
-  box-shadow: 0 12px 35px rgba(59, 130, 246, 0.18);
-  animation: stepFadeIn 0.25s ease;
   margin-top: 100px;
   margin-bottom: 100px;
 }

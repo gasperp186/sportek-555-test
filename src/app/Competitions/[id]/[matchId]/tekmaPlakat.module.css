@@ -69,11 +69,11 @@
 }
 
 .textDetails {
-  font-size: 50px;
+  font-size: 50px !important;
 }
 
 .textTime {
-  font-size: 70px;
+  font-size: 50px;
 }
 
 

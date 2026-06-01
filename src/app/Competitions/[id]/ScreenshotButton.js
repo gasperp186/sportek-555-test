@@ -52,7 +52,19 @@ export default function ScreenshotButton({ comp, contentToExport, width = "", he
     alignItems: 'center'
   }}>
     <h2 className={classes.naslov}>{comp.title}</h2>
-    <h3 className={classes.podnaslov}>{formatDate(comp.startDate)}{comp.season}</h3>
+    <h3 className={classes.podnaslov}>{comp.mode === "bracket" || comp.mode === "knockout" ? (
+          <>
+            <strong>Datum:</strong> {
+              !comp.endDate || comp.startDate === comp.endDate 
+                ? formatDate(comp.startDate) 
+                : `${formatDate(comp.startDate)} - ${formatDate(comp.endDate)}`
+            }
+          </>
+        ) : (
+          <>
+            <strong>Sezona:</strong> {comp.season}
+          </>
+        )}</h3>
     <h3 className={classes.podnaslov2}>{comp.city}</h3>
     
     {contentToExport}

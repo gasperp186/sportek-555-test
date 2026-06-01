@@ -380,11 +380,11 @@ justify-content: space-between;
 }
 
 .plakatDetails {
-  margin-top: 50px;
+  margin-top: 40px;
 }
 
 .textDetails {
-  font-size: 50px;
+  font-size: 50px !important;
 }
 
 .textTime {

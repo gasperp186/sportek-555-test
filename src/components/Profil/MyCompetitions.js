@@ -74,7 +74,7 @@ export default function MyCompetitions() {
                     {/* POPRAVEK: <p> spremenjen v <div>, kar prepreči hydration error */}
                     <div className={classes.meta}>
                       {comp.mode === "bracket" || comp.mode === "knockout" ? (
-                        <div classesName={classes.majhnNaslov}>
+                        <div className={classes.majhnNaslov}>
                           <strong>Datum: </strong> {
                             !comp.endDate || comp.startDate === comp.endDate 
                               ? formatDate(comp.startDate) 
