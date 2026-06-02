@@ -320,7 +320,7 @@ export default function Page() {
               <div className={classes.exportScore}>{match.awayScore ?? 0}</div>
               <div className={classes.exportTeam}><h3>{match.away?.name || match.away}</h3></div>
             </div>
-            <h2 className={classes.koncniRezultat}>Končni rezultat</h2>
+            
           </div>
 
           <div style={{ width: '800px' }}>

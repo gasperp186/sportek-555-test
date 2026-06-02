@@ -26,6 +26,9 @@ export default async function Page({ params }) {
   // Preverimo, če je način nastavljen na form_only
   const isFormOnly = comp.publishMode === "FORM_ONLY";
 
+  const ozjaVrsta = (comp.mode === "knockout" && comp.maxTeams === 4);
+  const sirsaVrsta = (comp.mode === "knockout" && comp.maxTeams === 16);
+
   return (
     <div className={classes.page}>
       <div className={classes.card}>
@@ -40,6 +43,7 @@ export default async function Page({ params }) {
     <div>
       <strong>Kraj:</strong> {comp.city}
     </div>
+    <span className={classes.separator}>|</span>
   </div>
   
   {/* Druga vrstica: Datum ali Sezona */}
@@ -66,10 +70,17 @@ export default async function Page({ params }) {
         <CompetitionDetails id={id} initialData={comp} isEditMode={true} />
         
         {/* Če je form_only, z inline stilom preglasimo flex postavitev na center */}
-        <div 
-          className={classes.vrsta} 
+        
+        <div  
+          className={`
+                    ${ozjaVrsta ? classes.ozjaVrsta : classes.vrsta} 
+                  
+                    
+                  `}
           style={isFormOnly ? { justifyContent: 'center' } : {}}
         >
+
+
           {/* Legenda se prikaže samo, če NI form_only */}
           {!isFormOnly && <Legenda />}
           

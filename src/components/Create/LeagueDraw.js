@@ -1,7 +1,16 @@
 "use client";
 
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { useMemo, useState, useEffect } from "react";
 import classes from "./Draw.module.css"; 
+
+import {
+  toDateOrNull,
+  toTimeDateOrNull,
+  formatYMD,
+  formatHM,
+} from "@/lib/DateTime";
 
 function pripraviEkipe(teams) {
   const result = [];
@@ -70,7 +79,6 @@ function generirajKroge(teams) {
       const away = isEvenRound ? b : a;
 
       roundMatches.push({
-        // Dodan unikaten id za vsako generirano tekmo, da lažje posodabljamo datum/uro
         id: `m-r${r + 1}-${i}`, 
         round: r + 1,
         homeTeamId: home.id,
@@ -80,8 +88,8 @@ function generirajKroge(teams) {
         scoreHome: null,
         scoreAway: null,
         phase: "league",
-        date: "",  // <-- NOVO: Nastavimo privzeto vrednost za datum
-        time: ""   // <-- NOVO: Nastavimo privzeto vrednost za uro
+        date: "",  
+        time: ""   
       });
     }
 
@@ -116,8 +124,8 @@ function dvokrozno(rounds) {
         scoreHome: null,
         scoreAway: null,
         phase: "league",
-        date: "",  // <-- NOVO
-        time: ""   // <-- NOVO
+        date: "",  
+        time: ""   
       });
     }
 
@@ -132,24 +140,19 @@ function dvokrozno(rounds) {
 
 export default function LeagueDraw({ teams, onChangeMatches, isHybrid }) {
   const [isDouble, setIsDouble] = useState(false);
-  
-  // Lokalno stanje za hranjenje krogov z vnosi za datume in ure
   const [localRounds, setLocalRounds] = useState([]);
 
   const safeTeams = useMemo(() => pripraviEkipe(teams), [teams]);
 
-  // Generiranje krogov ob spremembi ekip ali načina igranja (eno/dvokrožno)
   const generiraniKrogi = useMemo(() => {
     const firstHalf = generirajKroge(safeTeams);
     return isDouble ? dvokrozno(firstHalf) : firstHalf;
   }, [safeTeams, isDouble]);
 
-  // Ko se generirajo novi krogi, osvežimo lokalno stanje
   useEffect(() => {
     setLocalRounds(generiraniKrogi);
   }, [generiraniKrogi]);
 
-  // Sprožimo onChangeMatches navzgor vsakič, ko se spremeni lokalno stanje (tudi ko uporabnik vpiše datum/uro)
   useEffect(() => {
     const vseTekme = localRounds.flatMap(roundObj => roundObj.matches);
     if (vseTekme.length > 0) {
@@ -157,7 +160,6 @@ export default function LeagueDraw({ teams, onChangeMatches, isHybrid }) {
     }
   }, [localRounds, onChangeMatches]);
 
-  // Funkcija, ki posodobi polje (date ali time) za določeno tekmo
   const handleMatchMetaChange = (roundIdx, matchIdx, field, value) => {
     setLocalRounds(prevRounds => {
       const noviKrogi = [...prevRounds];
@@ -211,32 +213,52 @@ export default function LeagueDraw({ teams, onChangeMatches, isHybrid }) {
             )}
 
             <div className={classes.roundMatches}>
-              {round.matches.map((m, matchIdx) => (
-                <div key={m.id || matchIdx} className={classes.matchRow}>
-                  {/* Imena ekip */}
-                  <div className={classes.teamsInfo}>
-                    <span className={classes.teamName}>{m.home}</span>
-                    <span className={classes.vs}>vs</span>
-                    <span className={classes.teamName}>{m.away}</span>
-                  </div>
+              {round.matches.map((m, matchIdx) => {
+                // Pretvorba shranjenih nizov v Date objekte za react-datepicker
+                const selectedDate = toDateOrNull(m.date);
+                const selectedTime = toTimeDateOrNull(m.time);
 
-                  {/* NOVO: Polja za vnos datuma in ure */}
-                  <div className={classes.matchInputs}>
-                    <input
-                      type="date"
-                      className={classes.dateInput}
-                      value={m.date || ""}
-                      onChange={(e) => handleMatchMetaChange(roundIdx, matchIdx, "date", e.target.value)}
-                    />
-                    <input
-                      type="time"
-                      className={classes.timeInput}
-                      value={m.time || ""}
-                      onChange={(e) => handleMatchMetaChange(roundIdx, matchIdx, "time", e.target.value)}
-                    />
+                return (
+                  <div key={m.id || matchIdx} className={classes.matchRow}>
+                    {/* Imena ekip */}
+                    <div className={classes.teamsInfo}>
+                      <span className={classes.teamName}>{m.home}</span>
+                      <span className={classes.vs}>vs</span>
+                      <span className={classes.teamName}>{m.away}</span>
+                    </div>
+
+                    {/* Izbira datuma in ure z enakimi komponentami kot v MatchCard */}
+                    <div className={classes.metaRow}>
+                      <div className={classes.datetimeBlock}>
+                        <span className={classes.metaLabel}>Datum</span>
+                        <DatePicker
+                          selected={selectedDate}
+                          onChange={(d) => handleMatchMetaChange(roundIdx, matchIdx, "date", d ? formatYMD(d) : "")}
+                          dateFormat="dd.MM.yyyy"
+                          placeholderText="Datum"
+                          className={classes.dpInput}
+                        />
+                      </div>
+
+                      <div className={classes.datetimeBlock}>
+                        <span className={classes.metaLabel}>Ura</span>
+                        <DatePicker
+                          selected={selectedTime}
+                          onChange={(d) => handleMatchMetaChange(roundIdx, matchIdx, "time", d ? formatHM(d) : "")}
+                          showTimeSelect
+                          showTimeSelectOnly
+                          timeIntervals={15}
+                          timeCaption="Ura"
+                          dateFormat="HH:mm"
+                          placeholderText="Ura"
+                          className={classes.dpInput}
+                        />
+                      </div>
+                    </div>
+
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </section>
         ))}

@@ -20,11 +20,11 @@ export const sports = {
     image: "/images/sports/futsal.jpg",
   },
   "namizni nogomet": {
-    naslov: "NamizniNogomet",
+    naslov: "Namizni nogomet",
     image: "/images/sports/namizniNogomet.jpg",
   },
   "namizni tenis": {
-    naslov: "NamizniTenis",
+    naslov: "Namizni tenis",
     image: "/images/sports/namizniTenis.jpg",
   },
   biljard: {

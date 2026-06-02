@@ -61,6 +61,8 @@ export default function KnockoutTeams({ form, setForm, onValidChange }) {
     setForm({
       ...form,
       knockoutTeamCount: number,
+      maxTeams: number
+
     });
   }
 

@@ -66,8 +66,10 @@ export default function ScreenshotButton({ comp, contentToExport, width = "", he
           </>
         )}</h3>
     <h3 className={classes.podnaslov2}>{comp.city}</h3>
+    <div style={{marginTop: '50px'}}>
+        {contentToExport}
+    </div>
     
-    {contentToExport}
   </div>
 </div>
   </>
