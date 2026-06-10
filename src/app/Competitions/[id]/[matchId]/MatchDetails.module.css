@@ -24,7 +24,6 @@
 
 .dpInput {
   padding: 8px;
-  border-radius: 6px;
   border: 1px solid #ccc;
   background: white;
   color: black;
@@ -184,6 +183,7 @@ justify-content: space-between;
   margin-top: 10px;
   background-color: rgb(60, 60, 65);
   border: none;
+  border-radius: 10px;
 }
 
 .inlineInput {
