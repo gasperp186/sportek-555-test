@@ -142,7 +142,7 @@ export default function Bracket8({ matches, basePath = "", isExport = false }) {
         <div className={`
           ${isExport ? classes.col2 : classes.col} 
           ${isExport ? classes.colSemi2 : classes.colSemi} 
-          ${!isExport ? classes.order3 : ""}
+          ${!isExport ? classes.order4 : ""}
         `}>
           {/* TUKAJ NE dodamo onlyMobileTitle, da bo na telefonu samo eden naslov za obe tekmi */}
           <Match
@@ -165,6 +165,7 @@ export default function Bracket8({ matches, basePath = "", isExport = false }) {
         ${isExport ? classes.col2 : classes.col} 
         ${isExport ? classes.colRound2 : classes.colRound} 
         ${!isExport ? classes.order1 : ""}
+        ${!isExport ? classes.colRoundRight : ""}
     `}>
         <Match
           id={qf3?.id}
