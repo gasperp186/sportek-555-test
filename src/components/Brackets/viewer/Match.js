@@ -9,7 +9,7 @@ export default function Match({
   
   const statusClass = 
     status === "V teku" ? classes.borderInGame : 
-    status === "načrtovana" ? classes.borderPlanned : 
+    status === "Načrtovana" ? classes.borderPlanned : 
     classes.borderFinished;
 
   const blockCls = isExport ? `${classes.block} ${classes.block2}` : classes.block;

@@ -8,14 +8,14 @@ export default function Bracket16({ teams, matches, onChangeMatches, isHybrid, t
   // 1. Inicializacija stanja za vseh 16 tekem
   const [matchData, setMatchData] = useState(() => {
     const initialState = {
-      R16_1: { home: "", away: "", date: "", time: "", status: "načrtovana" },
-      R16_2: { home: "", away: "", date: "", time: "", status: "načrtovana" },
-      R16_3: { home: "", away: "", date: "", time: "", status: "načrtovana" },
-      R16_4: { home: "", away: "", date: "", time: "", status: "načrtovana" },
-      R16_5: { home: "", away: "", date: "", time: "", status: "načrtovana" },
-      R16_6: { home: "", away: "", date: "", time: "", status: "načrtovana" },
-      R16_7: { home: "", away: "", date: "", time: "", status: "načrtovana" },
-      R16_8: { home: "", away: "", date: "", time: "", status: "načrtovana" },
+      R16_1: { home: "", away: "", date: "", time: "", status: "Načrtovana" },
+      R16_2: { home: "", away: "", date: "", time: "", status: "Načrtovana" },
+      R16_3: { home: "", away: "", date: "", time: "", status: "Načrtovana" },
+      R16_4: { home: "", away: "", date: "", time: "", status: "Načrtovana" },
+      R16_5: { home: "", away: "", date: "", time: "", status: "Načrtovana" },
+      R16_6: { home: "", away: "", date: "", time: "", status: "Načrtovana" },
+      R16_7: { home: "", away: "", date: "", time: "", status: "Načrtovana" },
+      R16_8: { home: "", away: "", date: "", time: "", status: "Načrtovana" },
       QF1: { date: "", time: "" },
       QF2: { date: "", time: "" },
       QF3: { date: "", time: "" },
@@ -110,16 +110,16 @@ export default function Bracket16({ teams, matches, onChangeMatches, isHybrid, t
         date: matchData[id].date, time: matchData[id].time, 
         nextPosition: (parseInt(id.split("_")[1]) % 2 !== 0) ? "home" : "away"
       })),
-      { id: "QF1", round: "QF1", phase: "knockout", home: "", away: "", date: matchData.QF1.date, time: matchData.QF1.time, nextPosition: "home", status: "načrtovana" },
-      { id: "QF2", round: "QF2", phase: "knockout", home: "", away: "", date: matchData.QF2.date, time: matchData.QF2.time, nextPosition: "away", status: "načrtovana" },
-      { id: "QF3", round: "QF3", phase: "knockout", home: "", away: "", date: matchData.QF3.date, time: matchData.QF3.time, nextPosition: "home", status: "načrtovana" },
-      { id: "QF4", round: "QF4", phase: "knockout", home: "", away: "", date: matchData.QF4.date, time: matchData.QF4.time, nextPosition: "away", status: "načrtovana" },
-      { id: "SF1", round: "SF1", phase: "knockout", home: "", away: "", date: matchData.SF1.date, time: matchData.SF1.time, nextPosition: "home", status: "načrtovana" },
-      { id: "SF2", round: "SF2", phase: "knockout", home: "", away: "", date: matchData.SF2.date, time: matchData.SF2.time, nextPosition: "away", status: "načrtovana" },
-      { id: "F1",  round: "F1",  phase: "knockout", home: "", away: "", date: matchData.F1.date,  time: matchData.F1.time, status: "načrtovana" },
+      { id: "QF1", round: "QF1", phase: "knockout", home: "", away: "", date: matchData.QF1.date, time: matchData.QF1.time, nextPosition: "home", status: "Načrtovana" },
+      { id: "QF2", round: "QF2", phase: "knockout", home: "", away: "", date: matchData.QF2.date, time: matchData.QF2.time, nextPosition: "away", status: "Načrtovana" },
+      { id: "QF3", round: "QF3", phase: "knockout", home: "", away: "", date: matchData.QF3.date, time: matchData.QF3.time, nextPosition: "home", status: "Načrtovana" },
+      { id: "QF4", round: "QF4", phase: "knockout", home: "", away: "", date: matchData.QF4.date, time: matchData.QF4.time, nextPosition: "away", status: "Načrtovana" },
+      { id: "SF1", round: "SF1", phase: "knockout", home: "", away: "", date: matchData.SF1.date, time: matchData.SF1.time, nextPosition: "home", status: "Načrtovana" },
+      { id: "SF2", round: "SF2", phase: "knockout", home: "", away: "", date: matchData.SF2.date, time: matchData.SF2.time, nextPosition: "away", status: "Načrtovana" },
+      { id: "F1",  round: "F1",  phase: "knockout", home: "", away: "", date: matchData.F1.date,  time: matchData.F1.time, status: "Načrtovana" },
       thirdPlaceMatch ? { 
         id: "T3", round: "T3", phase: "knockout", home: "", away: "", 
-        date: matchData.T3.date, time: matchData.T3.time, status: "načrtovana" 
+        date: matchData.T3.date, time: matchData.T3.time, status: "Načrtovana" 
       } : null,
     ].filter(Boolean);
 

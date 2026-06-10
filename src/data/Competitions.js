@@ -202,7 +202,7 @@ export const matchesC4 = [
 
     scoreHome: 1,
     scoreAway: 3,
-    status: "načrtovana",
+    status: "Načrtovana",
   },
 
   {
@@ -221,7 +221,7 @@ export const matchesC4 = [
 
     scoreHome: 2,
     scoreAway: 3,
-    status: "načrtovana",
+    status: "Načrtovana",
   },
 ];
 

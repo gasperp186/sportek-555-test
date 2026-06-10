@@ -85,22 +85,22 @@ export default function Bracket4({ teams, matches, onChangeMatches, isHybrid, th
       id: "SF1", round: "SF1", phase: "knockout",
       home: isHybrid ? "1. uvrščeni" : matchData.SF1.home, 
       away: isHybrid ? "4. uvrščeni" : matchData.SF1.away, 
-      date: matchData.SF1.date, time: matchData.SF1.time, nextPosition: "home", status: "načrtovana"
+      date: matchData.SF1.date, time: matchData.SF1.time, nextPosition: "home", status: "Načrtovana"
     },
     { 
       id: "SF2", round: "SF2", phase: "knockout",
       home: isHybrid ? "2. uvrščeni" : matchData.SF2.home, 
       away: isHybrid ? "3. uvrščeni" : matchData.SF2.away, 
-      date: matchData.SF2.date, time: matchData.SF2.time, nextPosition: "away", status: "načrtovana"
+      date: matchData.SF2.date, time: matchData.SF2.time, nextPosition: "away", status: "Načrtovana"
     },
     { 
       id: "F1", round: "F1", phase: "knockout", home: "", away: "", 
-      date: matchData.F1.date, time: matchData.F1.time, status: "načrtovana"
+      date: matchData.F1.date, time: matchData.F1.time, status: "Načrtovana"
     },
     // Tekmo za 3. mesto dodamo samo, če je thirdPlaceMatch resničen
     thirdPlaceMatch ? { 
       id: "T3", round: "T3", phase: "knockout", home: "", away: "", 
-      date: matchData.T3.date, time: matchData.T3.time, status: "načrtovana"
+      date: matchData.T3.date, time: matchData.T3.time, status: "Načrtovana"
     } : null,
   ].filter(Boolean); // To odstrani 'null' iz seznama, če thirdPlaceMatch ni označen
 
