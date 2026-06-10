@@ -235,7 +235,7 @@ export default function LeagueDraw({ teams, onChangeMatches, isHybrid }) {
                           selected={selectedDate}
                           onChange={(d) => handleMatchMetaChange(roundIdx, matchIdx, "date", d ? formatYMD(d) : "")}
                           dateFormat="dd.MM.yyyy"
-                          placeholderText="Datum"
+                          placeholderText=""
                           className={classes.dpInput}
                         />
                       </div>
@@ -250,7 +250,7 @@ export default function LeagueDraw({ teams, onChangeMatches, isHybrid }) {
                           timeIntervals={15}
                           timeCaption="Ura"
                           dateFormat="HH:mm"
-                          placeholderText="Ura"
+                          placeholderText=""
                           className={classes.dpInput}
                         />
                       </div>

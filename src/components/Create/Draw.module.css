@@ -8,7 +8,7 @@
   padding: 2.4rem;
   border-radius: 1.2rem;
   border: 2px solid #3b82f6;
-  box-shadow: 0 12px 35px rgba(59, 130, 246, 0.18);
+  
   margin-top: 85px;
   margin-bottom: 50px;
   /* animation: fadeIn 0.25s ease; */
@@ -162,7 +162,6 @@
   border-radius: 1rem;
   border: 1px solid #e2e8f0;
   padding: 1rem 1.2rem;
-  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
 }
 
 .roundHeader {
@@ -183,7 +182,8 @@
 .roundMeta {
   font-size: 0.85rem;
   color: #64748b;
-  margin-right: 20px;
+  margin-bottom: 10px;
+  margin-right: 18px;
 }
 
 .roundMatches {
@@ -224,6 +224,12 @@
   font-weight: 600;
 }
 
+.metaLabel {
+  color: var(--color-text);
+  margin-bottom: 5px;
+  font-size: 15px;
+}
+
 /* mala prilagoditev za manjše ekrane */
 @media (max-width: 600px) {
   .matchRow {
@@ -250,18 +256,15 @@
   font-size: 0.9rem;
   cursor: pointer;
   color: #334155;
-  transition: 0.2s ease;
+ 
 }
 
-.toggleBtn:hover {
-  background: #f8fafc;
-}
 
 .toggleBtnActive {
   border-color: #2563eb;
   background: #2563eb;
   color: #ffffff;
-  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
+  
 }
 
 .podnaslov {
@@ -285,8 +288,7 @@
   gap: 1rem;
   padding: 10px 14px;
   background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 10px;
+
   margin-bottom: 8px;
 }
 
@@ -334,4 +336,9 @@
   .matchInputs {
     justify-content: flex-start;
   }
+}
+
+
+.datetimeBlock {
+  margin-bottom: 10px;
 }
