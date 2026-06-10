@@ -230,7 +230,7 @@ export default function Page() {
             {role === "owner" || role === "editor" ? (
               <input id="homeInput" type="number" className={classes.scoreInput} defaultValue={match.homeScore ?? ""} min="0" />
             ) : (
-              <p className={classes.score}>{match.status === "scheduled" ? "-" : match.homeScore ?? "-"}</p>
+              <p className={classes.score}>{match.status === "načrtovana" ? "-" : match.homeScore ?? "-"}</p>
             )}
           </div>
 
@@ -241,7 +241,7 @@ export default function Page() {
             {role === "owner" || role === "editor" ? (
               <input id="awayInput" type="number" className={classes.scoreInput} defaultValue={match.awayScore ?? ""} min="0" />
             ) : (
-              <p className={classes.score}>{match.status === "scheduled" ? "-" : match.awayScore ?? "-"}</p>
+              <p className={classes.score}>{match.status === "načrtovana" ? "-" : match.awayScore ?? "-"}</p>
             )}
           </div>
         </div>
@@ -249,7 +249,7 @@ export default function Page() {
         <div className={classes.statusBox}>
           {role === "owner" || role === "editor" ? (
             <select id="status" defaultValue={match.status} className={classes.status}>
-              <option value="scheduled">Načrtovana</option>
+              <option value="načrtovana">Načrtovana</option>
               <option value="live">V teku</option>
               <option value="finished">Končana</option>
             </select>

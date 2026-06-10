@@ -103,7 +103,7 @@ const rulesValue = form.rulesText ?? DEFAULT_RULES[form.sport] ?? "";
           away: match.away,
           date: match.date || "",
           time: match.time || "", 
-          status: "scheduled",
+          status: "načrtovana",
           homeScore: null,
           awayScore: null,
           city: form.city || "",

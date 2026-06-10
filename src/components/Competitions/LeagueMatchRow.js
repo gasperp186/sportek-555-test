@@ -10,7 +10,7 @@ export default function LeagueRound({ matchesThisRound, basePath, classes, isExp
         const status = m.status;
         const statusClass = 
           status === "live" ? classes.borderInGame : 
-          status === "scheduled" ? classes.borderPlanned : 
+          status === "načrtovana" ? classes.borderPlanned : 
           classes.borderFinished;
         
         // Logika za prikaz datuma: 

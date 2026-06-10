@@ -34,7 +34,7 @@ export default function Bracket8({ matches, basePath = "", isExport = false }) {
       <>
          {teamName ? teamName : "\u00A0"}
         <span className={classes.score}>
-          {status === "scheduled" ? "–" : (score ?? "–")}
+          {status === "načrtovana" ? "–" : (score ?? "–")}
         </span>
       </>
     );
