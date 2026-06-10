@@ -8,7 +8,7 @@ export default function Match({
   const href = `${basePath}/${id}`.replace(/\/+/g, "/");
   
   const statusClass = 
-    status === "live" ? classes.borderInGame : 
+    status === "V teku" ? classes.borderInGame : 
     status === "načrtovana" ? classes.borderPlanned : 
     classes.borderFinished;
 

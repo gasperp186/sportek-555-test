@@ -9,7 +9,7 @@ export default function LeagueRound({ matchesThisRound, basePath, classes, isExp
 
         const status = m.status;
         const statusClass = 
-          status === "live" ? classes.borderInGame : 
+          status === "V teku" ? classes.borderInGame : 
           status === "načrtovana" ? classes.borderPlanned : 
           classes.borderFinished;
         

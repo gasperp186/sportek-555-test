@@ -18,7 +18,7 @@ export default function Legenda () {
           </div>
           <div className={classes.legendItem}>
             <span className={`${classes.dot} ${classes.dotFinished}`}></span>
-            <span>Zaključeno</span>
+            <span>Končana</span>
           </div>
          
         </div>

@@ -157,7 +157,7 @@ export default function Page() {
       const newAwayScore = awayEl.value === "" ? null : Number(awayEl.value);
       const newStatus = statusEl.value;
 
-      if (comp.mode === "knockout" && newStatus === "finished" && newHomeScore === newAwayScore) {
+      if (comp.mode === "knockout" && newStatus === "Končana" && newHomeScore === newAwayScore) {
         setError("Končni rezultat ne sme biti neodločen!");
         return;
       }
@@ -178,7 +178,7 @@ export default function Page() {
           case "SF1": case "SF2": targetRound = "F1"; break;
         }
 
-        if (newStatus === "finished" && match.nextPosition && targetRound) {
+        if (newStatus === "Končana" && match.nextPosition && targetRound) {
           const winner = newHomeScore > newAwayScore ? (match.home?.name || match.home) : (match.away?.name || match.away);
           const q = query(matchesRef, where("round", "==", targetRound));
           const snap = await getDocs(q);
@@ -187,7 +187,7 @@ export default function Page() {
           }
         }
 
-        if (newStatus === "finished" && String(match.round).startsWith("SF") && match.nextPosition) {
+        if (newStatus === "Končana" && String(match.round).startsWith("SF") && match.nextPosition) {
           const loser = newHomeScore > newAwayScore ? (match.away?.name || match.away) : (match.home?.name || match.home);
           const queryT3 = query(matchesRef, where("round", "==", "T3"));
           const snapT3 = await getDocs(queryT3);
@@ -205,7 +205,7 @@ export default function Page() {
         time: match.time || "",
         location: match.location || "",
         city: match.city || "",
-        completed: newStatus === "finished"
+        completed: newStatus === "Končana"
       });
 
       setMatch(prev => ({ ...prev, homeScore: newHomeScore, awayScore: newAwayScore, status: newStatus }));
@@ -250,8 +250,8 @@ export default function Page() {
           {role === "owner" || role === "editor" ? (
             <select id="status" defaultValue={match.status} className={classes.status}>
               <option value="načrtovana">Načrtovana</option>
-              <option value="live">V teku</option>
-              <option value="finished">Končana</option>
+              <option value="V teku">V teku</option>
+              <option value="Končana">Končana</option>
             </select>
           ) : (
             <div className={classes.viewerStatus}><p>{match.status}</p></div>
