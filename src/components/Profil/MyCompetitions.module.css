@@ -87,9 +87,22 @@
   margin-bottom: 5px;
 }
 
+.ghostBtn {
+
+  padding: 9px 20px;
+  font-size: 14px;
+  color: white;
+  background-color: rgb(172, 166, 166);
+  border-radius: 20px;
+  border: none;
+  margin-right: 20px;
+  cursor: pointer;
+
+}
+
 .urediBtn {
 
-  padding: 8px 15px;
+  padding: 9px 20px;
   font-size: 14px;
   color: white;
   background-color: var(--color-primary-light);
