@@ -43,7 +43,23 @@ const toInputDate = (dateStr) => {
         />
       </div>
 
+      {data.season ? (
+        
       <div className={classes.row}>
+        <div className={classes.field}>
+          <label>Sezona</label>
+          <input
+            type="text"
+            name="season"
+            value={data.season}
+            onChange={onChange}
+          />
+        </div>
+        </div>
+      ) 
+       :
+        (
+<div className={classes.row}>
         <div className={classes.field}>
           <label>Datum od</label>
           <input
@@ -64,6 +80,10 @@ const toInputDate = (dateStr) => {
           />
         </div>
       </div>
+        )
+      }
+
+      
 
       <div className={classes.row}>
         <div className={classes.field}>
