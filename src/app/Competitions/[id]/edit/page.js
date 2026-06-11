@@ -97,7 +97,7 @@ export default function CompetitionEditPage() {
         <div className={classes.titleBox}>
           <h2>{savedComp.title}</h2>
           <div>
-            {comp.sport} • {comp.location} • {comp.date}
+            {comp.sport}
           </div>
         </div>
 

@@ -99,9 +99,9 @@ const toInputDate = (dateStr) => {
         <div className={classes.field}>
           <label>Prizorišče</label>
           <input
-            name="venue"
+            name="location"
             type="text"
-            value={data.venue}
+            value={data.location}
             onChange={onChange}
           />
         </div>
