@@ -1,14 +1,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
 import { useParams } from "next/navigation";
-import { competitions as data } from "@/data/Competitions";
 import classes from "./CompetitionEditPage.module.css";
 import CompetitionDetails from "@/components/Competitions/CompetitionDetails";
 import Osnovno from '@/components/Edit/Osnovno'
 import Dostop from "@/components/Edit/Dostop";
 import Prijave from "@/components/Edit/Prijave";
+
+import BackButton2 from "@/components/BackButton2";
 
 import { db } from "@/lib/firebase";
 import { getDoc, doc, updateDoc } from "firebase/firestore";
@@ -92,24 +92,26 @@ export default function CompetitionEditPage() {
 
   return (
     <div className={classes.page}>
-      {/* HEADER */}
       <div className={classes.headBox}>
         <div className={classes.titleBox}>
           <h2>{savedComp.title}</h2>
-          <div>
+           <div className={classes.titleBox}>
             {comp.sport}
           </div>
         </div>
 
-        <div className={classes.actions}>
-          <Link href={`/Competitions/${id}`}>Ogled</Link>
-          <button onClick={handleSave} type="button">Shrani</button>
-        </div>
+       
       </div>
 
+      <div className={classes.card}>
+ {/* HEADER */}
+      
       {role === "owner" && (
 
         <div className={classes.tabs}>
+          <button className={classes.nazajBtn} onClick={() => router.back()} type="button">
+  Nazaj
+</button>
         <button
           type="button"
           onClick={() => setTab("tekme")}
@@ -130,7 +132,7 @@ export default function CompetitionEditPage() {
           Osnovno
         </button>
 
-        <button
+        {comp.publicSignups ? <button
           type="button"
           onClick={() => setTab("prijave")}
           className={`${classes.tabBtn} ${
@@ -138,7 +140,9 @@ export default function CompetitionEditPage() {
           }`}
         >
           Prijave
-        </button>
+        </button> : null}
+
+        
 
         <button
           type="button"
@@ -156,6 +160,9 @@ export default function CompetitionEditPage() {
       {role === "editor" && (
 
         <div className={classes.tabs}>
+          <button className={classes.nazajBtn} onClick={() => router.back()} type="button">
+  Nazaj
+</button>
         <button
           type="button"
           onClick={() => setTab("tekme")}
@@ -163,7 +170,7 @@ export default function CompetitionEditPage() {
             tab === "tekme" ? classes.tabBtnActive : ""
           }`}
         >
-          Tekme
+          <p className={classes.naslov}>Tekme</p>
         </button>
 
         <button
@@ -183,19 +190,18 @@ export default function CompetitionEditPage() {
       
 
       {/* CONTENT */}
-      <div className={classes.card}>
+
+       
         {tab === "tekme" && (
           <>
-            <h3>Tekme</h3>
+            <h3 className={classes.naslov}>Tekme</h3>
             <CompetitionDetails id={id} initialData={comp} isEditMode={true} />
           </>
         )}
 
         {tab === "osnovno" && (
-          <>
-            <Osnovno data={comp} onChange={onChange} />
-          </>
-        )}
+  <Osnovno data={comp} onChange={onChange} onSave={handleSave} />
+)}
 
         {tab === "dostop" && (
           <>
@@ -208,7 +214,13 @@ export default function CompetitionEditPage() {
             <Prijave data={comp} onChange={onChange} />
           </>
         )}
+
+       
       </div>
-    </div>
+      </div>
+     
+
+
+    
   );
 }

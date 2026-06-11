@@ -4,8 +4,16 @@ import { useMemo, useState } from "react";
 import { useParams } from "next/navigation";
 import { competitions as data } from "@/data/Competitions";
 import classes from "./Osnovno.module.css";
+import classes2 from "@/app/Competitions/[id]/edit/CompetitionEditPage.module.css";
+import { db } from "@/lib/firebase";
+import { getDoc, doc, updateDoc } from "firebase/firestore";
 
-export default function Osnovno({data, onChange}) {
+export default function Osnovno({data, onChange, onSave}) {
+
+const { id } = useParams();
+
+  const [comp, setComp] = useState(null);
+
 
   // Helper funkcija
 const toInputDate = (dateStr) => {
@@ -27,8 +35,7 @@ const toInputDate = (dateStr) => {
 };
 
 
-
-
+ 
   return (
     <div className={classes.wrapper}>
       <h2 className={classes.title}>Osnovno</h2>
@@ -117,6 +124,10 @@ const toInputDate = (dateStr) => {
           rows={6}
         />
       </div>
+        <div className={classes2.actions}>
+          
+         <button className={classes2.shraniButton} onClick={onSave} type="button">Shrani</button>
+        </div>
     </div>
   );
 }

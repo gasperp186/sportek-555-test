@@ -94,10 +94,7 @@
   outline: none;
 }
 
-.form input:focus {
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.18);
-}
+
 
 .primary {
   margin-top: 10px;
@@ -109,12 +106,9 @@
   padding: 10px 16px;
   border-radius: 10px;
   cursor: pointer;
-  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.35);
 }
 
-.primary:hover {
-  filter: brightness(1.05);
-}
+
 
 .success {
   color: #16a34a;

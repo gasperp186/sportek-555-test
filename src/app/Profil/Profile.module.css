@@ -1,10 +1,16 @@
 .page {
+  
+  background: #0b1224; 
+}
+
+.card {
   display: flex;
   align-items: flex-start;
   gap: 18px;
   max-width: 1100px;
-  margin: 0 auto;
-  padding: 24px 16px;
+  margin: auto;
+  padding-bottom: 50px;
+
 }
 
 .leftCol {

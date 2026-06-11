@@ -14,7 +14,8 @@ export default function Profile() {
 
   return (
     <div className={classes.page}>
-      <aside className={classes.leftCol}>
+      <div className={classes.card}>
+        <aside className={classes.leftCol}>
         <ProfileBar activeTab={activeTab} onSelectTab={setActiveTab} />
       </aside>
 
@@ -25,6 +26,8 @@ export default function Profile() {
         {activeTab === "uredi" && <EditProfile />}
         {activeTab === "varnost" && <ProfileSecurity />}
       </section>
+      </div>
+      
     </div>
   );
 }
