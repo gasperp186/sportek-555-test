@@ -12,7 +12,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import { toPng } from 'html-to-image';
 import { Camera, Printer } from 'lucide-react';
 
-import LoadingSpinner from "@/components/LoadingSpinner"; 
 
 import {
   toDateOrNull,
@@ -217,7 +216,7 @@ export default function Page() {
     }
   };
 
- if (loading) return <LoadingSpinner />;
+
   if (!match) return <div className={classes.page}>Tekma ni najdena.</div>;
 
   return (
