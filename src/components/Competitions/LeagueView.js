@@ -2,6 +2,7 @@
 
 import LeagueRound from "./LeagueMatchRow";
 import classes from "./League.module.css";
+import classes2 from "./LeagueScreenShot.module.css"
 import { useState, useMemo } from "react";
 
 export default function LeagueView({ matches, teams, id, isExport }) {
@@ -95,11 +96,13 @@ export default function LeagueView({ matches, teams, id, isExport }) {
   const roundKeys = Object.keys(matchesByRound).map(Number).sort((a, b) => a - b);
   const maxRound = roundKeys.length > 0 ? Math.max(...roundKeys) : 1;
 
-  // Render vsebine
-  const renderGridContent = () => (
-    <>
+  // =========================================================================
+  // --- NAVADEN PRIKAZ ZA UPORABNIKA (Pusti pri miru, če ti dela ok) ---
+  // =========================================================================
+  const renderStandardGrid = () => (
+    <div className={classes.leagueGrid}>
       {/* LEVA STRAN: Lestvica */}
-      <div className={isExport ? `${classes.left} ${classes.colExport}` : classes.left}>
+      <div className={classes.left}>
         <h4 className={classes.tableTitle}>Lestvica</h4>
         <table className={classes.table}>
           <thead>
@@ -130,12 +133,12 @@ export default function LeagueView({ matches, teams, id, isExport }) {
       </div>
 
       {/* DESNA STRAN: Tekme po krogih */}
-      <div className={isExport ? `${classes.right} ${classes.colExport}` : classes.right}>
+      <div className={classes.right}>
         <div className={classes.roundToolbar}>
           <button 
             onClick={() => setSelectedRound(s => Math.max(1, s - 1))} 
             disabled={selectedRound === 1} 
-            className={`${classes.smallBtn} ${isExport ? classes.hideOnExport : ""}`}
+            className={classes.smallBtn}
           >
             Nazaj
           </button>
@@ -145,7 +148,7 @@ export default function LeagueView({ matches, teams, id, isExport }) {
           <button 
             onClick={() => setSelectedRound(s => Math.min(maxRound, s + 1))} 
             disabled={selectedRound === maxRound} 
-            className={`${classes.smallBtn} ${isExport ? classes.hideOnExport : ""}`}
+            className={classes.smallBtn}
           >
             Naprej
           </button>
@@ -158,7 +161,7 @@ export default function LeagueView({ matches, teams, id, isExport }) {
                 matchesThisRound={matchesByRound[selectedRound]} 
                 basePath={`/Competitions/${id}`} 
                 classes={classes} 
-                isExport={isExport}
+                isExport={false}
               />
             </div>
           ) : (
@@ -166,23 +169,71 @@ export default function LeagueView({ matches, teams, id, isExport }) {
           )}
         </div>
       </div>
-    </>
-  );
-
-  // Če izvažamo, ovijemo v centriran kontejner za ozadje, sicer vrnemo standarden grid
-  if (isExport) {
-    return (
-      <div className={classes.exportWrapper}>
-        <div className={classes.leagueGridExport}>
-          {renderGridContent()}
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div className={classes.leagueGrid}>
-      {renderGridContent()}
     </div>
   );
+
+  // =========================================================================
+  // --- KOPIJA SAMO ZA EXPORT SCREENSHOT (Tukaj popravljaj poljubno) ---
+  // =========================================================================
+  const renderExportGrid = () => (
+    <div className={classes2.exportWrapper}>
+      <div className={classes2.leagueGridExport}>
+        
+        {/* LEVA STRAN EXPORTA: Lahko spremeniš th, td, dodane classes itd. */}
+        <div className={`${classes2.left} ${classes2.colExport}`}>
+          <h4 className={classes2.tableTitle}>Lestvica</h4>
+          <table className={classes2.table}>
+            <thead>
+              <tr>
+                <th>Ekipa</th>
+                <th className={classes2.num}>OT</th>
+                <th className={classes2.num}>T</th>              
+                <th className={classes2.num}>Z</th>
+                <th className={classes2.num}>N</th>
+                <th className={classes2.num}>P</th>
+                <th className={classes2.num}>RT</th>
+              </tr>
+            </thead>
+            <tbody>
+              {lestvicaSorted.map((row) => (
+                <tr key={row.team.id}>
+                  <td>{row.team.name}</td>
+                  <td className={classes2.num}>{row.P}</td>
+                  <td className={classes2.num} style={{ fontWeight: 'bold' }}>{row.PTS}</td>
+                  <td className={classes2.num}>{row.W}</td>
+                  <td className={classes2.num}>{row.D}</td>
+                  <td className={classes2.num}>{row.L}</td>
+                  <td className={classes2.num}>{row.GD}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {/* DESNA STRAN EXPORTA: Spremeni strukturo tekem, kot ti paše */}
+        <div className={`${classes2.right} ${classes2.colExport}`}>
+          <h4 className={classes2.roundTitle}>Krog {selectedRound} / {maxRound}</h4>
+          
+          <div className={classes2.allRoundsContainer}>
+            {matchesByRound[selectedRound] ? (
+              <div className={classes2.roundWrapper}>
+                <LeagueRound 
+                  matchesThisRound={matchesByRound[selectedRound]} 
+                  basePath={`/Competitions/${id}`} 
+                  classes={classes2} 
+                  isExport={true}
+                />
+              </div>
+            ) : (
+              <p className={classes2.noMatches}>Za ta krog ni razpisanih tekem.</p>
+            )}
+          </div>
+        </div>
+
+      </div>
+    </div>
+  );
+
+  // Končni izris glede na prop
+  return isExport ? renderExportGrid() : renderStandardGrid();
 }

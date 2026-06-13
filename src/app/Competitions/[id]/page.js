@@ -90,8 +90,8 @@ export default async function Page({ params }) {
               <ScreenshotButton 
                 comp={comp}
                 className={classes.screenshootButton} 
-                width="900px" 
-                height="700px" 
+                width="1100px" 
+                height="900px" 
                 contentToExport={
                   <CompetitionDetails id={id} initialData={comp} isExport={true} />
                 }
