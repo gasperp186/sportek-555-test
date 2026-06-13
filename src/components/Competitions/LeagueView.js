@@ -179,7 +179,29 @@ export default function LeagueView({ matches, teams, id, isExport }) {
     <div className={classes2.exportWrapper}>
       <div className={classes2.leagueGridExport}>
         
-        {/* LEVA STRAN EXPORTA: Lahko spremeniš th, td, dodane classes itd. */}
+       
+
+        {/* DESNA STRAN EXPORTA: Spremeni strukturo tekem, kot ti paše */}
+        <div className={`${classes2.right} ${classes2.colExport}`}>
+          <h4 className={classes2.roundTitle}>Krog {selectedRound} / {maxRound}</h4>
+          
+          <div className={classes2.allRoundsContainer}>
+            {matchesByRound[selectedRound] ? (
+              <div className={classes2.roundWrapper}>
+                <LeagueRound 
+                  matchesThisRound={matchesByRound[selectedRound]} 
+                  basePath={`/Competitions/${id}`} 
+                  classes={classes2} 
+                  isExport={true}
+                />
+              </div>
+            ) : (
+              <p className={classes2.noMatches}>Za ta krog ni razpisanih tekem.</p>
+            )}
+          </div>
+        </div>
+
+         {/* LEVA STRAN EXPORTA: Lahko spremeniš th, td, dodane classes itd. */}
         <div className={`${classes2.left} ${classes2.colExport}`}>
           <h4 className={classes2.tableTitle}>Lestvica</h4>
           <table className={classes2.table}>
@@ -208,26 +230,6 @@ export default function LeagueView({ matches, teams, id, isExport }) {
               ))}
             </tbody>
           </table>
-        </div>
-
-        {/* DESNA STRAN EXPORTA: Spremeni strukturo tekem, kot ti paše */}
-        <div className={`${classes2.right} ${classes2.colExport}`}>
-          <h4 className={classes2.roundTitle}>Krog {selectedRound} / {maxRound}</h4>
-          
-          <div className={classes2.allRoundsContainer}>
-            {matchesByRound[selectedRound] ? (
-              <div className={classes2.roundWrapper}>
-                <LeagueRound 
-                  matchesThisRound={matchesByRound[selectedRound]} 
-                  basePath={`/Competitions/${id}`} 
-                  classes={classes2} 
-                  isExport={true}
-                />
-              </div>
-            ) : (
-              <p className={classes2.noMatches}>Za ta krog ni razpisanih tekem.</p>
-            )}
-          </div>
         </div>
 
       </div>
