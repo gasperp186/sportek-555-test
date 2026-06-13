@@ -10,6 +10,7 @@ import { useState, useEffect } from "react";
 import { auth, db } from "@/lib/firebase";
 import { QrCode2Rounded } from "@mui/icons-material";
 import { formatDate } from "@/components/formatDate";
+import LoadingSpinner from "@/components/LoadingSpinner"; // <-- POPRAVEK: Uspešen uvoz komponente
 
 export default function MyCompetitions() {
   const [competitions, setCompetitions] = useState([]);
@@ -19,6 +20,8 @@ export default function MyCompetitions() {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         try {
+          setLoading(true);
+
           const q = query(collection(db, "competitions"), where("createdBy", "==", user.uid));
           const querySnapshot = await getDocs(q);
 
@@ -36,12 +39,13 @@ export default function MyCompetitions() {
           }));
 
           const zdruzeniSeznam = [...list, ...list2];
-
           setCompetitions(zdruzeniSeznam);
         } catch (error) {
-          console.error("Napaka:", error);
+          console.error("Napaka pri branju tekmovanj:", error);
+        } finally {
+          // <-- POPRAVEK: finally poskrbi, da se loading izklopi tudi v primeru napake
+          setLoading(false);
         }
-        setLoading(false);
       } else {
         setLoading(false);
       }
@@ -50,9 +54,8 @@ export default function MyCompetitions() {
     return () => unsubscribe();
   }, []);
 
-  if (loading) {
-    return <div className={classes.page}><p className={classes.empty}>Nalaganje...</p></div>; // Opcijsko dodano za lepši UX
-  }
+  // <-- POPRAVEK: Namesto navadnega teksta vrnemo tvoje novo stilizirano okence
+  if (loading) return <LoadingSpinner />;
 
   return (
     <div className={classes.page}>
@@ -92,14 +95,10 @@ export default function MyCompetitions() {
                       <div className={classes.majhnNaslov}>
                         <strong>Kraj: </strong> {comp.city}
                       </div>
-                       <div className={classes.majhnNaslov}>
-                         <strong>Šport: </strong> {comp.sport}
-                       </div>
-                     
-                  
+                      <div className={classes.majhnNaslov}>
+                        <strong>Šport: </strong> {comp.sport}
+                      </div>
                     </div>
-
-                   
                   </div>
 
                   <div className={classes.actions}>

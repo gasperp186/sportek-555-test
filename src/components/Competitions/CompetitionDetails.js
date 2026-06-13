@@ -16,6 +16,8 @@ import LeagueRound from "./LeagueMatchRow";
 import { db } from "@/lib/firebase";
 import { collection, onSnapshot, doc, updateDoc } from "firebase/firestore";
 import LeagueView from "./LeagueView";
+import LoadingSpinner from "@/components/LoadingSpinner"; // <-- 1. UVOZ KOMPONENTE
+
 
 export default function CompetitionDetails({ id, initialData, basePath = "", isEditMode = false, isExport = false }) {
   const [comp, setComp] = useState(initialData);
@@ -119,7 +121,8 @@ export default function CompetitionDetails({ id, initialData, basePath = "", isE
     return m;
   });
 
-  if (loading) return <div className={classes.loading}>Nalagam podatke...</div>;
+    if (loading) return <LoadingSpinner />;
+  
 
   const isLeague = comp?.mode === "ligaski";
   const isHybrid = comp?.mode === "hybrid";

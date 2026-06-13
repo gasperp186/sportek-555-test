@@ -1,5 +1,5 @@
-import LoadingSpinner from "@/components/LoadingSpinner"; // Prilagodi pot do tvoje komponente
+import LoadingSpinner from "@/components/LoadingSpinner";
 
-export default function Loading() {
+export default function GlobalLoading() {
   return <LoadingSpinner />;
 }

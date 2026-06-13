@@ -12,6 +12,7 @@ import {
 } from "firebase/firestore";
 import { useParams, useRouter } from "next/navigation";
 import { useState, useEffect, useMemo, useCallback } from "react";
+import LoadingSpinner from "@/components/LoadingSpinner"; // <-- 1. UVOZ KOMPONENTE
 
 import classes from "./Prijave.module.css";
 
@@ -118,7 +119,8 @@ export default function Prijave() {
     }
   }
 
-  if (loading) return <div className={classes.wrapper}>Nalagam prijave...</div>;
+    if (loading) return <LoadingSpinner />;
+  
 
   const potrjeneEkipe = applications.filter(a => a.status === 'potrjeno');
   const novePrijave = applications.filter(a => !a.status || (a.status !== 'potrjeno' && a.status !== 'zavrnjeno'));

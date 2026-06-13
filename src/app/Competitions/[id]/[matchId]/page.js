@@ -12,7 +12,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import { toPng } from 'html-to-image';
 import { Camera, Printer } from 'lucide-react';
 
-
 import {
   toDateOrNull,
   toTimeDateOrNull,
@@ -30,6 +29,7 @@ import {
   query, 
   where 
 } from "firebase/firestore";
+import LoadingSpinner from "@/components/LoadingSpinner"; // <-- 1. UVOZ KOMPONENTE
 
 export default function Page() {
   const [comp, setComp] = useState(null);
@@ -72,11 +72,11 @@ export default function Page() {
     async function fetchData() {
       if (!id || !matchId) return;
       try {
+        setLoading(true);
         const compRef = doc(db, "competitions", id);
         const compSnap = await getDoc(compRef);
 
         if (!compSnap.exists()) {
-          setLoading(false);
           return;
         }
 
@@ -104,6 +104,7 @@ export default function Page() {
       } catch (error) {
         console.error("Napaka pri branju baze:", error);
       } finally {
+        // <-- POPRAVEK: Izklop loading stanja varno v finally bloku
         setLoading(false);
       }
     }
@@ -216,6 +217,8 @@ export default function Page() {
     }
   };
 
+  // <-- 2. POPRAVEK: Namesto starih tekstov vrnemo novo okence
+  if (loading) return <LoadingSpinner />;
 
   if (!match) return <div className={classes.page}>Tekma ni najdena.</div>;
 
@@ -231,7 +234,7 @@ export default function Page() {
             {role === "owner" || role === "editor" ? (
               <input id="homeInput" type="number" className={classes.scoreInput} defaultValue={match.homeScore ?? ""} min="0" />
             ) : (
-              <p className={classes.score}>{match.status === "Načrtovana" ? "-" : match.homeScore ?? "-"}</p>
+              <p className={classes.score}>{match.status === "Načrtovana" || match.status === "schedule" ? "-" : match.homeScore ?? "-"}</p>
             )}
           </div>
 
@@ -242,7 +245,7 @@ export default function Page() {
             {role === "owner" || role === "editor" ? (
               <input id="awayInput" type="number" className={classes.scoreInput} defaultValue={match.awayScore ?? ""} min="0" />
             ) : (
-              <p className={classes.score}>{match.status === "Načrtovana" ? "-" : match.awayScore ?? "-"}</p>
+              <p className={classes.score}>{match.status === "Načrtovana" || match.status === "schedule" ? "-" : match.awayScore ?? "-"}</p>
             )}
           </div>
         </div>
@@ -255,7 +258,10 @@ export default function Page() {
               <option value="Končana">Končana</option>
             </select>
           ) : (
-            <div className={classes.viewerStatus}><p>{match.status}</p></div>
+            // <-- 3. POPRAVEK: Varnostni popravek, če je v bazi še stari "schedule" niz
+            <div className={classes.viewerStatus}>
+              <p>{match.status === "schedule" ? "Načrtovana" : match.status}</p>
+            </div>
           )}
         </div>
 
@@ -321,7 +327,6 @@ export default function Page() {
               <div className={classes.exportScore}>{match.awayScore ?? 0}</div>
               <div className={classes.exportTeam}><h3>{match.away?.name || match.away}</h3></div>
             </div>
-            
           </div>
 
           <div style={{ width: '800px' }}>

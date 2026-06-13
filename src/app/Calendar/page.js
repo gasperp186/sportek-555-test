@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Calendar from "@/components/Calender/Calendar";
+import LoadingSpinner from "@/components/LoadingSpinner"; // <-- 1. UVOZ NOVOGA OKENCA
 import { db } from "@/lib/firebase";
 import { collection, getDocs } from "firebase/firestore";
 
@@ -8,7 +9,7 @@ import { collection, getDocs } from "firebase/firestore";
 const sportColors = {
   nogomet: "#2ecc71",           // Zelena
   kosarka: "#e67e22",           // Oranžna
-  odbojka: "#f1c40f", // Rumena
+  odbojka: "#f1c40f",           // Rumena
   pikado: "#9b59b6",            // Vijolična
   rokomet: "#3498db",           // Modra
   tenis: "#badc58",             // Svetlo zelena
@@ -16,7 +17,7 @@ const sportColors = {
   default: "#95a5a6"            // Siva (če športa ne najde)
 };
 
-// Pomožna funkcija za čiščenje besedila (da npr. "Nogomet" in "nogomet" delujeta isto)
+// Pomožna funkcija za čiščenje besedila
 function normalizeSport(str) {
   return (str || "").toString().toLowerCase().trim();
 }
@@ -57,7 +58,6 @@ export default function Page() {
               title: tournamentTitle,
               start: datum,
               allDay: true,
-              // Uporabimo barvo športa
               backgroundColor: tournamentColor,
               borderColor: tournamentColor,
               textColor: "#ffffff", 
@@ -80,11 +80,10 @@ export default function Page() {
     fetchGroupedEvents();
   }, []);
 
-  if (loading) return <div style={{ padding: "50px", color: "black" }}>Pripravljam barvni koledar...</div>;
+  // <-- 2. POPRAVEK: Namesto starega div-a vrnemo novo komponento
+  if (loading) return <LoadingSpinner />;
 
   return (
-   
-      <Calendar key={events.length} events={events} />
-    
+    <Calendar key={events.length} events={events} />
   );
 }

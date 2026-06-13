@@ -5,6 +5,8 @@ import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { db } from "@/lib/firebase"; 
 import classes from "./EditProfile.module.css";
+import LoadingSpinner from "@/components/LoadingSpinner"; // <-- 1. UVOZ KOMPONENTE
+
 
 export default function EditProfile() {
   const [dbUser, setDbUser] = useState({
@@ -72,7 +74,7 @@ export default function EditProfile() {
     }
   }
 
-  if (loading) return <div className={classes.page}>Nalagam profil...</div>;
+  if (loading) return <LoadingSpinner />;
 
   return (
     <div className={classes.page}>
