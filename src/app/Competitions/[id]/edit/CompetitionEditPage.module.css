@@ -1,6 +1,7 @@
 .page {
   
   background: #0b1224; 
+   min-height: 100vh;
 }
 
 .card {

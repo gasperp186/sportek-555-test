@@ -161,7 +161,7 @@ export default function CompetitionsPublic() {
               const sportKey = normalize(c.sport);
               const bg = sportBackgrounds[sportKey] || fallbackBg;
               return (
-                <div key={c.id} className={classes.item} style={{ backgroundImage: `url(${bg})` }}>
+                <Link href={`/Competitions/${c.id}`} key={c.id} className={classes.item} style={{ backgroundImage: `url(${bg})` }}>
                   <div className={classes.overlay}>
                     <h3 className={classes.itemTitle}>{c.title}</h3>
                     <p className={classes.itemInfo}>
@@ -179,9 +179,9 @@ export default function CompetitionsPublic() {
   </>
 )}
                     </p>
-                    <Link href={`/Competitions/${c.id}`} className={classes.btn}>Odpri</Link>
+                    
                   </div>
-                </div>
+                </Link>
               );
             })}
           </div>

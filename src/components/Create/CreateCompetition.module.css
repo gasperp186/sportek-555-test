@@ -103,17 +103,14 @@
   text-decoration: none;
 }
 
-
+*/
 .btnOutline {
   background: #ffffff;
   color: #3b82f6;
   border: 2px solid #3b82f6;
 }
 
-.btnOutline:hover {
-  background: #eff6ff;
-  box-shadow: inset 0 0 0 1px rgba(59,130,246,.35);
-} */
+
 
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(8px); }

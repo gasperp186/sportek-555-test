@@ -163,14 +163,14 @@ export default function CompetitionEditPage() {
           <button className={classes.nazajBtn} onClick={() => router.back()} type="button">
   Nazaj
 </button>
-        <button
+       <button
           type="button"
           onClick={() => setTab("tekme")}
           className={`${classes.tabBtn} ${
             tab === "tekme" ? classes.tabBtnActive : ""
           }`}
         >
-          <p className={classes.naslov}>Tekme</p>
+          Tekme
         </button>
 
         <button

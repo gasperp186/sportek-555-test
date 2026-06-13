@@ -99,17 +99,17 @@ useEffect(() => {
 
     {/* Iskalni del */}
     <div className={classes.inputGroup}>
-      <label className={classes.text} style={{fontWeight: '600'}}>Dodaj novega urednika</label>
+      <h4 className={classes.podnaslov}>Dodaj novega urednika</h4>
       <input
         type="email"
-        placeholder="Vpišite e-poštni naslov uporabnika..."
+        placeholder="Vpišite elektronski naslov uporabnika"
         value={newEmail}
         onChange={(e) => setNewEmail(e.target.value)}
       />
 
       {foundUser && (
         <div className={classes.foundBox}>
-          <p className={classes.text} style={{margin: 0}}>
+          <p className={classes.text}>
             <strong>Najden:</strong> {foundUser.name} {foundUser.surname}
           </p>
           <button className={classes.addButton} onClick={addEditor}>Dodaj</button>
@@ -124,12 +124,12 @@ useEffect(() => {
     </div>
 
     {/* Seznam urednikov */}
-    <div style={{marginTop: '20px'}}>
-      <h3 className={classes.text} style={{fontWeight: '700', borderBottom: '1px solid #eee', paddingBottom: '10px'}}>
+    <div className={classes.seznamBox}>
+      <h4 className={classes.podnaslov}>
         Seznam trenutnih urednikov
-      </h3>
+      </h4>
       <ul className={classes.editorList}>
-        {editors.length === 0 && <p className={classes.text} style={{opacity: 0.5}}>Ni dodanih urednikov.</p>}
+        {editors.length === 0 && <p className={classes.text} >Ni dodanih urednikov.</p>}
         {editors.map((editor) => (
           <li className={classes.editorItem} key={editor.id}>
             <div className={classes.teamInfo}>

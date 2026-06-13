@@ -15,17 +15,25 @@
   font-size: 24px;
 }
 
+.podnaslov {
+  color: black;
+  margin-top: 10px;
+  font-weight: 600;
+}
+
 .text {
   color: black;
   margin-top: 10px;
+  font-weight: 500;
 }
+
+
 
 /* Iskalno polje */
 .inputGroup {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  background: #f8fafc;
   padding: 20px;
   border-radius: 12px;
 }
@@ -36,27 +44,23 @@
   border-radius: 8px;
   font-size: 16px;
   outline: none;
-  transition: all 0.3s;
   background: white;
   color: black;
 }
 
-.inputGroup input:focus {
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+.seznamBox {
+  padding: 20px;
 }
 
-/* Okvirček z najdenim uporabnikom */
 .foundBox {
-  background: #f0fdf4;
-  border: 2px solid #bbf7d0;
+  background: #ffffff;
+  border: 2px solid var(--color-primary-light);
   padding: 15px;
   border-radius: 8px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-top: 10px;
-  animation: fadeIn 0.3s ease-in;
 }
 
 @keyframes fadeIn {
@@ -80,7 +84,6 @@
   justify-content: space-between;
   align-items: center;
   border: 1px solid #eee;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
 .teamInfo {
@@ -89,7 +92,7 @@
 }
 
 .teamName {
-  font-weight: 600;
+  font-weight: 500;
   color: #1a1a1a;
 }
 
@@ -100,33 +103,23 @@
 
 /* Gumbi */
 .addButton {
-  background-color: #22c55e;
+  background-color: var(--color-primary-light);
   color: white;
   border: none;
   padding: 8px 20px;
   border-radius: 6px;
   cursor: pointer;
   font-weight: bold;
-  transition: background 0.2s;
 }
 
-.addButton:hover {
-  background-color: #16a34a;
-}
 
 .removeButton {
-  background-color: #fee2e2;
-  color: #ef4444;
-  border: 1px solid #fecaca;
+  background-color: #ffffff;
+  color: var(--color-primary-light);
+  border: 1px solid var(--color-primary-light);
   padding: 8px 14px;
   border-radius: 6px;
   cursor: pointer;
   font-size: 13px;
   font-weight: 600;
-  transition: all 0.2s;
-}
-
-.removeButton:hover {
-  background-color: #ef4444;
-  color: white;
 }

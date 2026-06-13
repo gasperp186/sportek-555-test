@@ -4,16 +4,28 @@
 import classes from "./ProfileBar.module.css";
 
 import { useState, useEffect } from "react";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { db, auth } from "@/lib/firebase"; 
 import { doc, getDoc } from "firebase/firestore";
+import { usePathname, useRouter } from "next/navigation";
+
 
 export default function ProfileBar({ activeTab, onSelectTab }) {
+  const router = useRouter();
+
+ 
 
   const [currentUser, setCurrentUser] = useState(null);
   const [dbUser, setDbUser] = useState(null);
 
-
+ const handleLogout = async () => {
+      try {
+        await signOut(auth);
+        router.push("/"); // To te vrže na prvo stran po odjavi
+      } catch (error) {
+        console.error("Napaka pri odjavi:", error);
+      }
+    };
 
   useEffect(() => {
     // Poslušalec za prijavo uporabnika
@@ -91,12 +103,13 @@ export default function ProfileBar({ activeTab, onSelectTab }) {
           </button> */}
           <button
             type="button"
-            className={itemClass("varnost")}
-            onClick={() => onSelectTab("varnost")}
+            className={itemClass("odjava")}
+            onClick={handleLogout} href="/"
           >
             Odjava
           </button>
 
+          
 
          
         </nav>
