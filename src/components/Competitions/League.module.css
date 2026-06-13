@@ -218,11 +218,10 @@
 }
 
 .matchRowExport {
-  composes: matchRow;
-  grid-template-columns: 30px 1fr 10px !important; /* Še malo bolj stisnemo stolpce */
-  padding-top: 6px !important;
-  padding-bottom: 6px !important;
-  margin-bottom: 6px !important;
+  grid-template-columns: 50px 1fr 20px !important; /* Še malo bolj stisnemo stolpce */
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
+  margin-bottom: 8px !important;
 }
 
 .matchTimeExport {
@@ -243,25 +242,22 @@
   justify-content: center;
   align-items: center;
   gap: 5px;      /* Zmanjšan razmik med ekipo in rezultatom iz 1rem na 0.5rem */
-  font-size: 13px;   /* Manjša pisava za celoten tekst */
+  font-size: 14px;   /* Manjša pisava za celoten tekst */
   line-height: 1.1;
 }
 
 .teamLeftExport {
-  composes: teamLeft; /* Prevzame pisavo, barvo, skrivanje dolgih imen in flex: 1 */
-  font-size: 12px;
-  font-weight: 300;
+  font-size: 14px;
+  font-weight: bold;
 }
 
 .teamRightExport {
-  composes: teamRight; /* Prevzame pisavo, barvo, skrivanje dolgih imen in flex: 1 */
-  font-size: 12px;
-  font-weight: 300;
+  font-size: 14px;
+  font-weight: bold;
 }
 
 .scoreExport {
-  composes: score;    /* Prevzame centriranje, črno barvo in debelo pisavo */
-  font-size: 13px;
+  font-size: 14px;
   padding: 2px 6px;   /* Močno stisnjeni odmiki okoli rezultata (prej 6px 10px) */
 }
 
