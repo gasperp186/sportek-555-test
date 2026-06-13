@@ -41,33 +41,49 @@ export default function ScreenshotButton({ comp, contentToExport, width = "", he
       <Camera size={22} />
     </button>
 
-   <div style={{ position: 'absolute', left: '-9999px', top: '0', backgroundColor: '#1e293b' }}>
-  <div ref={ref} style={{ 
-    width: width, 
-    height: height, // Fiksna višina prepreči spodnji bel rob
-    margin: '0',
-    padding: '0',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center'
-  }}>
+   {/* Krovni skriti div, ki mu dodamo barvo ozadja celotnega plakata */}
+<div style={{ position: 'absolute', left: '-9999px', top: '0', backgroundColor: '#1e293b' }}>
+  <div 
+    ref={ref} 
+    style={{ 
+      width: width, 
+      height: height, 
+      margin: '0',
+      padding: '40px 0', /* Malo paddinga zgoraj in spodaj, da naslovi dihajo */
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      boxSizing: 'border-box',
+      backgroundColor: '#1e293b' /* Za vsak slučaj še tukaj, da ni belih robov */
+    }}
+  >
     <h2 className={classes.naslov}>{comp.title}</h2>
-    <h3 className={classes.podnaslov}>{comp.mode === "bracket" || comp.mode === "knockout" ? (
-          <>
-            <strong>Datum:</strong> {
-              !comp.endDate || comp.startDate === comp.endDate 
-                ? formatDate(comp.startDate) 
-                : `${formatDate(comp.startDate)} - ${formatDate(comp.endDate)}`
-            }
-          </>
-        ) : (
-          <>
-            <strong>Sezona:</strong> {comp.season}
-          </>
-        )}</h3>
+    <h3 className={classes.podnaslov}>
+      {comp.mode === "bracket" || comp.mode === "knockout" ? (
+        <>
+          <strong>Datum:</strong> {
+            !comp.endDate || comp.startDate === comp.endDate 
+              ? formatDate(comp.startDate) 
+              : `${formatDate(comp.startDate)} - ${formatDate(comp.endDate)}`
+          }
+        </>
+      ) : (
+        <>
+          <strong>Sezona:</strong> {comp.season}
+        </>
+      )}
+    </h3>
     <h3 className={classes.podnaslov2}>{comp.city}</h3>
-    <div>
-        {contentToExport}
+    
+    {/* POPRAVEK: Ta div zdaj prisili vsebino, da se raztegne na točno želeno širino */}
+    <div style={{ 
+      width: '100%', 
+      display: 'flex', 
+      justifyContent: 'center',
+      /* Če je liga, potisnemo vsebino bolj gor (manjši margin-top), če je bracket pa nižje */
+      marginTop: comp.mode === "ligaski" ? '0px' : '100px' 
+    }}>
+      {contentToExport}
     </div>
     
   </div>

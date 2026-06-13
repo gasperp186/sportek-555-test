@@ -7,6 +7,7 @@ import RulesButton from "@/components/RulesButton";
 import BackButton from "@/components/BackButton";
 import Legenda from "@/components/Legenda";
 import { formatDate } from "@/components/formatDate";
+import classes2 from "@/components/Competitions/LeagueScreenShot.module.css"
 
 export default async function Page({ params }) {
   const { id } = await params; 
@@ -29,6 +30,23 @@ export default async function Page({ params }) {
   const ozjaVrsta = (comp.mode === "knockout" && comp.maxTeams === 4);
   const sirsaVrsta = (comp.mode === "knockout" && comp.maxTeams === 16);
 
+
+  let screenshotConfig = {
+    width: "950px",
+    height: "800px",
+    
+    
+  };
+
+  if (comp.mode === "ligaski") {
+    // Pri ligi potrebuješ širši plakat, vsebina pa se pomakne višje
+    screenshotConfig = {
+      width: "900px",
+      height: "1100px", 
+      
+    };
+
+  };
   return (
     <div className={classes.page}>
       <div className={classes.card}>
@@ -90,8 +108,8 @@ export default async function Page({ params }) {
               <ScreenshotButton 
                 comp={comp}
                 className={classes.screenshootButton} 
-                width="900px" 
-                height="700px" 
+                width={screenshotConfig.width}
+                height={screenshotConfig.height} 
                 contentToExport={
                   <CompetitionDetails id={id} initialData={comp} isExport={true} />
                 }

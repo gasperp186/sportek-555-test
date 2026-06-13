@@ -13,6 +13,18 @@
   margin-top: 50px;
 }
 
+.BracketGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.4rem;
+  margin: 0 auto;
+  max-width: 1300px;
+  width: 100%;
+  margin-top: 150px;
+}
+
+
+
 .ligaOkvir {
   align-items: center;
   justify-content: center;
@@ -31,9 +43,14 @@
   border: 1px solid #e2e8f0;
   border-radius: 16px;
   padding: 30px;
-  min-height: 330px;
+  min-height: 200px;
   max-width: 600px;
   width: 100%;
+  margin: auto;
+}
+
+.roundWrapper {
+  margin-top: 20px;
 }
 
 /* NOVO: Trije simetrični stolpci (Nazaj | Krog | Naprej) */
@@ -77,12 +94,12 @@
 
 .table {
   width: 100%;
-  border-collapse: separate;
   border-spacing: 0;
   margin-top: 0.85rem;
   overflow: hidden;
   border-radius: 12px;
   border: 1px solid #e2e8f0;
+  border-collapse: collapse;
 }
 
 .table th {
@@ -91,12 +108,12 @@
   font-weight: 800;
   font-size: 0.85rem;
   letter-spacing: 0.2px;
-  padding: 10px 10px;
+  padding: 10px 0px;
   border-bottom: 1px solid #e2e8f0;
 }
 
 .table td {
-  padding: 10px 10px;
+  padding: 10px 0px;
   border-bottom: 1px solid #eef2f7;
   font-size: 0.92rem;
   color: #0f172a;
@@ -104,6 +121,7 @@
 
 .table tr:last-child td {
   border-bottom: none;
+  
 }
 
 .table tr:hover td {
@@ -111,6 +129,9 @@
 }
 
 .num {
+  width: 60%; 
+  white-space: nowrap; 
+  padding: 10px 15px; 
   text-align: center;
 }
 
@@ -378,15 +399,24 @@
 
 /* Vsak stolpec vzame polovično širino */
 .colExport {
-  flex: 1 !important;
-  min-width: 0 !important;
-  width: 100% !important;
-  height: auto !important; /* Prepreči praznino spodaj znotraj same kartice */
-  min-height: 0 !important; /* Preglasi fiksnih 330px, če je malo ekip */
+  display: flex;          /* Omogoči Flexbox, da center sploh dela */
+  flex-direction: column; /* Da gredo naslov in tekme lepo eno pod drugo */
+  justify-content: center;/* Centriranje navpično (če je prostor) */
+  align-items: center;    /* Centriranje vodoravno */
+  margin: 0 auto;         /* Prisili brskalnik, da centrira celoten blok */
+  width: 100%;            
+  max-width: 800px;       /* Zadrži lepo širino kartice */
 }
 
 /* Prisilno stiskanje tabele na levo polovico */
 .leagueGridExport table {
   width: 100% !important;
   table-layout: fixed !important;
+}
+
+
+.table th:first-child,
+.table td:first-child {
+  width: 100%;
+  text-align: center;
 }

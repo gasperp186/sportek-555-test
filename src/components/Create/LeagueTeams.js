@@ -6,7 +6,7 @@ import classes from "./LeagueTeams.module.css";
 export default function LeagueTeams({ form, setForm, onValidChange }) {
 
   let MIN_EKIP = 3; 
-  const MAX_EKIP = 10;
+  const MAX_EKIP = 8;
 
   if (form.mode === "hybrid") {
     MIN_EKIP = 4;

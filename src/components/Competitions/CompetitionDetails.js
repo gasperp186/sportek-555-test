@@ -150,14 +150,14 @@ export default function CompetitionDetails({ id, initialData, basePath = "", isE
     const exportujBracket = !isLeague && (!isHybrid || activeView === "bracket");
 
     return (
-      <div style={{ background: '#1e293b', padding: '20px' }}>
+      <div style={{ background: '#1e293b', padding: '20px'}}>
         {/* Izvozimo SAMO tisto, kar je bilo aktivno na zaslonu */}
         {exportujLigo && (
           <LeagueView matches={matches} teams={teams} id={id} isExport={true} />
         )}
 
         {exportujBracket && (
-          <ExportBracket matches={prikazaneTekme} isExport={true} />
+          <ExportBracket matches={prikazaneTekme} isExport={true} style={{marginTop: '150px'}} />
         )}
       </div>
     );

@@ -208,12 +208,12 @@ export default function LeagueView({ matches, teams, id, isExport }) {
             <thead>
               <tr>
                 <th>Ekipa</th>
-                <th className={classes2.num}>OT</th>
-                <th className={classes2.num}>T</th>              
-                <th className={classes2.num}>Z</th>
-                <th className={classes2.num}>N</th>
-                <th className={classes2.num}>P</th>
-                <th className={classes2.num}>RT</th>
+                <th className={classes2.num}>Odigrane tekme</th>
+                <th className={classes2.num}>Točke</th>              
+                <th className={classes2.num}>Zmage</th>
+                <th className={classes2.num}>Neodločen izid</th>
+                <th className={classes2.num}>Porazi</th>
+                <th className={classes2.num}>Razlika točk</th>
               </tr>
             </thead>
             <tbody>
