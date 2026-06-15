@@ -1,27 +1,20 @@
 .page {
-  background: #0b1224; 
   display: flex;
-  gap: 28px;
+  flex-direction: column;   /* Spremenjeno v column za lažje prilagajanje */
+  width: 100%;
   box-sizing: border-box;
 }
 
 .rightCol {
   flex: 1;
-  min-width: 320px;
-}
-
-.rightCard {
-  background: #fff;
-  border-radius: 14px;
-  box-shadow: 0 10px 24px rgba(2, 6, 23, 0.15);
-  padding: 24px;
+  width: 100%;
 }
 
 .headRight {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 60px;
+  min-height: 60px; 
   margin-bottom: 10px;
 }
 
@@ -30,9 +23,17 @@
   font-weight: 700;
   color: #0f172a;
   text-align: center;
-  margin: 0;
+  margin: 0; 
 }
 
+.rightCard {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 10px 24px rgba(2, 6, 23, 0.15);
+  padding: 24px;
+  width: 100%;
+  box-sizing: border-box;
+}
 .divider {
   height: 1px;
   background: rgba(2, 6, 23, 0.08);
@@ -130,5 +131,28 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
+  }
+}
+
+@media (max-width: 680px) {
+  .page {
+    padding: 0px;           /* Odstranjen padding, ker zunanji Profile.module že ima 12px */
+    width: 100%;
+  }
+
+  .rightCard {
+    padding: 20px 16px;     /* Malo stisnemo stranski padding, da ima tekst več prostora */
+    border-radius: 14px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  /* Da se vrstice (Ime, Priimek, Email) na ozkem S23 ne zlomijo čudno */
+  .fields li {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
   }
 }

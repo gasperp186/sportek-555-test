@@ -1,19 +1,13 @@
 .page {
-  background: #0b1224; 
   display: flex;
+  flex-direction: column;   /* Spremenjeno v column za lažje prilagajanje */
+  width: 100%;
   box-sizing: border-box;
 }
 
 .rightCol {
   flex: 1;
-  min-width: 320px;
-}
-
-
-.rightCard {
-  background: #fff;
-  border-radius: 14px;
-  padding: 24px;
+  width: 100%;
 }
 
 .headRight {
@@ -32,6 +26,14 @@
   margin: 0; 
 }
 
+.rightCard {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 10px 24px rgba(2, 6, 23, 0.15);
+  padding: 24px;
+  width: 100%;
+  box-sizing: border-box;
+}
 .avatar {
   width: 52px;
   height: 52px;
@@ -116,14 +118,23 @@
 
 @media (max-width: 680px) {
   .page {
-    flex-direction: column;
-    padding: 28px 0px;
+    padding: 0px;           /* Odstranjen padding, ker zunanji Profile.module že ima 12px */
+    width: 100%;
   }
 
-  .rightCol {
-  flex: 1;
-  max-width: 880px;
-  width: 100%;
-
-}
+  .rightCard {
+    padding: 20px 16px;     /* Malo stisnemo stranski padding, da ima tekst več prostora */
+    border-radius: 14px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  /* Da se vrstice (Ime, Priimek, Email) na ozkem S23 ne zlomijo čudno */
+  .fields li {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+  }
 }
