@@ -126,10 +126,28 @@
 @media (max-width: 640px) {
   .gridNames { grid-template-columns: 1fr 1fr; }
   .card { border: none; }
+  .card {
+  background: #ffffff;
+  border: 2px solid #3b82f6;
+  border-radius: 19px; 
+  width: 100%;
+  max-width: 800px;
+  padding: 35px 42px; 
+  color: #1e293b;
+}
 }
 @media (max-width: 920px) {
   .gridNames { grid-template-columns: 1fr 1fr 1fr; }
-  .card { border: none; }
+  .card {
+  background: #ffffff;
+  border: none;
+  border-radius: 19px; 
+  width: 100%;
+  max-width: 800px;
+  padding: 0px 42px; 
+  color: #1e293b;
+  
+}
 
 }
 
