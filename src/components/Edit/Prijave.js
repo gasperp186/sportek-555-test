@@ -12,14 +12,14 @@ import {
 } from "firebase/firestore";
 import { useParams, useRouter } from "next/navigation";
 import { useState, useEffect, useMemo, useCallback } from "react";
-import LoadingSpinner from "@/components/LoadingSpinner"; // <-- 1. UVOZ KOMPONENTE
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 import classes from "./Prijave.module.css";
 
-// Uvoz generatorja (create), ki ima gumbe za žreb in dropdown liste
 import Bracket4Generator from "@/components/Brackets/Bracket4"; 
 import Bracket8Generator from "@/components/Brackets/Bracket8"; 
 import Bracket16Generator from "@/components/Brackets/Bracket16"; 
+import LeagueDraw from "@/components/Create/LeagueDraw";
 
 export default function Prijave() {
   const [applications, setApplications] = useState([]);
@@ -28,15 +28,12 @@ export default function Prijave() {
   const router = useRouter();
   const [comp, setComp] = useState(null);
 
-  // Stanja za žreb
   const [pripravljenNaZreb, setPripravljenNaZreb] = useState(false);
   const [tempMatches, setTempMatches] = useState([]);
 
-  // 1. REAL-TIME pridobivanje prijav in podatkov o tekmovanju
   useEffect(() => {
     if (!id) return;
 
-    // Poslušalec za podatke o tekmovanju
     const compRef = doc(db, "competitions", id);
     const unsubComp = onSnapshot(compRef, (snap) => {
       if (snap.exists()) {
@@ -44,7 +41,6 @@ export default function Prijave() {
       }
     });
 
-    // Poslušalec za prijave (da takoj vidiš nove prijave)
     const appsRef = collection(db, "competitions", id, "applications");
     const unsubApps = onSnapshot(appsRef, (snap) => {
       setApplications(snap.docs.map(doc => ({ id: doc.id, ...doc.data() })));
@@ -57,18 +53,15 @@ export default function Prijave() {
     };
   }, [id]);
 
-  // 2. Funkcija za potrjevanje ali zavračanje ekip
   async function spremeniStatus(prijavaId, noviStatus) {
     try {
       const idRef = doc(db, "competitions", id, "applications", prijavaId);
       await updateDoc(idRef, { status: noviStatus });
-      // UI se bo samodejno posodobil zaradi onSnapshot
     } catch (err) {
       console.error("Napaka pri posodabljanju statusa:", err);
     }
   }
 
-  // 3. OPTIMIZACIJA: Priprava ekip za Bracket
   const teamsForBracket = useMemo(() => {
     return applications
       .filter(a => a.status === 'potrjeno')
@@ -79,20 +72,17 @@ export default function Prijave() {
     setTempMatches(newMatches);
   }, []);
 
-  // 4. KONČNA OBJAVA ŽREBA
   async function objaviZreb() {
     const imaEkipe = tempMatches.some(m => (m.home && m.home !== "") || (m.away && m.away !== ""));
-    if (!imaEkipe) return alert("Najprej v Bracketu klikni gumb 'Naključni žreb'!");
+    if (!imaEkipe) return alert("Najprej generiraj žreb!");
 
     try {
-      // A) SHRANIMO EKIPE V /teams (za viewer 'teamCount')
       for (const ekipa of teamsForBracket) {
         await setDoc(doc(db, "competitions", id, "teams", ekipa.id), {
           name: ekipa.name
         });
       }
 
-      // B) SHRANIMO TEKME V /matches
       for (const m of tempMatches) {
         await setDoc(doc(db, "competitions", id, "matches", m.id), {
           ...m,
@@ -102,16 +92,14 @@ export default function Prijave() {
         });
       }
 
-      // C) PREKLOP NA SCHEDULE MODE
       const compRef = doc(db, "competitions", id);
       await updateDoc(compRef, { 
-        publishMode: "SCHEDULE_ONLY", // Usklajeno z CompetitionDetails
+        publishMode: "SCHEDULE_ONLY",
         status: "v_teku"
       });
 
-      alert("Žreb je uspešno objavljen! Gledalci zdaj vidijo razpored.");
+      alert("Žreb je uspešno objavljen!");
       setPripravljenNaZreb(false);
-      // Preusmerimo na javni pogled, da admin vidi rezultat
       router.push(`/Competitions/${id}`); 
     } catch (err) {
       console.error("Napaka pri objavi žreba:", err);
@@ -119,15 +107,13 @@ export default function Prijave() {
     }
   }
 
-    if (loading) return <LoadingSpinner />;
-  
+  if (loading) return <LoadingSpinner />;
 
   const potrjeneEkipe = applications.filter(a => a.status === 'potrjeno');
   const novePrijave = applications.filter(a => !a.status || (a.status !== 'potrjeno' && a.status !== 'zavrnjeno'));
   const zavrnjeneEkipe = applications.filter(a => a.status === 'zavrnjeno');
   
   const maxMest = comp?.maxTeams || 0;
-  const trenutnoPrijavljenih = applications.length;
   const isFull = maxMest > 0 && potrjeneEkipe.length >= maxMest;
   const prostaMesta = Math.max(0, maxMest - potrjeneEkipe.length);
 
@@ -135,11 +121,8 @@ export default function Prijave() {
     <div className={classes.wrapper}>
       
       {!pripravljenNaZreb ? (
-        /* --- 1. DEL: UPRAVLJANJE PRIJAV --- */
         <>
-          
-            <h2 className={classes.title}>Upravljanje prijav</h2>
-          
+          <h2 className={classes.title}>Upravljanje prijav</h2>
 
           <div className={classes.statusBox}>
             <div className={classes.statItem}>
@@ -151,10 +134,10 @@ export default function Prijave() {
               <strong style={{ color: isFull ? "#4caf50" : "white" }}>{potrjeneEkipe.length}</strong>
             </div>
             {maxMest > 0 && (
-               <div className={classes.statItem}>
-               <span>Še potrebnih:</span>
-               <strong>{prostaMesta}</strong>
-             </div>
+              <div className={classes.statItem}>
+                <span>Še potrebnih:</span>
+                <strong>{prostaMesta}</strong>
+              </div>
             )}
           </div>
 
@@ -200,16 +183,14 @@ export default function Prijave() {
           <div className={classes.footerActions}>
             <button 
               className={classes.mainBtn} 
-              disabled={potrjeneEkipe.length < 2} // Vsaj 2 ekipi za karkoli
+              disabled={potrjeneEkipe.length < 2}
               onClick={() => setPripravljenNaZreb(true)}
             >
               Nadaljuj na žreb ({potrjeneEkipe.length} ekip)
             </button>
-            
           </div>
         </>
       ) : (
-        /* --- 2. DEL: GENERIRANJE ŽREBA --- */
         <div className={classes.zrebWrapper}>
           <div className={classes.zrebHeader}>
             <h3>Generator žreba</h3>
@@ -218,43 +199,52 @@ export default function Prijave() {
             </button>
           </div>
 
-          {maxMest === 4 && (
-
-            <div className={classes.bracketBox}>
-            <Bracket4Generator 
-              teams={teamsForBracket} 
-              onChangeMatches={handleMatchesChange} 
-              isHybrid={comp.mode === "hybrid"}
-              thirdPlaceMatch={comp.thirdPlaceMatch}
-            />
-          </div>
+          {/* KNOCKOUT */}
+          {comp.mode === "knockout" && (
+            <>
+              {maxMest === 4 && (
+                <div className={classes.bracketBox}>
+                  <Bracket4Generator 
+                    teams={teamsForBracket} 
+                    onChangeMatches={handleMatchesChange} 
+                    isHybrid={false}
+                    thirdPlaceMatch={comp.thirdPlaceMatch}
+                  />
+                </div>
+              )}
+              {maxMest === 8 && (
+                <div className={classes.bracketBox}>
+                  <Bracket8Generator 
+                    teams={teamsForBracket} 
+                    onChangeMatches={handleMatchesChange} 
+                    isHybrid={false}
+                    thirdPlaceMatch={comp.thirdPlaceMatch}
+                  />
+                </div>
+              )}
+              {maxMest === 16 && (
+                <div className={classes.bracketBox}>
+                  <Bracket16Generator 
+                    teams={teamsForBracket} 
+                    onChangeMatches={handleMatchesChange} 
+                    isHybrid={false}
+                    thirdPlaceMatch={comp.thirdPlaceMatch}
+                  />
+                </div>
+              )}
+            </>
           )}
 
-           {maxMest === 8 && (
-            
+          {/* LIGA */}
+          {comp.mode === "ligaski" && (
             <div className={classes.bracketBox}>
-            <Bracket8Generator 
-              teams={teamsForBracket} 
-              onChangeMatches={handleMatchesChange} 
-              isHybrid={comp.mode === "hybrid"}
-              thirdPlaceMatch={comp.thirdPlaceMatch}
-            />
-          </div>
+              <LeagueDraw 
+                teams={teamsForBracket} 
+                onChangeMatches={handleMatchesChange} 
+                isHybrid={false}
+              />
+            </div>
           )}
-
-           {maxMest === 16 && (
-            
-            <div className={classes.bracketBox}>
-            <Bracket16Generator 
-              teams={teamsForBracket} 
-              onChangeMatches={handleMatchesChange} 
-              isHybrid={comp.mode === "hybrid"}
-              thirdPlaceMatch={comp.thirdPlaceMatch}
-            />
-          </div>
-          )}
-
-          
 
           <div className={classes.footerPublish}>
             <button onClick={objaviZreb} className={classes.btnPublish}>

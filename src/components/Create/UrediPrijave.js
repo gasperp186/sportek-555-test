@@ -59,27 +59,33 @@ export default function UrediPrijave({
 
         )}
 
-        {form.mode === "league" && (
+        {form.mode === "ligaski" && (
+
+          
 
           <div className={urediClasses.row2}>
           <div className={urediClasses.control}>
             <label className={createClasses.label} htmlFor="maxTeams">
               Največ ekip
             </label>
-            <input
-              id="maxTeams"
-              type="number"
-              min="3"
-              max="64"
-              className={createClasses.input}
-              value={form.maxTeams}
-              onChange={(e) =>
-                setForm((p) => ({
-                  ...p,
-                  maxTeams: Number(e.target.value),
-                }))
-              }
-            />
+            <select
+  id="maxTeams"
+  className={createClasses.input}
+  value={form.maxTeams}
+  onChange={(e) =>
+    setForm((p) => ({
+      ...p,
+      maxTeams: Number(e.target.value),
+    }))
+  }
+>
+  <option value={3}>3 ekipe</option>
+  <option value={4}>4 ekipe</option>
+  <option value={5}>5 ekipe</option>
+  <option value={6}>6 ekipe</option>
+  <option value={7}>7 ekipe</option>
+  <option value={8}>8 ekipe</option>
+</select>
           </div>
 
           <div className={urediClasses.control}>
