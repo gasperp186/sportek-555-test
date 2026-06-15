@@ -1,7 +1,6 @@
 .page {
   background: #0b1224; 
   display: flex;
-  gap: 28px;
   box-sizing: border-box;
 }
 
@@ -14,7 +13,6 @@
 .rightCard {
   background: #fff;
   border-radius: 14px;
-  box-shadow: 0 10px 24px rgba(2, 6, 23, 0.15);
   padding: 24px;
 }
 
@@ -116,9 +114,16 @@
   margin-top: 8px;
 }
 
-@media (max-width: 980px) {
+@media (max-width: 680px) {
   .page {
     flex-direction: column;
-    padding: 28px 18px;
+    padding: 28px 0px;
   }
+
+  .rightCol {
+  flex: 1;
+  max-width: 880px;
+  width: 100%;
+
+}
 }

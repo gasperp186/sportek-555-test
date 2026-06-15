@@ -1,13 +1,8 @@
-
-
 .leftCard {
   background: #fff;
   border-radius: 14px;
   box-shadow: 0 10px 24px rgba(2, 6, 23, 0.15);
-  padding-left: 22px;
-  padding-right: 80px;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding: 20px;
 }
 
 .head {
@@ -46,14 +41,13 @@
   margin-top: 2px;
 }
 
-/* MENU – gumbi */
 .menu {
   display: flex;
   flex-direction: column;
   margin-top: 6px;
-  height: 268px;
-  
+  height: auto;
 }
+
 .item {
   width: 100%;
   text-align: left;
@@ -67,30 +61,34 @@
   background: #fff;
   cursor: pointer;
   color: #0f172a;
-  text-decoration: none; /* za NavLink */
+  text-decoration: none;
   max-height: 45px;
   height: 100%;
 }
+
 .item:hover {
   background: #f8fafc;
 }
+
 .active {
   background: #f1f5f9;
 }
+
 .note {
   font-size: 0.8rem;
   color: #64748b;
 }
 
-/* spodnja mala kartica (Settings) */
 .small {
   padding: 14px;
 }
+
 .smallTitle {
   font-weight: 600;
   color: #0f172a;
   margin-bottom: 6px;
 }
+
 .row {
   display: flex;
   justify-content: space-between;
@@ -101,13 +99,7 @@
   border: 1px solid rgba(2, 6, 23, 0.06);
   background: #fff;
 }
+
 .muted {
   opacity: 0.6;
-}
-
-/* za responsive */
-@media (max-width: 980px) {
-  .leftCol {
-    flex: unset;
-  }
 }

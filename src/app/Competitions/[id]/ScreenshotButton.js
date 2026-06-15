@@ -28,7 +28,7 @@ export default function ScreenshotButton({ comp, contentToExport, width = "", he
   })
     .then((dataUrl) => {
       const link = document.createElement('a');
-      link.download = `${comp || 'export'}.png`;
+      link.download = `${comp.title}.png`;
       link.href = dataUrl;
       link.click();
     })

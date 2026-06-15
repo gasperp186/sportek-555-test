@@ -1,6 +1,6 @@
 .page {
-  
-  background: #0b1224; 
+  background: #0b1224;
+  min-height: 100vh;
 }
 
 .card {
@@ -10,27 +10,25 @@
   max-width: 1100px;
   margin: auto;
   padding-bottom: 50px;
-
 }
 
 .leftCol {
   width: 320px;
   flex: 0 0 320px;
   margin-top: 100px;
-  width: 100%;
 }
 
 .rightCol {
   flex: 1;
-  min-width: 0; 
+  min-width: 0;
   margin-top: 100px;
-  width: 100%;
 }
+
 .headRight {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 60px; 
+  min-height: 60px;
   margin-bottom: 10px;
 }
 
@@ -39,21 +37,15 @@
   font-weight: 700;
   color: #0f172a;
   text-align: center;
-  margin: 0; 
+  margin: 0;
 }
-
 
 .rightCard {
- background: #fff;
+  background: #fff;
   border-radius: 14px;
   box-shadow: 0 10px 24px rgba(2, 6, 23, 0.15);
-  padding-top: 24px;
-  padding-bottom: 18px;
-  padding-left: 24px;
-  padding-right: 24px;
-
+  padding: 24px 24px 18px 24px;
 }
-
 
 .avatar {
   width: 52px;
@@ -136,64 +128,65 @@
   filter: brightness(1.05);
 }
 
-/* Obstoječi media query prilagodiš in dopolniš */
 @media (max-width: 980px) {
-  .page {
-    flex-direction: column; /* Stolpca se postavita drug pod drugega */
+  .card {
+    display: flex;
+    flex-direction: column;
     padding: 16px;
-    gap: 20px;
-    margin-left: 10px;
-    margin-right: 10px;
+    gap: 16px;
   }
 
   .leftCol {
-    width: 100%;    /* Leva kolona (meni) zavzame celo širino */
+    width: 100%;
     flex: none;
-    margin-top: 20px; /* Zmanjšamo odmik z vrha na telefonu */
-    margin: auto;
-    max-width: 880px;
-    
+    margin-top: 80px;
   }
 
   .rightCol {
     width: 100%;
-    margin-top: 0;   /* Odstranimo odvečen margin, ker je že pod menijem */
+    margin-top: 0;
   }
 
   .naslov {
-    font-size: 20px; /* Malo manjša pisava za naslove na telefonu */
+    font-size: 20px;
   }
 
   .rightCard {
-    padding: 16px;   /* Manj notranjega odmika, da ostane več prostora za vsebino */
+    padding: 16px;
   }
 
   .fields li {
-    flex-direction: column; /* Podatki v seznamu (npr. Ime : Janez) se postavijo drug pod drugega */
+    flex-direction: column;
     align-items: flex-start;
     gap: 4px;
   }
 
   .value {
-    font-weight: 600; /* Vrednosti naj bodo bolj poudarjene, če so pod labelo */
+    font-weight: 600;
   }
 
   .primary {
-    width: 100%;    /* Gumbi na telefonu naj bodo čez celo širino za lažji klik */
+    width: 100%;
     text-align: center;
   }
 }
 
-/* Dodatek za zelo majhne zaslone (pod 480px) */
-@media (max-width: 480px) {
+@media (max-width: 680px) {
   .headRight {
     flex-direction: column;
     text-align: center;
     gap: 10px;
   }
-  
+
   .avatar.big {
-    width: 80px;  /* Povečamo avatar na sredini, da je bolj viden */
+    width: 80px;
     height: 80px;
   }
+
+  .rightCard {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 10px 24px rgba(2, 6, 23, 0.15);
+  padding: 0px 0px 0px 0px;
+}
 }

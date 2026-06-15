@@ -37,9 +37,6 @@ export default function ProfilePage() {
 
   return (
     <div className={classes.page}>
-
-      
-      
       <section className={classes.rightCol}>
         <div className={classes.rightCard}>
           <div className={classes.headRight}>
