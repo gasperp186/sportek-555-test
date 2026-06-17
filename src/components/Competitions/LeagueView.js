@@ -45,7 +45,7 @@ export default function LeagueView({ matches, teams, id, isExport }) {
 
     matches.forEach((match) => {
       if (typeof match.round !== 'number' && isNaN(Number(match.round))) return;
-      if (match.status !== "finished" || match.homeScore === null || match.awayScore === null) return;
+      if (match.status !== "Končana" || match.homeScore === null || match.awayScore === null) return;
       
       const homeName = match.homeTeam ?? match.home;
       const awayName = match.awayTeam ?? match.away;

@@ -8,10 +8,11 @@ export default function LeagueRound({ matchesThisRound, basePath, classes, isExp
         const href = `${basePath}/${m.id}`.replace(/\/+/g, "/");
 
         const status = m.status;
-        const statusClass = 
-          status === "V teku" ? classes.borderInGame : 
-          status === "Načrtovana" ? classes.borderPlanned : 
-          classes.borderFinished;
+       const statusClass = 
+  status === "V teku" ? classes.borderInGame : 
+  status === "Načrtovana" ? classes.borderPlanned : 
+  status === "Končana" ? classes.borderFinished :
+  classes.borderPlanned;
         
         // Logika za prikaz datuma: 
         // Pokaži datum, če je to prva tekma ali če je datum drugačen od prejšnje tekme

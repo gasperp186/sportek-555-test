@@ -29,14 +29,16 @@ import {
   query, 
   where 
 } from "firebase/firestore";
-import LoadingSpinner from "@/components/LoadingSpinner"; // <-- 1. UVOZ KOMPONENTE
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 export default function Page() {
   const [comp, setComp] = useState(null);
   const [match, setMatch] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(null);
   const [role, setRole] = useState("");
+  const [isSaving, setIsSaving] = useState(false);
+  const [successMsg, setSuccessMsg] = useState(null);
 
   const { id, matchId } = useParams();
   const router = useRouter();
@@ -47,7 +49,6 @@ export default function Page() {
   const selectedDate = toDateOrNull(match?.date);
   const selectedTime = toTimeDateOrNull(match?.time);
 
-  // --- LOGIKA ZA PRIKAZ IMENA KROGA (NAPIS) ---
   const izpisanNapis = useMemo(() => {
     if (!match?.round) return "Podrobnosti tekme";
 
@@ -67,7 +68,6 @@ export default function Page() {
     return roundMapping[match.round] || `Krog ${match.round}`;
   }, [match?.round]);
 
-  // --- PRIDOBIVANJE PODATKOV ---
   useEffect(() => {
     async function fetchData() {
       if (!id || !matchId) return;
@@ -76,9 +76,7 @@ export default function Page() {
         const compRef = doc(db, "competitions", id);
         const compSnap = await getDoc(compRef);
 
-        if (!compSnap.exists()) {
-          return;
-        }
+        if (!compSnap.exists()) return;
 
         const compData = compSnap.data();
         setComp({ id: compSnap.id, ...compData });
@@ -104,7 +102,6 @@ export default function Page() {
       } catch (error) {
         console.error("Napaka pri branju baze:", error);
       } finally {
-        // <-- POPRAVEK: Izklop loading stanja varno v finally bloku
         setLoading(false);
       }
     }
@@ -112,7 +109,6 @@ export default function Page() {
     fetchData();
   }, [id, matchId]);
 
-  // --- FUNKCIJE ZA SHRANJEVANJE IN SLIKE ---
   const shraniPng = useCallback(() => {
     if (ref.current === null) return;
     toPng(ref.current, { 
@@ -150,6 +146,9 @@ export default function Page() {
   }
 
   const handleSave = async () => {
+    setError(null);
+    setSuccessMsg(null);
+    setIsSaving(true);
     try {
       const homeEl = document.getElementById("homeInput");
       const awayEl = document.getElementById("awayInput");
@@ -159,8 +158,13 @@ export default function Page() {
       const newAwayScore = awayEl.value === "" ? null : Number(awayEl.value);
       const newStatus = statusEl.value;
 
-      if (comp.mode === "knockout" && newStatus === "Končana" && newHomeScore === newAwayScore) {
-        setError("Končni rezultat ne sme biti neodločen!");
+      const isKnockoutMatch = 
+        comp.mode === "knockout" || 
+        (comp.mode === "hybrid" && match.phase === "knockout");
+
+      if (isKnockoutMatch && newStatus === "Končana" && newHomeScore === newAwayScore) {
+        setError("V izločilnih bojih končni rezultat ne sme biti neodločen!");
+        setIsSaving(false);
         return;
       }
 
@@ -211,15 +215,18 @@ export default function Page() {
       });
 
       setMatch(prev => ({ ...prev, homeScore: newHomeScore, awayScore: newAwayScore, status: newStatus }));
-      alert("Shranjeno");
+      setSuccessMsg("Shranjeno!");
+      setSuccessMsg("Shranjeno!");
+setTimeout(() => setSuccessMsg(null), 3000);
     } catch (err) {
-      alert("Napaka pri shranjevanju");
+      console.error("Napaka pri shranjevanju:", err);
+      setError("Napaka pri shranjevanju");
+    } finally {
+      setIsSaving(false);
     }
   };
 
-  // <-- 2. POPRAVEK: Namesto starih tekstov vrnemo novo okence
-  if (loading) return <LoadingSpinner />;
-
+  if (loading || isSaving) return <LoadingSpinner />;
   if (!match) return <div className={classes.page}>Tekma ni najdena.</div>;
 
   return (
@@ -258,7 +265,6 @@ export default function Page() {
               <option value="Končana">Končana</option>
             </select>
           ) : (
-            // <-- 3. POPRAVEK: Varnostni popravek, če je v bazi še stari "schedule" niz
             <div className={classes.viewerStatus}>
               <p>{match.status === "schedule" ? "Načrtovana" : match.status}</p>
             </div>
@@ -302,6 +308,7 @@ export default function Page() {
             </>
           )}
           {error && <p style={{ color: "red", marginTop: "10px" }}>{error}</p>}
+          {successMsg && <p style={{ color: "#4caf50", marginTop: "10px", fontWeight: "600" }}>{successMsg}</p>}
         </div>
 
         <div className={classes.buttonDiv}>
@@ -316,7 +323,6 @@ export default function Page() {
           </div>
         </div>
 
-        {/* --- SKRITI ELEMENTI ZA EXPORT --- */}
         <div style={{ position: 'absolute', left: '-9999px', top: '0' }}>
           <div ref={ref} className={classes.socialCardExport}>
             <h1 className={classes.exportCompTitle}>{comp?.title}</h1>

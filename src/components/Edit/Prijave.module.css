@@ -3,6 +3,7 @@
   display: grid;
   gap: 16px;
   margin: auto;
+  color: black; /* DODAJ - pokrije vse potomce */
 }
 .title {
   text-align: center;
@@ -33,14 +34,16 @@
 
 .statItem span {
   font-size: 0.85rem;
-  color: #666;
+  color: black;
+
   text-transform: uppercase;
   font-weight: 600;
 }
 
 .statItem strong {
   font-size: 1.4rem;
-  color: #000;
+    color: black;
+
 }
 
 /* Sekcije za prijave */
@@ -54,10 +57,16 @@
 .section h4 {
   margin-top: 0;
   margin-bottom: 15px;
-  border-bottom: 2px solid #f0f0f0;
   padding-bottom: 10px;
   font-size: 1.1rem;
-  color: #222;
+   color: black;
+
+}
+
+.stevilka {
+  display: inline;
+  color: black;
+
 }
 
 /* Vrstica z ekipo */
@@ -66,9 +75,9 @@
   justify-content: space-between;
   align-items: center;
   padding: 12px 15px;
-  background: #f9f9f9;
   border-radius: 8px;
   margin-bottom: 10px;
+  border: 2px solid rgb(224, 218, 218);
 }
 
 
@@ -80,12 +89,14 @@
 .teamName {
   font-weight: 600;
   font-size: 1.05rem;
-  color: #111;
+    color: black;
+
 }
 
 .userName {
   font-size: 0.8rem;
-  color: #888;
+    color: black;
+
 }
 
 /* Gumbi */
@@ -95,9 +106,9 @@
 }
 
 .btnConfirm {
-  background: #2e7d32;
-  color: white;
-  border: none;
+  background: var( --color-primary-light);  
+color: white;
+border: none;
   padding: 8px 16px;
   border-radius: 6px;
   cursor: pointer;
@@ -106,9 +117,9 @@
 }
 
 .btnReject {
-  background: #fdeded;
-  color: #d32f2f;
-  border: 1px solid #ef9a9a;
+background: var( --color-primary-light);  
+color: white;
+border: none;
   padding: 8px 16px;
   border-radius: 6px;
   cursor: pointer;
@@ -119,10 +130,8 @@
 /* Footer akcije */
 .footerActions {
   text-align: center;
-  margin-top: 40px;
   padding: 30px;
-  background: #f8fafc;
-  border-radius: 16px;
+  
 }
 
 .mainBtn {
@@ -142,9 +151,6 @@
   box-shadow: none;
 }
 
-.mainBtn:not(:disabled):hover {
-  background: #2563eb;
-}
 
 /* Žreb način */
 .zrebWrapper {
@@ -161,12 +167,13 @@
 }
 
 .btnBack {
-  background: #64748b;
+background: var( --color-primary-light);
   color: white;
   border: none;
   padding: 8px 16px;
   border-radius: 6px;
   cursor: pointer;
+  font-weight: 600;
 }
 
 .bracketBox {
@@ -182,20 +189,18 @@
 .btnPublish {
   width: 100%;
   margin-top: 30px;
-  background: #ef4444;
+  background: var( --color-primary-light);
   color: white;
   border: none;
   padding: 20px;
-  font-size: 1.2rem;
-  font-weight: 800;
+  font-size: 18px;
+  font-weight: 700;
   border-radius: 12px;
   cursor: pointer;
   letter-spacing: 1px;
 }
 
-.btnPublish:hover {
-  background: #dc2626;
-}
+
 
 .hint {
   font-size: 0.85rem;

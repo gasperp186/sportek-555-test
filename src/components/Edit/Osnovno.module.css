@@ -7,14 +7,13 @@
 
 .title {
   text-align: center;
-  font-weight: 700;
+  font-weight: 700 !important;
   letter-spacing: 0.5px;
   color: black !important;
-  margin-top: 20px;
+  margin-top: 20px !important;
   margin-bottom: 20px;
-
+  font-size: 25px !important;
 }
-
 .row {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -71,4 +70,42 @@
   font-size: 14px;
   
 }
+}
+
+
+/* ... tvoji obstoječi stili zgoraj ostanejo isti ... */
+
+@media (max-width: 600px) {
+  .wrapper {
+    gap: 12px;
+    padding: 0 8px; /* Prepreči, da se robovi dotikajo ekrana */
+  }
+
+  .title {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 20px;
+  }
+
+  /* Preklopimo vrstice (datumi, kraj/prizorišče) v en stolpec, 
+     kar avtomatsko zoži in skrajša vnosna polja */
+  .row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .field input,
+  .field textarea {
+    padding: 8px 10px;
+    font-size: 14px;
+    border-radius: 8px; /* Malo nežnejši robovi na manjših ekranih */
+    width: 100%;        /* Da polja ne pobegnejo čez rob */
+    box-sizing: border-box;
+  }
+
+  /* Kratka navodila/pravila naredimo vizualno kompaktnejša */
+  .field textarea {
+    rows: 4; /* Če želiš, da je textarea že v osnovi nižja */
+    max-height: 120px; 
+  }
 }

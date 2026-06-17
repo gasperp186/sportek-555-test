@@ -4,8 +4,6 @@ import { db } from "@/lib/firebase";
 import { 
   doc, 
   collection, 
-  getDocs,
-  getDoc, 
   updateDoc, 
   setDoc,
   onSnapshot 
@@ -24,6 +22,8 @@ import LeagueDraw from "@/components/Create/LeagueDraw";
 export default function Prijave() {
   const [applications, setApplications] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isSaving, setIsSaving] = useState(false); // Stanje za loading spinner ob objavi
+  const [error, setError] = useState(null); // Stanje za rdeč napis
   const { id } = useParams();
   const router = useRouter();
   const [comp, setComp] = useState(null);
@@ -70,44 +70,64 @@ export default function Prijave() {
 
   const handleMatchesChange = useCallback((newMatches) => {
     setTempMatches(newMatches);
+    setError(null); // Počistimo napako ob spremembi žreba
   }, []);
 
   async function objaviZreb() {
+    if (isSaving) return;
+
     const imaEkipe = tempMatches.some(m => (m.home && m.home !== "") || (m.away && m.away !== ""));
-    if (!imaEkipe) return alert("Najprej generiraj žreb!");
+    if (!imaEkipe) {
+      setError("Najprej generirajte žreb!");
+      return;
+    }
+
+    setIsSaving(true);
+    setError(null);
 
     try {
+      // 1. Shranimo ekipe
       for (const ekipa of teamsForBracket) {
         await setDoc(doc(db, "competitions", id, "teams", ekipa.id), {
           name: ekipa.name
         });
       }
 
+      // 2. Shranimo generirane tekme (OČIŠČENE FAZE, DA DELUJE LESTVICA)
       for (const m of tempMatches) {
+        // Ustvarimo kopijo tekme in ji odstranimo phase, če obstaja
+        const ociscenaTekma = { ...m };
+        if (ociscenaTekma.phase) {
+          delete ociscenaTekma.phase; 
+        }
+
         await setDoc(doc(db, "competitions", id, "matches", m.id), {
-          ...m,
+          ...ociscenaTekma,
           scoreHome: null,
           scoreAway: null,
           completed: false
         });
       }
 
+      // 3. Posodobimo status turnirja
       const compRef = doc(db, "competitions", id);
       await updateDoc(compRef, { 
         publishMode: "SCHEDULE_ONLY",
         status: "v_teku"
       });
 
-      alert("Žreb je uspešno objavljen!");
+      setIsSaving(false);
       setPripravljenNaZreb(false);
       router.push(`/Competitions/${id}`); 
     } catch (err) {
       console.error("Napaka pri objavi žreba:", err);
-      alert("Prišlo je do napake pri shranjevanju.");
+      setError("Prišlo je do napake pri shranjevanju žreba.");
+      setIsSaving(false);
     }
   }
 
-  if (loading) return <LoadingSpinner />;
+  // Če se nalaga prvič ali če se žreb shranjuje, pokažemo spinner čez cel ekran
+  if (loading || isSaving) return <LoadingSpinner />;
 
   const potrjeneEkipe = applications.filter(a => a.status === 'potrjeno');
   const novePrijave = applications.filter(a => !a.status || (a.status !== 'potrjeno' && a.status !== 'zavrnjeno'));
@@ -126,10 +146,10 @@ export default function Prijave() {
 
           <div className={classes.statusBox}>
             <div className={classes.statItem}>
-              <span>Največ ekip:</span>
-              <strong>{maxMest}</strong>
+              <span>Največje število ekip: <p className={classes.stevilka}>{maxMest}</p></span>
+              
             </div>
-            <div className={classes.statItem}>
+            {/* <div className={classes.statItem}>
               <span>Potrjenih:</span>
               <strong style={{ color: isFull ? "#4caf50" : "white" }}>{potrjeneEkipe.length}</strong>
             </div>
@@ -138,12 +158,12 @@ export default function Prijave() {
                 <span>Še potrebnih:</span>
                 <strong>{prostaMesta}</strong>
               </div>
-            )}
+            )} */}
           </div>
 
           <section className={classes.section}>
             <h4>Nove prijave ({novePrijave.length})</h4>
-            {novePrijave.length === 0 && <p className={classes.empty}>Ni novih prijav.</p>}
+            {novePrijave.length === 0}
             {novePrijave.map(app => (
               <div className={classes.row} key={app.id}>
                 <div className={classes.teamInfo}>
@@ -170,10 +190,10 @@ export default function Prijave() {
 
           {zavrnjeneEkipe.length > 0 && (
             <section className={classes.section}>
-              <h4 style={{color: "#888"}}>Zavrnjene</h4>
+              <h4 style={{color: "black"}}>Zavrnjene</h4>
               {zavrnjeneEkipe.map(app => (
                 <div className={classes.row} key={app.id}>
-                  <span style={{color: '#666', textDecoration: 'line-through'}}>{app.teamName}</span>
+                  <span style={{color: 'black', textDecoration: 'line-through'}}>{app.teamName}</span>
                   <button onClick={() => spremeniStatus(app.id, "potrjeno")} className={classes.btnConfirm}>Vrni</button>
                 </div>
               ))}
@@ -186,7 +206,7 @@ export default function Prijave() {
               disabled={potrjeneEkipe.length < 2}
               onClick={() => setPripravljenNaZreb(true)}
             >
-              Nadaljuj na žreb ({potrjeneEkipe.length} ekip)
+              Nadaljuj na žreb
             </button>
           </div>
         </>
@@ -200,7 +220,7 @@ export default function Prijave() {
           </div>
 
           {/* KNOCKOUT */}
-          {comp.mode === "knockout" && (
+          {comp?.mode === "knockout" && (
             <>
               {maxMest === 4 && (
                 <div className={classes.bracketBox}>
@@ -235,21 +255,35 @@ export default function Prijave() {
             </>
           )}
 
-          {/* LIGA */}
-          {comp.mode === "ligaski" && (
+          {/* LIGA ALI HIBRID (za oba se v tej fazi zgenerira samo ligaški razpored) */}
+          {(comp?.mode === "ligaski" || comp?.mode === "hybrid") && (
             <div className={classes.bracketBox}>
               <LeagueDraw 
-                teams={teamsForBracket} 
-                onChangeMatches={handleMatchesChange} 
-                isHybrid={false}
-              />
+  teams={teamsForBracket} 
+  onChangeMatches={handleMatchesChange} 
+  isHybrid={comp.mode === "hybrid"}
+  thirdPlaceMatch={comp.thirdPlaceMatch} // DODAJ
+/>
             </div>
           )}
 
-          <div className={classes.footerPublish}>
+          <div className={classes.footerPublish} style={{ display: 'flex', flexDirection: 'column', gap: '10px', alignItems: 'center' }}>
             <button onClick={objaviZreb} className={classes.btnPublish}>
-              KONČAJ ŽREB IN OBJAVI NA STRAN
+             Shrani in objavi
             </button>
+
+            {/* RDEČI NAPIS ZA NAPAKO */}
+            {error && (
+              <div style={{
+                color: "#ef4444",
+                fontSize: "14px",
+                fontWeight: "600",
+                textAlign: "center",
+                marginTop: "4px"
+              }}>
+                {error}
+              </div>
+            )}
           </div>
         </div>
       )}

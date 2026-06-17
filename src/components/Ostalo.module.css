@@ -1,5 +1,9 @@
 
-
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
 .legend {
   display: flex;
   gap: 20px;
@@ -66,19 +70,42 @@
 
 
 
-
-
-@media (max-width: 800px) {
-
+@media (max-width: 670px) {
+  .container {
+    align-items: center; /* Centriramo vsebino kontejnerja na telefonu */
+  }
 
   .rulesButton {
-    margin: auto;
+    margin: 0 auto;
+    display: block;
+    max-width: 100%;
   }
 
-  .legend {
-    margin: auto;
+  .rulesKvadrat {
+    width: 100%;        /* Kvadrat zavzame polno širino */
+    box-sizing: border-box;
+    margin-top: 15px;
+    padding: 15px;
+    display: flex;      /* Prisilimo elemente znotraj kvadrata... */
+    flex-direction: column; /* ...da se postavijo striktno en pod drugega */
+    align-items: flex-start; /* Poravnamo tekst levo */
   }
- }
+
+  .rulesNaslov {
+    display: block;
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 8px;
+    font-size: 16px;
+  }
+
+  .rulesText {
+    display: block;
+    width: 100%;
+    font-size: 14px;
+    margin: 0;
+  }
+}
 
 
 

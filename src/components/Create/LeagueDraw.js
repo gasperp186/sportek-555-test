@@ -138,7 +138,8 @@ function dvokrozno(rounds) {
   return [...rounds, ...secondHalf];
 }
 
-export default function LeagueDraw({ teams, onChangeMatches, isHybrid }) {
+export default function LeagueDraw({ teams, onChangeMatches, isHybrid, thirdPlaceMatch }) {
+
   const [isDouble, setIsDouble] = useState(false);
   const [localRounds, setLocalRounds] = useState([]);
 
@@ -149,16 +150,35 @@ export default function LeagueDraw({ teams, onChangeMatches, isHybrid }) {
     return isDouble ? dvokrozno(firstHalf) : firstHalf;
   }, [safeTeams, isDouble]);
 
+
+  useEffect(() => {
+  const vseTekme = localRounds.flatMap(roundObj => roundObj.matches);
+  
+  if (isHybrid) {
+    const knockoutTekme = [
+      { id: "SF1", phase: "knockout", round: "SF1", home: "1. uvrščeni", away: "4. uvrščeni", date: "", time: "", status: "Načrtovana" },
+      { id: "SF2", phase: "knockout", round: "SF2", home: "2. uvrščeni", away: "3. uvrščeni", date: "", time: "", status: "Načrtovana" },
+      { id: "F1", phase: "knockout",  round: "F1",  home: "", away: "", date: "", time: "", status: "Načrtovana" },
+      // T3 samo če je označeno
+      ...(thirdPlaceMatch ? [
+        { id: "T3", phase: "knockout", round: "T3", home: "", away: "", date: "", time: "", status: "Načrtovana" }
+      ] : []),
+    ];
+    if (vseTekme.length > 0) {
+      onChangeMatches([...vseTekme, ...knockoutTekme]);
+    }
+  } else {
+    if (vseTekme.length > 0) {
+      onChangeMatches(vseTekme);
+    }
+  }
+}, [localRounds, onChangeMatches, isHybrid, thirdPlaceMatch]);
+
   useEffect(() => {
     setLocalRounds(generiraniKrogi);
   }, [generiraniKrogi]);
 
-  useEffect(() => {
-    const vseTekme = localRounds.flatMap(roundObj => roundObj.matches);
-    if (vseTekme.length > 0) {
-      onChangeMatches(vseTekme);
-    }
-  }, [localRounds, onChangeMatches]);
+  
 
   const handleMatchMetaChange = (roundIdx, matchIdx, field, value) => {
     setLocalRounds(prevRounds => {

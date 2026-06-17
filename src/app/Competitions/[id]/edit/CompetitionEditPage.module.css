@@ -176,3 +176,31 @@ color: white;
     justify-content: flex-start;
   }
 }
+
+
+@media (max-width: 720px) {
+  .headBox {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .actions {
+    justify-content: flex-start;
+  }
+
+  .tabs {
+    flex-wrap: wrap;
+  }
+
+  .nazajBtn {
+    width: 100%;
+    flex-basis: 100%;
+  }
+
+  .tabBtn {
+    flex: 1;
+    padding: 0 8px;
+    font-size: 14px;
+    height: 36px;
+  }
+}

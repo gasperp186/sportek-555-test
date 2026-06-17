@@ -58,13 +58,8 @@
   border-radius: 14px;
   padding: 20px 18px;
   color: #cbd5e1;
-  transition: transform .15s ease, border-color .2s ease, background .2s ease;
 }
-.card:hover {
-  border-color: rgba(56, 189, 248, .35);  /* cyan */
-  background: rgba(15, 23, 42, 0.75);
-  cursor: pointer;
-}
+
 
 .icon {
   font-size: 28px;

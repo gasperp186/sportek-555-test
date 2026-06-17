@@ -1,7 +1,7 @@
 // components/Competitions/CompetitionDetails.js
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import Link from "next/link";
 import classes from "@/components/Competitions/League.module.css";
 
@@ -17,6 +17,7 @@ import { db } from "@/lib/firebase";
 import { collection, onSnapshot, doc, updateDoc } from "firebase/firestore";
 import LeagueView from "./LeagueView";
 import LoadingSpinner from "@/components/LoadingSpinner"; // <-- 1. UVOZ KOMPONENTE
+
 
 
 export default function CompetitionDetails({ id, initialData, basePath = "", isEditMode = false, isExport = false }) {
@@ -46,15 +47,61 @@ export default function CompetitionDetails({ id, initialData, basePath = "", isE
   const isFull = aktivnePrijaveCount >= maxMest;
   const prostaMesta = Math.max(0, maxMest - aktivnePrijaveCount);
 
-  const lestvica = teams.map((team) => ({
-    team: team, P: 0, PTS: 0, W: 0, D: 0, L: 0, GD: 0,
-  }));
-  const lestvicaSorted = [...lestvica].sort((a, b) => b.PTS - a.PTS || b.GD - a.GD);
-  const top4 = lestvicaSorted.slice(0, 4);
+
 
   // Preverjanje pogojev za polfinale
   const ligaskeTekme = matches.filter(m => typeof m.round === 'number');
-  const vseKoncane = ligaskeTekme.length > 0 && ligaskeTekme.every(m => m.status === "finished");
+  const vseKoncane = ligaskeTekme.length > 0 && ligaskeTekme.every(m => m.status === "Končana");
+
+  
+    // 2. Izračun lestvice
+    const lestvicaSorted = useMemo(() => {
+      const table = teams.map(t => ({ 
+        team: t, P: 0, PTS: 0, W: 0, D: 0, L: 0, GD: 0 
+      }));
+  
+      matches.forEach((match) => {
+        if (typeof match.round !== 'number' && isNaN(Number(match.round))) return;
+        if (match.status !== "Končana" || match.homeScore === null || match.awayScore === null) return;
+        
+        const homeName = match.homeTeam ?? match.home;
+        const awayName = match.awayTeam ?? match.away;
+        
+        let home = table.find((t) => t.team.name === homeName);
+        let away = table.find((t) => t.team.name === awayName);
+  
+        if (!home || !away) return;
+  
+        home.P += 1; 
+        away.P += 1;
+        const hScore = Number(match.homeScore);
+        const aScore = Number(match.awayScore);
+  
+        if (hScore > aScore) { 
+          home.PTS += 3;
+          home.W += 1; 
+          away.L += 1; 
+        }
+        else if (hScore < aScore) { 
+          away.PTS += 3;
+          away.W += 1; 
+          home.L += 1; 
+        }
+        else { 
+          home.PTS += 1;
+          away.PTS += 1; 
+          home.D += 1; 
+          away.D += 1; 
+        }
+        home.GD += (hScore - aScore);
+        away.GD += (aScore - hScore);
+      });
+  
+      return [...table].sort((a, b) => b.PTS - a.PTS || b.GD - a.GD);
+    }, [matches, teams]);
+
+    const top4 = lestvicaSorted.slice(0, 4);
+
 
   // 1. POSLUŠALCI (useEffect - prinašanje podatkov)
   useEffect(() => {
@@ -162,6 +209,8 @@ export default function CompetitionDetails({ id, initialData, basePath = "", isE
       </div>
     );
   }
+
+  
 
   return (
     <div className={classes.page}>
