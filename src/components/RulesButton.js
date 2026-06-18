@@ -7,7 +7,7 @@ export default function RulesToggle({ rules }) {
   const [showRules, setShowRules] = useState(false);
 
   return (
-    <div className={classes.container}> 
+    <div className={classes.container2}> 
       <button 
         onClick={() => setShowRules(!showRules)} 
         className={classes.rulesButton}

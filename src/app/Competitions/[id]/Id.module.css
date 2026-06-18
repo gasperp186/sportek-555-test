@@ -51,53 +51,61 @@
 
 
 /* ==========================================================================
-   2. ELEMENTI: VRSTA (Legenda, Screenshot, Pravila)
+   2. ELEMENTI: VRSTA & OŽJA VRSTA (Različne širine za Bracket 4)
    ========================================================================== */
+/* Privzeta široka postavitev za velike turnirje */
 .vrsta {
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: nowrap;
   width: 100%;
-  max-width: 1300px;
+  max-width: 1300px; /* Široko za Bracket 8, 16, Lige... */
   margin: 30px auto;
   gap: 20px;
 }
 
+/* Posebna ožja postavitev samo za Bracket 4 */
 .ozjaVrsta {
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: nowrap;
   width: 100%;
-  max-width: 955px;
+  max-width: 850px; /* Lepo se ujame z ozkim bracketom 4 */
   margin: 30px auto;
   gap: 20px;
 }
 
 .vrsta > *, .ozjaVrsta > * {
-  flex: 1;
   display: flex;
 }
 
-/* Legendo poravnamo na levo */
-.vrsta > :first-child, .ozjaVrsta > :first-child {
+/* Legenda je stisnjena nase in poravnana levo */
+.legendWrapper {
+  flex: 0 1 auto;
+  display: flex;
   justify-content: flex-start;
+  align-items: center;
 }
 
-/* Screenshot gumb kontejner (sredina) */
+/* Screenshot vedno drži sredino, ne glede na širino diva */
 .screenShotDiv {
-  background-color: transparent;
+  flex: 1 1 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex: 1;
+  background-color: transparent;
 }
 
-/* Pravila poravnamo na desno */
-.vrsta > :last-child, .ozjaVrsta > :last-child {
-  justify-content: flex-end !important;
-  align-items: end;
+/* Pravila so skrajno desno */
+.rulesWrapper {
+  flex: 0 1 auto;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  max-width: 290px;
 }
 
 .screenshotButton {
@@ -194,17 +202,11 @@
    5. RESPONSIVE DIZAJN / PRILAGODITVE ZA MANJŠE ZASLONE
    ========================================================================== */
 
-/* --- Tablice in manjši monitorji (pod 900px) --- */
+/* Mobilni breakpoint velja za oba razreda enako (vse skoči v navpično vrsto) */
 @media (max-width: 900px) {
   .vrsta, .ozjaVrsta {
     padding: 0 16px;
     box-sizing: border-box;
-  }
-}
-
-/* --- Telefoni (do 900px) --- */
-@media (max-width: 900px) {
-  .vrsta, .ozjaVrsta {
     flex-direction: column;
     flex-wrap: nowrap;
     justify-content: center;
@@ -214,16 +216,13 @@
     margin: 20px auto;
   }
 
-  .vrsta > *, .ozjaVrsta > * {
+  .legendWrapper,
+  .screenShotDiv,
+  .rulesWrapper {
     width: 100% !important;
-    max-width: 100%;
-    justify-content: center !important;
     flex: none;
-  }
-
-  .screenShotDiv {
-    width: 100%;
     justify-content: center !important;
+    align-items: center;
   }
 
   .vrsta button, .ozjaVrsta button {
@@ -232,7 +231,6 @@
   }
 }
 
-/* --- Zelo mali telefoni (pod 500px) --- */
 @media (max-width: 500px) {
   .title {
     font-size: 30px;

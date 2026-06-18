@@ -324,7 +324,6 @@
     box-shadow: none;   /* Popolnoma ravna oblika brez robov */
     width: 100%;
     min-width: 800px;
-    border: none;
   }
 
   .page {
