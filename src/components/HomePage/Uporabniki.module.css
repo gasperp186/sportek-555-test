@@ -38,15 +38,7 @@
   border: 1px solid #334155;
   border-radius: 12px; /* NOVO: Elegantno, nežno zaobljeni robovi */
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
   max-height: 270px; /* Kompaktna višina pravokotnika */
-}
-
-.card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-  border-color: #475569;
 }
 
 .media {
@@ -100,3 +92,13 @@
   text-align: center;
 }
 
+@media (max-width: 600px) {
+  .card {
+    grid-template-columns: 1fr;
+    max-height: none;
+  }
+
+  .media {
+    display: none;
+  }
+}
