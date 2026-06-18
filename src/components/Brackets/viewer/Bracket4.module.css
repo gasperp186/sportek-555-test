@@ -168,7 +168,16 @@ max-width: 960px;
   .container {
     display: flex !important;
     flex-direction: column !important;
-    gap: 20px !important;
+    gap: 0 !important;  /* ← spremeni 20px na 0 */
+  }
+
+  .colSemi,
+  .colFinals {
+    gap: 0 !important;
+  }
+
+  .onlyMobileTitle {
+    margin: 0 0 10px 0 !important;
   }
 
   
@@ -180,7 +189,9 @@ max-width: 960px;
     order: 1 !important;
   }
 
-  
+   .order3 .onlyMobileTitle {
+    margin-top: 20px !important;
+  }
 
   .order3 {
     order: 3 !important;
@@ -193,7 +204,7 @@ max-width: 960px;
     font-size: 13px;
     font-weight: bold;
     color: white;
-    margin: 10px 0 10px 0; /* Malo več zgornjega odmika za preglednost */
+    margin: 10px 0 10px 0; 
     text-transform: uppercase;
   }
 }

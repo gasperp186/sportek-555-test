@@ -60,7 +60,7 @@ const [profile, setProfile] = useState(null);  //profil iz Firestore
   return (
     <header className={`${classes.header} ${isOpen ? classes.menuOpen : ""}`}>
       <div className={classes.logoContainer}>
-        <span className={classes.logoText}>Sportek</span>
+        <Link href="/" className={classes.logoText}>Sportek</Link>
       </div>
 
       <nav className={classes.navDesktop} aria-label="Glavna navigacija">

@@ -54,5 +54,12 @@
 }
 
 
+@media (max-width: 1100px) {
+  .card {
+    border: none;
+    margin-top: 1px;
+  }
+}
+
 
 

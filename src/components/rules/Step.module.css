@@ -1,4 +1,4 @@
-
+/* --- OSNOVNI STILI (Privzeto za PC / večje ekrane) --- */
 .page {
   min-height: 100vh;
   display: grid;
@@ -6,12 +6,21 @@
   background: #ffffff;
   font-family: 'Poppins', sans-serif;
   padding: 32px; 
+  box-sizing: border-box;
 }
 
-
+.card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 900px;
+  padding: 2.4rem;
+  border-radius: 1.2rem;
+  border: 2px solid #3b82f6;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
 
 .naslov {
-
   text-align: center;
   font-size: 2rem;
   font-weight: 700;
@@ -19,88 +28,15 @@
   color: var(--color-primary-light);
   margin: 0 0 .4rem;
   margin-bottom: 20px;
-
 }
 
 .podnaslov {
-
   text-align: center;
   font-size: 16px;
   font-weight: 700;
   letter-spacing: 0.5px;
   color: var(--color-subtitle);
   margin: 0 0 .4rem;
-
-}
-
-.label {
-  font-weight: 600;
-  font-size: 0.9rem;
-  color: #1e3a8a;
-  margin-bottom: 0.4rem;
-}
-
-.actions {
-  display: flex;
-  gap: 14px; 
-  margin-top: 16px; 
-}
-
-.btn {
-  flex: 1;
-  height: 46px;
-  border-radius: 13px; 
-  font-weight: 600;
-  cursor: pointer;
-  border: none;
-  color: #fff;
-  text-align: center;
-  background: linear-gradient(135deg, #2563eb, #3b82f6);
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  text-decoration: none;
-}
-
-
-.btnOutline {
-  background: #ffffff;
-  color: #3b82f6;
-  border: 2px solid #3b82f6;
-}
-
-/* .btnOutline:hover {
-  background: #eff6ff;
-  box-shadow: inset 0 0 0 1px rgba(59,130,246,.35);
-} */
-
-
-
-
-.card {
-  background: #ffffff;
-  width: 100%;
-  max-width: 800px;
-  padding: 2.4rem;
-  border-radius: 1.2rem;
-  border: 2px solid #3b82f6;
-  margin-top: 100px;
-  margin-bottom: 100px;
-}
-
-.grid2 {
-  display: grid;
-  gap: 1rem;
-}
-@media (min-width: 720px) {
-  .grid2 {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-.row {
-  display: grid;
-  gap: 0.45rem;
 }
 
 .control {
@@ -115,6 +51,7 @@
   font-size: 0.95rem;
   color: #1e3a8a;
   font-weight: 500;
+  margin-bottom: 0.4rem;
 }
 
 .form input,
@@ -129,8 +66,9 @@
   padding: 0.85rem 1rem;
   font-size: 1rem;
   outline: none;
-  
   font-family: "Poppins", sans-serif;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .form input::placeholder,
@@ -138,46 +76,31 @@
   color: #94a3b8;
 }
 
-/* .form input:hover,
-.form select:hover,
-.form textarea:hover,
-.input:hover,
-.select:hover {
-  border-color: #3b82f6;
-  background: #f1f5f9;
-} */
-
-/* ✅ popravljeno: focus selectorji so zdaj omejeni */
 .form input:focus,
 .form select:focus,
 .form textarea:focus,
 .input:focus,
 .select:focus,
 .textareaLight:focus {
-  border: 1px solid #e2e8f0;
+  border: 2px solid #3b82f6; /* Lepši fokus, ki ustreza temi */
   background: #ffffff;
   outline: none;
 }
 
-/* === RULES (title/subtitle/textarea) ===================== */
-.titleLight {
-  margin: 0 0 0.4rem;
+/* === RULES / TEXTAREA STILI === */
+.titleLight, .title {
+  color: #3b82f6;
+  text-align: center;
   font-size: 1.8rem;
+  margin-bottom: 1.4rem;
   font-weight: 700;
-  color: #3b82f6; /* modri naslov kot Create */
 }
 
 .subtitleLight {
   color: #475569;
   margin: 0 0 1.2rem;
   font-size: 1rem;
-}
-
-.title {
-  color: #3b82f6;
   text-align: center;
-  font-size: 1.8rem;
-  margin-bottom: 1.4rem;
 }
 
 .textareaLight {
@@ -192,23 +115,18 @@
   line-height: 1.65;
   resize: none;
   font-family: Arial, Helvetica, sans-serif;
-  
+  box-sizing: border-box;
 }
 
-/* .textareaLight:hover {
-  background: #f1f5f9;
-  border-color: #3b82f6;
-} */
-
-/* Dodatni okvir za Rules (isti vizual kot card) */
 .ruleCardLight {
   background: #ffffff;
   border: 2px solid #dbeafe;
   border-radius: 1.2rem;
   padding: 2.2rem 2.6rem;
+  box-sizing: border-box;
 }
 
-/* Akcije/gumbi (isti slog kot Create/Teams) */
+/* === GUMBI / AKCIJE === */
 .actions,
 .ruleActions {
   width: 100%;
@@ -236,35 +154,32 @@
   text-decoration: none;
   max-width: 350px;
   width: 100%;
+  box-sizing: border-box;
 }
-
-/* .btn:hover,
-.ruleBtn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
-  filter: brightness(1.05);
-} */
 
 .btnOutline,
 .ruleBtnOutline {
   background: #ffffff;
   color: #3b82f6;
   border: 2px solid #3b82f6;
-
 }
 
-
-
-/* če uporabljaš CSS Modules compose, je to OK v .module.css */
-.ruleBtnPrimary {
-  composes: ruleBtn;
+/* === GRID / POSTAVITEV === */
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
 }
 
-/* === TEAMS (2 ekipi v eni vrstici) ======================= */
+.row {
+  display: grid;
+  gap: 0.45rem;
+}
+
 .teamsWrapper {
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
+  gap: 12rem;
   margin-top: 1rem;
 }
 
@@ -282,14 +197,47 @@
   gap: 0.45rem;
 }
 
-/* Animacija */
-@keyframes stepFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
+
+/* --- POSEBEJ ZA MOBILNE NAPRAVE IN TABLICE (do 720px) --- */
+@media (max-width: 720px) {
+  .page {
+    padding: 16px 12px;   /* Manj zunanjega paddinga na telefonu */
+    display: block;       /* Preklopimo grid na block, da se znebimo odvečne praznine */
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+
+  .card {
+    border: none;         /* Umaknemo obrobo na mobilnih napravah */
+    padding: 1.2rem 0.5rem; /* Stisnemo stranski padding kartice */
+    margin: 0 auto;       /* Avtomatsko centriranje */
+    max-width: 100%;      /* Kartica se popolnoma prilagodi širini ekrana */
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .grid2 {
+    grid-template-columns: 1fr; /* Na telefonu se elementi zložijo en pod drugega */
+  }
+
+  .naslov {
+    font-size: 2rem;
+    margin-top: 10px;
+    margin-bottom: 15px;
+  }
+
+  .textareaLight {
+    min-height: 200px;    /* Malo zmanjšamo višino okna za pravila, da gre lažje na zaslon */
+    padding: 0.8rem;
+  }
+
+  .actions,
+  .ruleActions {
+    gap: 10px;            /* Manjši razmak med gumboma */
+    margin-top: 20px;
+  }
+
+  .btn,
+  .ruleBtn {
+    height: 44px;         /* Prilagojena udobna višina za gumbe na dotik */
+    font-size: 15px;
   }
 }
