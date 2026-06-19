@@ -110,6 +110,10 @@
     font-size: 14px;
     margin: 0;
   }
+
+  .legend {
+    max-width: 280px;
+  }
 }
 
 

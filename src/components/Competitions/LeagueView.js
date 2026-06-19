@@ -96,30 +96,27 @@ export default function LeagueView({ matches, teams, id, isExport }) {
   const roundKeys = Object.keys(matchesByRound).map(Number).sort((a, b) => a - b);
   const maxRound = roundKeys.length > 0 ? Math.max(...roundKeys) : 1;
 
-  // =========================================================================
-  // --- NAVADEN PRIKAZ ZA UPORABNIKA (Pusti pri miru, če ti dela ok) ---
-  // =========================================================================
+  // Standardni prikaz
   const renderStandardGrid = () => (
     <div className={classes.leagueGrid}>
-      {/* LEVA STRAN: Lestvica */}
       <div className={classes.left}>
         <h4 className={classes.tableTitle}>Lestvica</h4>
         <table className={classes.table}>
           <thead>
             <tr>
-              <th>Ekipa</th>
-              <th className={classes.num} title="Odigrane tekme">OT</th>
-              <th className={classes.num} title="Točke">T</th>              
-              <th className={classes.num} title="Zmage">Z</th>
-              <th className={classes.num} title="Neodločeno">N</th>
-              <th className={classes.num} title="Porazi">P</th>
-              <th className={classes.num} title="Razlika točk">RT</th>
+              <th className={classes.teamTh}>Ekipa</th>
+              <th className={`${classes.num} ${classes.colNumHeader}`} title="Odigrane tekme">OT</th>
+              <th className={`${classes.num} ${classes.colNumHeader}`} title="Točke">T</th>              
+              <th className={`${classes.num} ${classes.colNumHeader}`} title="Zmage">Z</th>
+              <th className={`${classes.num} ${classes.colNumHeader}`} title="Neodločeno">N</th>
+              <th className={`${classes.num} ${classes.colNumHeader}`} title="Porazi">P</th>
+              <th className={`${classes.num} ${classes.colNumHeader}`} title="Razlika točk">RT</th>
             </tr>
           </thead>
           <tbody>
             {lestvicaSorted.map((row) => (
               <tr key={row.team.id}>
-                <td>{row.team.name}</td>
+                <td className={classes.teamTd}>{row.team.name}</td>
                 <td className={classes.num}>{row.P}</td>
                 <td className={classes.num} style={{ fontWeight: 'bold' }}>{row.PTS}</td>
                 <td className={classes.num}>{row.W}</td>
@@ -132,7 +129,6 @@ export default function LeagueView({ matches, teams, id, isExport }) {
         </table>
       </div>
 
-      {/* DESNA STRAN: Tekme po krogih */}
       <div className={classes.right}>
         <div className={classes.roundToolbar}>
           <button 
@@ -172,19 +168,12 @@ export default function LeagueView({ matches, teams, id, isExport }) {
     </div>
   );
 
-  // =========================================================================
-  // --- KOPIJA SAMO ZA EXPORT SCREENSHOT (Tukaj popravljaj poljubno) ---
-  // =========================================================================
+  // Export prikaz
   const renderExportGrid = () => (
     <div className={classes2.exportWrapper}>
       <div className={classes2.leagueGridExport}>
-        
-       
-
-        {/* DESNA STRAN EXPORTA: Spremeni strukturo tekem, kot ti paše */}
         <div className={`${classes2.right} ${classes2.colExport}`}>
           <h4 className={classes2.roundTitle}>Krog {selectedRound} / {maxRound}</h4>
-          
           <div className={classes2.allRoundsContainer}>
             {matchesByRound[selectedRound] ? (
               <div className={classes2.roundWrapper}>
@@ -201,25 +190,24 @@ export default function LeagueView({ matches, teams, id, isExport }) {
           </div>
         </div>
 
-         {/* LEVA STRAN EXPORTA: Lahko spremeniš th, td, dodane classes itd. */}
         <div className={`${classes2.left} ${classes2.colExport}`}>
           <h4 className={classes2.tableTitle}>Lestvica</h4>
           <table className={classes2.table}>
             <thead>
               <tr>
-                <th>Ekipa</th>
-                <th className={classes2.num}>Odigrane tekme</th>
-                <th className={classes2.num}>Točke</th>              
-                <th className={classes2.num}>Zmage</th>
-                <th className={classes2.num}>Neodločen izid</th>
-                <th className={classes2.num}>Porazi</th>
-                <th className={classes2.num}>Razlika točk</th>
+                <th className={classes2.teamTh}>Ekipa</th>
+                <th className={`${classes2.num} ${classes2.colNumHeader}`}>Odigrane tekme</th>
+                <th className={`${classes2.num} ${classes2.colNumHeader}`}>Točke</th>              
+                <th className={`${classes2.num} ${classes2.colNumHeader}`}>Zmage</th>
+                <th className={`${classes2.num} ${classes2.colNumHeader}`}>Neodločen izid</th>
+                <th className={`${classes2.num} ${classes2.colNumHeader}`}>Porazi</th>
+                <th className={`${classes2.num} ${classes2.colNumHeader}`}>Razlika točk</th>
               </tr>
             </thead>
             <tbody>
               {lestvicaSorted.map((row) => (
                 <tr key={row.team.id}>
-                  <td>{row.team.name}</td>
+                  <td className={classes2.teamTd}>{row.team.name}</td>
                   <td className={classes2.num}>{row.P}</td>
                   <td className={classes2.num} style={{ fontWeight: 'bold' }}>{row.PTS}</td>
                   <td className={classes2.num}>{row.W}</td>
@@ -231,11 +219,9 @@ export default function LeagueView({ matches, teams, id, isExport }) {
             </tbody>
           </table>
         </div>
-
       </div>
     </div>
   );
 
-  // Končni izris glede na prop
   return isExport ? renderExportGrid() : renderStandardGrid();
 }

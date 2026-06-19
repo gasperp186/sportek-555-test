@@ -263,4 +263,8 @@
   .separator {
     display: none;
   }
+
+  .page {
+    padding: 7px;
+  }
 }
