@@ -97,6 +97,7 @@ export default async function Page({ params }) {
             <RulesButton rules={comp.rulesText}/>
           </div>
         </div>
+        
        
         <BackButton/>
       </div>

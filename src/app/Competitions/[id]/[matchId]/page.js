@@ -158,9 +158,8 @@ export default function Page() {
       const newAwayScore = awayEl.value === "" ? null : Number(awayEl.value);
       const newStatus = statusEl.value;
 
-      const isKnockoutMatch = 
-        comp.mode === "knockout" || 
-        (comp.mode === "hybrid" && match.phase === "knockout");
+      const isKnockoutMatch = typeof match.round === "string";
+
 
       if (isKnockoutMatch && newStatus === "Končana" && newHomeScore === newAwayScore) {
         setError("V izločilnih bojih končni rezultat ne sme biti neodločen!");

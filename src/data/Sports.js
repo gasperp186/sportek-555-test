@@ -31,4 +31,8 @@ export const sports = {
     naslov: "Biljard",
     image: "/images/sports/biljard.jpg",
   },
+  balinanje: {
+    naslov: "Balinanje",
+    image: "/images/sports/balinanje.jpg",
+  },
 };

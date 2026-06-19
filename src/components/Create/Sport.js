@@ -31,6 +31,7 @@ export default function StepSport({ setForm, onNext }) {
           <SportCard sport="namizni nogomet" onSelect={selectSport} />
           <SportCard sport="odbojka" onSelect={selectSport} />
            <SportCard sport="nogomet" onSelect={selectSport} />
+           <SportCard sport="balinanje" onSelect={selectSport} />
         </div>
       </div>
     </div>
