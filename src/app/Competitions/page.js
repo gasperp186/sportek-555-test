@@ -15,6 +15,7 @@ const sportBackgrounds = {
   "namizni nogomet": "/images/sports/namizniNogomet.jpg",
   biljard: "/images/sports/biljard.jpg",
   "namizni tenis": "/images/sports/namizniTenis.jpg",
+  balinanje: "/images/sports/balinanje.jpg",
 };
 
 const fallbackBg = "/images/sports/football.jpg"; // Odstranjen /public/, Next.js ga ne potrebuje v poti

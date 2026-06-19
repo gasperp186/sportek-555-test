@@ -1,83 +1,67 @@
+.glavniKontejner {
+  width: 100%;
+  max-width: 500px; /* Omejitev širine celotnega bloka, da ne raztegne elementov preveč na namizju */
+  margin: 0 auto;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
 .naslov {
-      text-align: center;
+  text-align: center;
   font-size: 2rem;
   font-weight: 700;
   letter-spacing: 0.5px;
   color: var(--color-primary-light);
   margin: 0 0 .4rem;
-
 }
 
 .podnaslov {
-   text-align: center;
+  text-align: center;
   font-size: 16px;
   font-weight: 700;
   letter-spacing: 0.5px;
   color: var(--color-subtitle);
-  margin-bottom: 55px;
+  margin-bottom: 35px; /* Nekoliko zmanjšan odmik za boljši izkoristek prostora */
 }
 
-.dodajButton {
-margin-top: 14px;
-margin-bottom: 40px;
-margin-left: 18px;
-  padding: 8px 100px;
-  border-radius: 15px;
-  border: 1px dashed #2563eb;
-  background: #fff;
-  color: #2563eb;
-  font-size: 0.85rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: 0.2s ease;
-}
-
-.removeButton {
-
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  font-size: 0.9rem;
-  color: #94a3b8;
-  padding: 4px;
-  margin-top: 10px;
-  margin-left: 10px;
-
-}
-.teamInput {
-  padding: 8px 55px;
-  border-radius: 10px;
-  border: 1px solid #cbd5e1;
-  font-size: 0.9rem;
-  font-family: "Poppins", sans-serif;
-  transition: 0.2s ease;
-  background-color: white;
-  color: black;
-  margin-top: 10px;
-  text-align: center;
-}
-
-.index {
-    color: black;
-    font-size: 13px;
-    margin-right: 10px;
-    margin-top: 7px;
-    
+.teamsList {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px; /* Enakomerni razmiki med vrsticami namesto margin-top */
 }
 
 .teamRow {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
 }
 
-.dodajBtnDiv {
-
-   display: flex;
-  align-items: center;
-  justify-content: center;
+.index {
+  color: black;
+  font-size: 14px;
+  font-weight: 600;
+  width: 24px; /* Fiksna širina poskrbi, da so vsi inputi popolnoma poravnani */
+  text-align: right;
+  margin-right: 12px;
 }
 
+.teamInput {
+  flex: 1;
+  max-width: 280px; /* Stabilna širina inputa */
+  width: 100%;
+  padding: 10px 15px; /* Namesto ogromnega stranskega paddinga */
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  font-size: 0.95rem;
+  font-family: "Poppins", sans-serif;
+  transition: 0.2s ease;
+  background-color: white;
+  color: black;
+  text-align: center;
+  box-sizing: border-box;
+}
 
 .teamInput:focus {
   outline: none;
@@ -85,13 +69,77 @@ margin-left: 18px;
   box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.18);
 }
 
+/* Kontejner za gumb "X" poskrbi, da se postavitev ob izbrisu ne zamakne */
+.removeButtonWrapper {
+  width: 32px;
+  margin-left: 8px;
+  display: flex;
+  justify-content: flex-start;
+}
 
+.removeButton {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 1rem;
+  color: #94a3b8;
+  padding: 6px;
+  transition: color 0.2s ease;
+}
 
-.addTeamBtn:hover {
-  background: #eff6ff;
+.removeButton:hover {
+  color: #e11d48;
+}
+
+.prazenProstor {
+  width: 32px;
+  height: 32px;
+}
+
+.dodajBtnDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.dodajButton {
+  margin-bottom: 40px;
+  padding: 10px 0;
+  width: 100%;
+  max-width: 280px; /* Poravnano s širino inputov */
+  border-radius: 15px;
+  border: 1px dashed #2563eb;
+  background: #fff;
+  color: #2563eb;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s ease;
+  text-align: center;
 }
 
 
-.removeTeamBtn:hover {
-  color: #e11d48;
+
+/* Prilagoditve za manjše mobilne naprave (npr. telefoni pod 480px širine) */
+@media (max-width: 480px) {
+  .naslov {
+    font-size: 1.6rem;
+  }
+  
+  .podnaslov {
+    font-size: 14px;
+    margin-bottom: 25px;
+  }
+
+  .teamInput, .dodajButton {
+    font-size: 0.9rem;
+    padding: 10px 10px;
+  }
+  
+  .index {
+    font-size: 13px;
+    margin-right: 8px;
+  }
 }
