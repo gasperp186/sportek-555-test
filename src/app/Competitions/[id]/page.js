@@ -50,7 +50,7 @@ export default async function Page({ params }) {
             <span className={classes.separator}>|</span>
             <div><strong>Kraj:</strong> {comp.city}</div>
             <span className={classes.separator}>|</span>
-            <div><strong>Kraj:</strong> {comp.location}</div>
+            <div><strong>Lokacija:</strong> {comp.location}</div>
             <span className={classes.separator}>|</span>
           </div>
           <div className={classes.dateGroup}>

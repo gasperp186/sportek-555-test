@@ -253,3 +253,14 @@
     display: none;
   }
 }
+
+@media (max-width: 700px) {
+  .metaGroup {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .separator {
+    display: none;
+  }
+}
