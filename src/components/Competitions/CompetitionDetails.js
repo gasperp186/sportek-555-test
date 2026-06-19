@@ -16,7 +16,7 @@ import LeagueRound from "./LeagueMatchRow";
 import { db } from "@/lib/firebase";
 import { collection, onSnapshot, doc, updateDoc } from "firebase/firestore";
 import LeagueView from "./LeagueView";
-import LoadingSpinner from "@/components/LoadingSpinner"; // <-- 1. UVOZ KOMPONENTE
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 
 
@@ -29,6 +29,9 @@ export default function CompetitionDetails({ id, initialData, basePath = "", isE
   const [applications, setApplications] = useState([]);
   const [selectedRound, setSelectedRound] = useState(1);
   const [editTab, setEditTab] = useState("tekme");
+  
+  // Stanje, ki spremlja, ali je bila pravkar oddana zadnja uspešna prijava
+  const [zadnjaPrijavaUspela, setZadnjaPrijavaUspela] = useState(false);
 
   const router = useRouter();
   const pathName = usePathname();
@@ -46,7 +49,6 @@ export default function CompetitionDetails({ id, initialData, basePath = "", isE
 
   const isFull = aktivnePrijaveCount >= maxMest;
   const prostaMesta = Math.max(0, maxMest - aktivnePrijaveCount);
-
 
 
   // Preverjanje pogojev za polfinale
@@ -174,9 +176,12 @@ export default function CompetitionDetails({ id, initialData, basePath = "", isE
   const isLeague = comp?.mode === "ligaski";
   const isHybrid = comp?.mode === "hybrid";
   const mode = comp.publishMode;
+  
+  // Pogoji prilagojeni tako, da upoštevajo začasno stanje uspeha
   const showForm = mode === "FORM_ONLY" && !isFull;
+  const mestaZapolnjena = mode === "FORM_ONLY" && isFull && !zadnjaPrijavaUspela;
+
   const showSchedule = mode === "SCHEDULE_ONLY";
-  const mestaZapolnjena = mode === "FORM_ONLY" && isFull;
   const isBracket = showSchedule && !isLeague && matches.length > 0;
 
   const today = new Date().setHours(0, 0, 0, 0);
@@ -226,8 +231,34 @@ if (!isHybrid) {
           <>
             {mestaZapolnjena && <MestaZapolnjena />}
             {konecPrijav && <KonecPrijav />}
+            
+            {/* Če je bila oddana zadnja prijava in je baza že javila isFull, prikažemo uspeh */}
+            {isFull && zadnjaPrijavaUspela && (
+              <div style={{
+                backgroundColor: "#d1fae5",
+                color: "#065f46",
+                padding: "1rem",
+                borderRadius: "0.5rem",
+                textAlign: "center",
+                fontWeight: "bold",
+                marginBottom: "1rem"
+              }}>
+                Prijava uspešna!
+              </div>
+            )}
+
+            {/* Normalen prikaz obrazca */}
             {showForm && (
-              <PrijavniObrazec competition={comp} onSuccess={() => {}} />
+              <PrijavniObrazec 
+                competition={comp} 
+                onSuccess={() => {
+                  // Tukaj prestrežemo klik in aktiviramo zeleni napis za 4 sekunde
+                  setZadnjaPrijavaUspela(true);
+                  setTimeout(() => {
+                    setZadnjaPrijavaUspela(false);
+                  }, 4000);
+                }} 
+              />
             )}
           </>
         )}

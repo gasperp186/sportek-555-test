@@ -1,31 +1,37 @@
 import React from "react";
 import classes from "./Uporabniki.module.css";
 
-
-
 const podatki = [
   {
     chip: "Organizator",
     title: "Enostavno vodenje tekmovanj",
     text: "Hitro odpri javne prijave z omejitvijo ekip, avtomatsko generiraj ligaški žreb in brez truda upravljaj razpored po krogih.",
+    image: "/images/merge1.jpg"
   },
   {
     chip: "Igralec",
-    title: "Urnik in rezultati vedno pri roki",
+    title: "Urnik in rezultati",
     text: "Spremljaj svoje prihajajoče in odigrane tekme preko koledarja. Vsi podatki so vedno ažurni.",
+    image: "/images/merge2.jpg"
   },
   {
     chip: "Gledalec",
     title: "Spremljanje v živo",
-    text: "Preprosto izberi šport in si oglej trenutno lestvico lige, točke ter izide tekem. Idealno za navijače in spremljanje rezultatov.",
+    text: "Izberi tekmovanje in si oglej trenutno lestvico lige, točke ter izide tekem. Idealno za navijače in spremljanje rezultatov.",
+    image: "/images/merge3.jpg"
   },
 ];
 
 function Card({ p }) {
   return (
     <article className={classes.card}>
-      <div className={classes.media}>
-        <img src={p.imgSrc} alt={p.chip} loading="lazy" />
+      <div className={classes.media} style={{ width: "100%", overflow: "hidden" }}>
+        <img 
+          src={p.image} 
+          alt={p.chip} 
+          loading="lazy" 
+          style={{ width: "100%", height: "auto", display: "block", objectFit: "cover" }} 
+        />
       </div>
 
       <div className={classes.content}>
