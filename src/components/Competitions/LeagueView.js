@@ -3,9 +3,9 @@
 import LeagueRound from "./LeagueMatchRow";
 import classes from "./League.module.css";
 import classes2 from "./LeagueScreenShot.module.css"
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 
-export default function LeagueView({ matches, teams, id, isExport }) {
+export default function LeagueView({ matches, teams, id, isExport, form, setForm }) {
   // 1. Izračun začetnega kroga
   const initialRound = useMemo(() => {
     if (!matches || matches.length === 0) return 1;
@@ -36,6 +36,74 @@ export default function LeagueView({ matches, teams, id, isExport }) {
   }, [matches]);
 
   const [selectedRound, setSelectedRound] = useState(initialRound);
+
+  // =========================================================================
+  // --- NOVO: AVTOMATSKO NAPREDOVANJE IZ POLFINALA V FINALE / 3. MESTO ---
+  // =========================================================================
+  useEffect(() => {
+    if (!matches || !setForm) return;
+
+    let prisloDoSpremembe = false;
+    // Naredimo kopijo trenutnih tekem
+    let posodobljeneTekme = [...matches];
+
+    // Poiščemo polfinalne, finalne in tekme za 3. mesto
+    const sf1 = posodobljeneTekme.find(m => m.round === "SF1");
+    const sf2 = posodobljeneTekme.find(m => m.round === "SF2");
+    
+    // Funkcija, ki ugotovi zmagovalca/poraženca in preveri strukturo (lahko je string ali objekt)
+    const izracunajIzid = (sfMatch) => {
+      if (!sfMatch || sfMatch.status !== "Končana" || sfMatch.homeScore === null || sfMatch.awayScore === null) {
+        return { zmagovalec: null, porazenec: null };
+      }
+      const hScore = Number(sfMatch.homeScore);
+      const aScore = Number(sfMatch.awayScore);
+      
+      const zmagovalec = hScore > aScore ? sfMatch.home : sfMatch.away;
+      const porazenec = hScore > aScore ? sfMatch.away : sfMatch.home;
+      return { zmagovalec, porazenec };
+    };
+
+    const sf1Rezultat = izracunajIzid(sf1);
+    const sf2Rezultat = izracunajIzid(sf2);
+
+    // Posodobimo končne tekme v naši kopiji, če so polfinali zaključeni
+    posodobljeneTekme = posodobljeneTekme.map(m => {
+      let osvezenMatch = { ...m };
+
+      // Preverjamo in nastavljamo Finale (F1) in 3. mesto (T3) za SF1
+      if (sf1Rezultat.zmagovalec) {
+        if (m.round === "F1" && m.home !== sf1Rezultat.zmagovalec) {
+          osvezenMatch.home = sf1Rezultat.zmagovalec;
+          prisloDoSpremembe = true;
+        }
+        if (m.round === "T3" && m.home !== sf1Rezultat.porazenec) {
+          osvezenMatch.home = sf1Rezultat.porazenec;
+          prisloDoSpremembe = true;
+        }
+      }
+
+      // Preverjamo in nastavljamo Finale (F1) in 3. mesto (T3) za SF2
+      if (sf2Rezultat.zmagovalec) {
+        if (m.round === "F1" && m.away !== sf2Rezultat.zmagovalec) {
+          osvezenMatch.away = sf2Rezultat.zmagovalec;
+          prisloDoSpremembe = true;
+        }
+        if (m.round === "T3" && m.away !== sf2Rezultat.porazenec) {
+          osvezenMatch.away = sf2Rezultat.porazenec;
+          prisloDoSpremembe = true;
+        }
+      }
+
+      return osvezenMatch;
+    });
+
+    // Če se je karkoli spremenilo, shranimo v state brez povzročanja neskončne zanke
+    if (prisloDoSpremembe) {
+      setForm(prev => ({ ...prev, matches: posodobljeneTekme }));
+    }
+  }, [matches, setForm]);
+  // =========================================================================
 
   // 2. Izračun lestvice
   const lestvicaSorted = useMemo(() => {
