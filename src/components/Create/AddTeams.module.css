@@ -18,6 +18,8 @@
   border: 2px solid #3b82f6; /* Modra obroba na PC-ju */
   box-sizing: border-box;
   margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .control {
