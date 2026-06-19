@@ -24,7 +24,7 @@ export default async function Page({ params }) {
   };
 
   const isFormOnly = comp.publishMode === "FORM_ONLY";
-  const jeBracket4 = (comp.mode === "knockout" || comp.mode === "bracket") && comp.maxTeams === 4;
+  const jeBracket4 = (comp.mode === "knockout" || comp.mode === "bracket" || (comp.mode === "hybrid")) && comp.maxTeams === 4;
 
   let screenshotConfig = {
     width: "950px",

@@ -183,13 +183,18 @@ export default function CompetitionDetails({ id, initialData, basePath = "", isE
   const deadLine = comp?.registrationDeadline ? new Date(comp.registrationDeadline).setHours(0, 0, 0, 0) : null;
   const konecPrijav = deadLine ? deadLine < today : false;
 
+ 
   let Bracket = Bracket4;
+if (!isHybrid) {
   if (teamCount === 8) Bracket = Bracket8;
   if (teamCount === 16) Bracket = Bracket16;
+}
 
-  let ExportBracket = Bracket4;
+let ExportBracket = Bracket4;
+if (!isHybrid) {
   if (teamCount === 8) ExportBracket = Bracket8;
   if (teamCount === 16) ExportBracket = Bracket16;
+}
 
   // --- LOGIKA ZA SCREENSHOT EXPORT ---
   if (isExport) {
