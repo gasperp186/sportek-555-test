@@ -5,19 +5,19 @@ const podatki = [
   {
     chip: "Organizator",
     title: "Enostavno vodenje tekmovanj",
-    text: "Hitro odpri javne prijave z omejitvijo ekip, avtomatsko generiraj ligaški žreb in brez truda upravljaj razpored po krogih.",
+    text: "V nekaj klikih nastavi ime tekmovanja, lokacijo, datume in specifična pravila igre. Celotno vodenje športnega dogodka je zbrano na enem, preglednem mestu.",
     image: "/images/merge1.jpg"
   },
   {
     chip: "Igralec",
     title: "Urnik in rezultati",
-    text: "Spremljaj svoje prihajajoče in odigrane tekme preko koledarja. Vsi podatki so vedno ažurni.",
+    text: "Spremljaj prihajajoče in odigrane tekme preko koledarja in razporeda. Vsi podatki so vedno ažurni.",
     image: "/images/merge2.jpg"
   },
   {
     chip: "Gledalec",
     title: "Spremljanje v živo",
-    text: "Izberi tekmovanje in si oglej trenutno lestvico lige, točke ter izide tekem. Idealno za navijače in spremljanje rezultatov.",
+    text: "Izberi tekmovanje in si oglej trenutno lestvico lige, točke ter izide tekem.",
     image: "/images/merge3.jpg"
   },
 ];

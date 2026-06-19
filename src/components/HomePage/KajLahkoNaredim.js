@@ -17,15 +17,17 @@ export default function KajLahkoNaredim() {
             <article className={classes.card}>
               <Settings size={30} strokeWidth={2} style={{ marginRight: "8px" }}></Settings>
               <h3 className={classes.cardTitle}>Upravljaj rezultate</h3>
-              <p className={classes.desc}>Po vsakem odigranem dvoboju preprosto vnesi rezultate – sistem samodejno 
+              <p className={classes.desc}>Po vsakem odigranem dvoboju preprosto vnesi rezultate. Sistem samodejno 
                 izračuna posodobljeno lestvico, razpored naslednjih tekem in uvrstitve ekip.</p>
             </article>
 
             <article className={classes.card}>
               <Globe size={30} strokeWidth={2} style={{ marginRight: "8px" }}></Globe>
               <h3 className={classes.cardTitle}>Deli s svetom</h3>
-              <p className={classes.desc}>Spletno povezavo lahko deliš z igralci, 
-                navijači ali prijatelji. Vsakdo lahko spremlja rezultate, razporede in napredovanje ekip v živo.</p>
+             <p className={classes.desc}>
+  Spletno povezavo ali avtomatsko zgenerirane slike turnirja lahko preprosto deliš z igralci, 
+  navijači ali prijatelji. Vsakdo lahko v živo spremlja rezultate, razporede in napredovanje ekip.
+</p>
             </article>
           </div>
         </div>
