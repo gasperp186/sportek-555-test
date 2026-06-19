@@ -24,8 +24,6 @@ export default async function Page({ params }) {
   };
 
   const isFormOnly = comp.publishMode === "FORM_ONLY";
-  
-  // Pogoj, ki določi, kdaj gre za majhen turnir s 4 ekipami
   const jeBracket4 = (comp.mode === "knockout" || comp.mode === "bracket") && comp.maxTeams === 4;
 
   let screenshotConfig = {
@@ -49,9 +47,12 @@ export default async function Page({ params }) {
             <div><strong>Šport:</strong> {comp.sport}</div>
             <span className={classes.separator}>|</span>
             <div><strong>Kraj:</strong> {comp.city}</div>
-            <span className={classes.separator}>|</span>
-            <div><strong>Lokacija:</strong> {comp.location}</div>
-            <span className={classes.separator}>|</span>
+            {comp.location && (
+              <>
+                <span className={classes.separator}>|</span>
+                <div><strong>Lokacija:</strong> {comp.location}</div>
+              </>
+            )}
           </div>
           <div className={classes.dateGroup}>
             {comp.mode === "bracket" || comp.mode === "knockout" ? (
@@ -70,7 +71,6 @@ export default async function Page({ params }) {
         
         <CompetitionDetails id={id} initialData={comp} isEditMode={true} />
         
-        {/* Dinamična zamenjava razreda za širino vrste */}
         <div
           className={jeBracket4 ? classes.ozjaVrsta : classes.vrsta}
           style={isFormOnly ? { justifyContent: 'center' } : {}}
@@ -100,7 +100,6 @@ export default async function Page({ params }) {
           </div>
         </div>
         
-       
         <BackButton/>
       </div>
     </div>
