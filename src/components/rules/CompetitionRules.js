@@ -9,7 +9,6 @@ import { collection, addDoc } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import { getAuth } from "firebase/auth";
 
-// Uvozi tvoj LoadingSpinner (prilagodi pot, če je mapa drugje)
 import LoadingSpinner from "@/components/LoadingSpinner"; 
 
 const DEFAULT_RULES = {
@@ -19,7 +18,9 @@ const DEFAULT_RULES = {
   biljard: `Igra se po pravilih 'osmice' (8-ball) ali 'devetke' (9-ball). Zmaga tisti, ki prvi pospravi vse svoje krogline in na koncu črno kroglo (pri osmici). Upoštevajo se standardna pravila o prekrških in 'foul' udarcih.`,
   pikado: `Najpogostejša igra je 501 ali 301. Igralci izmenično metajo po tri puščice. Cilj je čim hitreje priti do ničle, pri čemer se mora zadnji met končati z zadetkom v 'double' polje.`,
   "namizni nogomet": `Igra se do doseženih 10 golov ali na dva dobljena niza do 5. Prepovedano je 'vrtenje' ročk (spinning). Ekipo sestavljata en ali dva igralca.`,
-  "namizni tenis": `Tekma se igra na tri dobljene sete. Posamezen set se igra do 11. točke. Servis se menja na vsaki dve točki. Pri rezultatu 10:10 se igra na dve točki razlike.`
+  "namizni tenis": `Tekma se igra na tri dobljene sete. Posamezen set se igra do 11. točke. Servis se menja na vsaki dve točki. Pri rezultatu 10:10 se igra na dve točki razlike.`,
+  balinanje: `Tekma se igra 1h 15 min oziroma do 13 točk. V primeru neoodločenega izzida se odigra dodatni met dokler ne dobimo zmagovalca.`
+
 };
 
 export default function CompetitionRules({ form, setForm, onBack }) {
@@ -37,7 +38,7 @@ export default function CompetitionRules({ form, setForm, onBack }) {
 
   const handleFinalSubmit = async () => {
     if (isLoading) return;
-    setIsLoading(true); // Tukaj se bo prikazal tvoj LoadingSpinner
+    setIsLoading(true);
 
     const auth = getAuth();
     if (!auth.currentUser) {
@@ -76,11 +77,9 @@ export default function CompetitionRules({ form, setForm, onBack }) {
         competitionToSave.season = "";
       }
 
-      // 1. Shranimo glavno tekmovanje
       const docRef = await addDoc(collection(db, "competitions"), competitionToSave);
       const compId = docRef.id;
 
-      // 2. Shranimo ekipe
       if (form.teams && Array.isArray(form.teams)) {
         for (const team of form.teams) {
           await addDoc(collection(db, "competitions", compId, "teams"), {
@@ -89,7 +88,6 @@ export default function CompetitionRules({ form, setForm, onBack }) {
         }
       }
 
-      // 3. Shranimo tekme
       if (form.matches && Array.isArray(form.matches)) {
         for (const match of form.matches) {
           const matchData = {
@@ -121,8 +119,8 @@ export default function CompetitionRules({ form, setForm, onBack }) {
         }
       }
 
-      setIsLoading(false); // Skrijemo spinner
-      setIsSuccess(true);  // Prikažemo obvestilo o uspehu
+      setIsLoading(false);
+      setIsSuccess(true);
 
       setTimeout(() => {
         router.push("/Competitions");
@@ -134,18 +132,17 @@ export default function CompetitionRules({ form, setForm, onBack }) {
       setIsLoading(false);
     }
   };
-// 1. Če se podatki nalagajo, takoj vrnemo prazno stran, ki vsebuje SAMO tvoj spinner
+
   if (isLoading) {
     return <LoadingSpinner />;
   }
 
-  // 2. Če se ne nalaga, se izriše preostali del strani (obrazec ali obvestilo o uspehu)
   return (
     <div className={createClasses.page}>
       <form className={stepClasses.card} onSubmit={(e) => e.preventDefault()}>
-        <h2 className={createClasses.naslov}>Pravila tekmovanja</h2>
+        
+        {!isSuccess && <h2 className={createClasses.naslov}>Pravila tekmovanja</h2>}
 
-        {/* Če je shranjevanje uspelo, pokažemo samo čisto potrditveno okno */}
         {isSuccess ? (
           <div style={{
             textAlign: 'center',
