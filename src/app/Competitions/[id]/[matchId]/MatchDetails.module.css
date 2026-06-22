@@ -184,6 +184,7 @@ justify-content: space-between;
   background-color: rgb(60, 60, 65);
   border: none;
   border-radius: 10px;
+  color: white;
 }
 
 .inlineInput {
