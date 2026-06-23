@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import classes from "./MatchDetails.module.css";
+import classes2 from "./tekmaScreen.module.css";
 
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 
@@ -115,7 +116,7 @@ export default function Page() {
       cacheBust: true,
       pixelRatio: 2,
       backgroundColor: '#b64e4e',
-      style: { padding: '20px' }
+      style: { padding: '20px'}
     })
     .then((dataUrl) => {
       const link = document.createElement('a');
@@ -323,10 +324,11 @@ setTimeout(() => setSuccessMsg(null), 3000);
         </div>
 
         <div style={{ position: 'absolute', left: '-9999px', top: '0' }}>
-          <div ref={ref} className={classes.socialCardExport}>
+          <div ref={ref} className={classes.socialCardExport} style={{ width: '950px', height: '1100px' }}>
+
             <h1 className={classes.exportCompTitle}>{comp?.title}</h1>
-            <h2 className={classes.exportRound}>{izpisanNapis}</h2>
-            <div className={classes.exportMatchArea}>
+              <h2 className={classes.exportRound}>{izpisanNapis.toUpperCase()}</h2>            
+              <div className={classes.exportMatchArea}>
               <div className={classes.exportTeam}><h3>{match.home?.name || match.home}</h3></div>
               <div className={classes.exportScore}>{match.homeScore ?? 0}</div>
               <div className={classes.exportScore}>{match.awayScore ?? 0}</div>
@@ -335,7 +337,7 @@ setTimeout(() => setSuccessMsg(null), 3000);
           </div>
 
           <div style={{ width: '800px' }}>
-            <div ref={refPlakat} className={classes.plakatExport}>
+            <div ref={refPlakat} className={classes.plakatExport} style={{ width: '850px', height: '1100px' }}>
               <h1 className={classes.plakatTitle}>{comp?.title}</h1>
               <h1 className={classes.plakatRound}>{izpisanNapis}</h1>
               <div className={classes.plakatDate}>

@@ -260,12 +260,13 @@ justify-content: space-between;
   text-transform: uppercase;
   letter-spacing: 4px;
   margin-bottom: 20px;
-  margin-top: 50px;
+  margin-top: 80px;
 }
 
 .exportRound {
   font-size: 40px;
   margin-bottom: 50px;
+  margin-top: 30px;
 }
 
 .koncniRezultat {
@@ -284,6 +285,7 @@ justify-content: space-between;
   
   /* Razmik med elementi (da niso čisto skupaj) */
   gap: 15px; 
+  margin-top: 50px;
 }
 
 .exportTeam h3 {

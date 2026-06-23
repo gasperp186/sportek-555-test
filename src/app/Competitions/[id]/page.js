@@ -28,13 +28,13 @@ export default async function Page({ params }) {
 
   let screenshotConfig = {
     width: "950px",
-    height: "800px",
+    height: "1100px",
   };
 
   if (comp.mode === "ligaski") {
     screenshotConfig = {
       width: "900px",
-      height: "1100px", 
+      height: "1800px", 
     };
   }
 
