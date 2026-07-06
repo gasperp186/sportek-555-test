@@ -105,7 +105,7 @@ export default function Draw({ form, setForm, onBack, onNext }) {
     return (
       <div className={createClasses.page}>
         <div className={drawClasses.card}>
-          <h1 className={createClasses.naslov}>Žreb knockout</h1>
+          <h1 className={createClasses.naslov}>Žreb</h1>
           <div className={drawClasses.bracketWide}>
             <SelectedBracket 
               teams={teams} 
