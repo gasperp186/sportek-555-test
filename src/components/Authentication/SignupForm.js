@@ -98,7 +98,7 @@ try {
             />
           </div>
           <div className={classes.control}>
-            <label htmlFor="confirm">Potrdite geslo</label>
+            <label htmlFor="confirm">Potrdi geslo</label>
             <input id="confirm" type="password" minLength={6}   onChange={(e) => setConfirmPassword(e.target.value)}
                    required value={confirmPassword} />
             
