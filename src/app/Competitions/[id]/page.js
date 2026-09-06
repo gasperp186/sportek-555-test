@@ -28,7 +28,7 @@ export default async function Page({ params }) {
 
   let screenshotConfig = {
     width: "950px",
-    height: "700px",
+    height: "770px",
   };
 
   if (comp.mode === "ligaski") {
