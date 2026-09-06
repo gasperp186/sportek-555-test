@@ -41,7 +41,7 @@ export default async function Page({ params }) {
     if (comp.mode === "hybrid") {
     screenshotConfig = {
       width: "900px",
-      height: "1800px", 
+      height: "1000px", 
     };
   }
 
