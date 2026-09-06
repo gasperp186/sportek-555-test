@@ -268,26 +268,36 @@
   margin-top: 6px !important;
   margin-bottom: 3px !important;
 }
-.matchContentExport {
-  grid-column: 2; 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 5px;      /* Zmanjšan razmik med ekipo in rezultatom iz 1rem na 0.5rem */
-  font-size: 13px;   /* Manjša pisava za celoten tekst */
-  line-height: 1.1;
+.matchRowExport {
+  composes: matchRow;
+  grid-template-columns: 50px 1fr 20px !important;
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+  margin-bottom: 10px !important;
+  max-width: 800px;
+  width: 100%;
 }
 
 .teamLeftExport {
-  composes: teamLeft; /* Prevzame pisavo, barvo, skrivanje dolgih imen in flex: 1 */
+  composes: teamLeft;
   font-size: 14px;
   font-weight: bold;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: unset;
+  word-break: break-word;
+  flex: 1;
 }
 
 .teamRightExport {
-  composes: teamRight; /* Prevzame pisavo, barvo, skrivanje dolgih imen in flex: 1 */
+  composes: teamRight;
   font-size: 14px;
   font-weight: bold;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: unset;
+  word-break: break-word;
+  flex: 1;
 }
 
 .scoreExport {
