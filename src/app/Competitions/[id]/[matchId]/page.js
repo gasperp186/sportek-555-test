@@ -10,8 +10,8 @@ import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-import { toPng } from 'html-to-image';
-import { Camera, Printer } from 'lucide-react';
+import { toPng } from "html-to-image";
+import { Camera, Printer } from "lucide-react";
 
 import {
   toDateOrNull,
@@ -21,14 +21,14 @@ import {
 } from "@/lib/DateTime";
 
 import { auth, db } from "@/lib/firebase";
-import { 
-  collection, 
-  getDocs, 
-  doc, 
-  getDoc, 
-  updateDoc, 
-  query, 
-  where 
+import {
+  collection,
+  getDocs,
+  doc,
+  getDoc,
+  updateDoc,
+  query,
+  where,
 } from "firebase/firestore";
 import LoadingSpinner from "@/components/LoadingSpinner";
 
@@ -58,12 +58,22 @@ export default function Page() {
     }
 
     const roundMapping = {
-      "R16_1": "Osmina finala", "R16_2": "Osmina finala", "R16_3": "Osmina finala", "R16_4": "Osmina finala",
-      "R16_5": "Osmina finala", "R16_6": "Osmina finala", "R16_7": "Osmina finala", "R16_8": "Osmina finala",
-      "QF1": "Četrtfinale", "QF2": "Četrtfinale", "QF3": "Četrtfinale", "QF4": "Četrtfinale",
-      "SF1": "Polfinale", "SF2": "Polfinale",
-      "T3": "Tekma za 3. mesto",
-      "F1": "Finale"
+      R16_1: "Osmina finala",
+      R16_2: "Osmina finala",
+      R16_3: "Osmina finala",
+      R16_4: "Osmina finala",
+      R16_5: "Osmina finala",
+      R16_6: "Osmina finala",
+      R16_7: "Osmina finala",
+      R16_8: "Osmina finala",
+      QF1: "Četrtfinale",
+      QF2: "Četrtfinale",
+      QF3: "Četrtfinale",
+      QF4: "Četrtfinale",
+      SF1: "Polfinale",
+      SF2: "Polfinale",
+      T3: "Tekma za 3. mesto",
+      F1: "Finale",
     };
 
     return roundMapping[match.round] || `Krog ${match.round}`;
@@ -112,15 +122,14 @@ export default function Page() {
 
   const shraniPng = useCallback(() => {
     if (ref.current === null) return;
-    toPng(ref.current, { 
+    toPng(ref.current, {
       cacheBust: true,
       pixelRatio: 2,
-      backgroundColor: '#b64e4e',
-      style: { padding: '20px'}
-    })
-    .then((dataUrl) => {
-      const link = document.createElement('a');
-      link.download = 'rezultat.png';
+      backgroundColor: "#b64e4e",
+      style: { padding: "20px" },
+    }).then((dataUrl) => {
+      const link = document.createElement("a");
+      link.download = "rezultat.png";
       link.href = dataUrl;
       link.click();
     });
@@ -128,15 +137,14 @@ export default function Page() {
 
   const shraniPlakat = useCallback(() => {
     if (refPlakat.current === null) return;
-    toPng(refPlakat.current, { 
+    toPng(refPlakat.current, {
       cacheBust: true,
       pixelRatio: 2,
-      backgroundColor: '#b64e4e',
-      style: { padding: '20px' }
-    })
-    .then((dataUrl) => {
-      const link = document.createElement('a');
-      link.download = 'plakat.png';
+      backgroundColor: "#b64e4e",
+      style: { padding: "20px" },
+    }).then((dataUrl) => {
+      const link = document.createElement("a");
+      link.download = "plakat.png";
       link.href = dataUrl;
       link.click();
     });
@@ -161,8 +169,11 @@ export default function Page() {
 
       const isKnockoutMatch = typeof match.round === "string";
 
-
-      if (isKnockoutMatch && newStatus === "Končana" && newHomeScore === newAwayScore) {
+      if (
+        isKnockoutMatch &&
+        newStatus === "Končana" &&
+        newHomeScore === newAwayScore
+      ) {
         setError("V izločilnih bojih končni rezultat ne sme biti neodločen!");
         setIsSaving(false);
         return;
@@ -173,19 +184,43 @@ export default function Page() {
 
       if (typeof match.round === "string") {
         let targetRound = null;
-        
-        switch(match.round) {
-          case "R16_1": case "R16_2": targetRound = "QF1"; break;
-          case "R16_3": case "R16_4": targetRound = "QF2"; break;
-          case "R16_5": case "R16_6": targetRound = "QF3"; break;
-          case "R16_7": case "R16_8": targetRound = "QF4"; break;
-          case "QF1": case "QF2": targetRound = "SF1"; break;
-          case "QF3": case "QF4": targetRound = "SF2"; break;
-          case "SF1": case "SF2": targetRound = "F1"; break;
+
+        switch (match.round) {
+          case "R16_1":
+          case "R16_2":
+            targetRound = "QF1";
+            break;
+          case "R16_3":
+          case "R16_4":
+            targetRound = "QF2";
+            break;
+          case "R16_5":
+          case "R16_6":
+            targetRound = "QF3";
+            break;
+          case "R16_7":
+          case "R16_8":
+            targetRound = "QF4";
+            break;
+          case "QF1":
+          case "QF2":
+            targetRound = "SF1";
+            break;
+          case "QF3":
+          case "QF4":
+            targetRound = "SF2";
+            break;
+          case "SF1":
+          case "SF2":
+            targetRound = "F1";
+            break;
         }
 
         if (newStatus === "Končana" && match.nextPosition && targetRound) {
-          const winner = newHomeScore > newAwayScore ? (match.home?.name || match.home) : (match.away?.name || match.away);
+          const winner =
+            newHomeScore > newAwayScore
+              ? match.home?.name || match.home
+              : match.away?.name || match.away;
           const q = query(matchesRef, where("round", "==", targetRound));
           const snap = await getDocs(q);
           if (!snap.empty) {
@@ -193,12 +228,21 @@ export default function Page() {
           }
         }
 
-        if (newStatus === "Končana" && String(match.round).startsWith("SF") && match.nextPosition) {
-          const loser = newHomeScore > newAwayScore ? (match.away?.name || match.away) : (match.home?.name || match.home);
+        if (
+          newStatus === "Končana" &&
+          String(match.round).startsWith("SF") &&
+          match.nextPosition
+        ) {
+          const loser =
+            newHomeScore > newAwayScore
+              ? match.away?.name || match.away
+              : match.home?.name || match.home;
           const queryT3 = query(matchesRef, where("round", "==", "T3"));
           const snapT3 = await getDocs(queryT3);
           if (!snapT3.empty) {
-            await updateDoc(snapT3.docs[0].ref, { [match.nextPosition]: loser });
+            await updateDoc(snapT3.docs[0].ref, {
+              [match.nextPosition]: loser,
+            });
           }
         }
       }
@@ -211,13 +255,18 @@ export default function Page() {
         time: match.time || "",
         location: match.location || "",
         city: match.city || "",
-        completed: newStatus === "Končana"
+        completed: newStatus === "Končana",
       });
 
-      setMatch(prev => ({ ...prev, homeScore: newHomeScore, awayScore: newAwayScore, status: newStatus }));
+      setMatch((prev) => ({
+        ...prev,
+        homeScore: newHomeScore,
+        awayScore: newAwayScore,
+        status: newStatus,
+      }));
       setSuccessMsg("Shranjeno!");
       setSuccessMsg("Shranjeno!");
-setTimeout(() => setSuccessMsg(null), 3000);
+      setTimeout(() => setSuccessMsg(null), 3000);
     } catch (err) {
       console.error("Napaka pri shranjevanju:", err);
       setError("Napaka pri shranjevanju");
@@ -239,9 +288,19 @@ setTimeout(() => setSuccessMsg(null), 3000);
           <div className={classes.team}>
             <h3>{match.home?.name || match.home || "TBD"}</h3>
             {role === "owner" || role === "editor" ? (
-              <input id="homeInput" type="number" className={classes.scoreInput} defaultValue={match.homeScore ?? ""} min="0" />
+              <input
+                id="homeInput"
+                type="number"
+                className={classes.scoreInput}
+                defaultValue={match.homeScore ?? ""}
+                min="0"
+              />
             ) : (
-              <p className={classes.score}>{match.status === "Načrtovana" || match.status === "schedule" ? "-" : match.homeScore ?? "-"}</p>
+              <p className={classes.score}>
+                {match.status === "Načrtovana" || match.status === "schedule"
+                  ? "-"
+                  : (match.homeScore ?? "-")}
+              </p>
             )}
           </div>
 
@@ -250,16 +309,30 @@ setTimeout(() => setSuccessMsg(null), 3000);
           <div className={classes.team}>
             <h3>{match.away?.name || match.away || "TBD"}</h3>
             {role === "owner" || role === "editor" ? (
-              <input id="awayInput" type="number" className={classes.scoreInput} defaultValue={match.awayScore ?? ""} min="0" />
+              <input
+                id="awayInput"
+                type="number"
+                className={classes.scoreInput}
+                defaultValue={match.awayScore ?? ""}
+                min="0"
+              />
             ) : (
-              <p className={classes.score}>{match.status === "Načrtovana" || match.status === "schedule" ? "-" : match.awayScore ?? "-"}</p>
+              <p className={classes.score}>
+                {match.status === "Načrtovana" || match.status === "schedule"
+                  ? "-"
+                  : (match.awayScore ?? "-")}
+              </p>
             )}
           </div>
         </div>
 
         <div className={classes.statusBox}>
           {role === "owner" || role === "editor" ? (
-            <select id="status" defaultValue={match.status} className={classes.status}>
+            <select
+              id="status"
+              defaultValue={match.status}
+              className={classes.status}
+            >
               <option value="Načrtovana">Načrtovana</option>
               <option value="V teku">V teku</option>
               <option value="Končana">Končana</option>
@@ -277,79 +350,154 @@ setTimeout(() => setSuccessMsg(null), 3000);
               <div className={classes.infoRow}>
                 <div className={classes.box}>
                   <strong>Datum:</strong>
-                  <DatePicker selected={selectedDate} onChange={(d) => updateMatchField("date", d ? formatYMD(d) : "")} dateFormat="dd.MM.yyyy" className={classes.dpInput} />
+                  <DatePicker
+                    selected={selectedDate}
+                    onChange={(d) =>
+                      updateMatchField("date", d ? formatYMD(d) : "")
+                    }
+                    dateFormat="dd.MM.yyyy"
+                    className={classes.dpInput}
+                  />
                 </div>
                 <div className={classes.box}>
                   <strong>Ura:</strong>
-                  <DatePicker selected={selectedTime} onChange={(d) => updateMatchField("time", d ? formatHM(d) : "")} showTimeSelect showTimeSelectOnly timeIntervals={15} dateFormat="HH:mm" className={classes.dpInput} />
+                  <DatePicker
+                    selected={selectedTime}
+                    onChange={(d) =>
+                      updateMatchField("time", d ? formatHM(d) : "")
+                    }
+                    showTimeSelect
+                    showTimeSelectOnly
+                    timeIntervals={15}
+                    dateFormat="HH:mm"
+                    className={classes.dpInput}
+                  />
                 </div>
               </div>
               <div className={classes.infoRow}>
                 <div className={classes.box}>
                   <strong>Lokacija:</strong>
-                  <input type="text" value={match.location || ""} onChange={(e) => updateMatchField("location", e.target.value)} />
+                  <input
+                    type="text"
+                    value={match.location || ""}
+                    onChange={(e) =>
+                      updateMatchField("location", e.target.value)
+                    }
+                  />
                 </div>
                 <div className={classes.box}>
                   <strong>Kraj:</strong>
-                  <input type="text" value={match.city || ""} onChange={(e) => updateMatchField("city", e.target.value)} />
+                  <input
+                    type="text"
+                    value={match.city || ""}
+                    onChange={(e) => updateMatchField("city", e.target.value)}
+                  />
                 </div>
               </div>
             </>
           ) : (
             <>
               <div className={classes.infoRow}>
-                <p><strong>Datum:</strong> {match.date || "Ni določen"}</p>
-                <p><strong>Čas:</strong> {match.time || "Ni določen"}</p>
+                <p>
+                  <strong>Datum:</strong> {match.date || "Ni določen"}
+                </p>
+                <p>
+                  <strong>Čas:</strong> {match.time || "Ni določen"}
+                </p>
               </div>
               <div className={classes.infoRow}>
-                <p><strong>Kraj:</strong> {match.city || "Ni določen"}</p>
-                <p><strong>Lokacija:</strong> {match.location || "Ni določen"}</p>
+                <p>
+                  <strong>Kraj:</strong> {match.city || "Ni določen"}
+                </p>
+                <p>
+                  <strong>Lokacija:</strong> {match.location || "Ni določen"}
+                </p>
               </div>
             </>
           )}
           {error && <p style={{ color: "red", marginTop: "10px" }}>{error}</p>}
-          {successMsg && <p style={{ color: "#4caf50", marginTop: "10px", fontWeight: "600" }}>{successMsg}</p>}
+          {successMsg && (
+            <p
+              style={{ color: "#4caf50", marginTop: "10px", fontWeight: "600" }}
+            >
+              {successMsg}
+            </p>
+          )}
         </div>
 
         <div className={classes.buttonDiv}>
           <div className={classes.prazenDiv}></div>
           <div className={classes.srednjiDiv}>
-            <button onClick={() => router.back()} className={classes.nazajButton}>Nazaj</button>
-            <button onClick={handleSave} className={classes.nazajButton}>Shrani</button>
+            <button
+              onClick={() => router.back()}
+              className={classes.nazajButton}
+            >
+              Nazaj
+            </button>
+            <button onClick={handleSave} className={classes.nazajButton}>
+              Shrani
+            </button>
           </div>
           <div className={classes.zadnjiDiv}>
-            <button onClick={shraniPng} className={classes.screenshoot}><Camera size={18} /></button>
-            <button onClick={shraniPlakat} className={classes.screenshoot}><Printer size={18} /></button>
+            <button onClick={shraniPng} className={classes.screenshoot}>
+              <Camera size={18} />
+            </button>
+            <button onClick={shraniPlakat} className={classes.screenshoot}>
+              <Printer size={18} />
+            </button>
           </div>
         </div>
 
-        <div style={{ position: 'absolute', left: '-9999px', top: '0' }}>
-          <div ref={ref} className={classes.socialCardExport} style={{ width: '950px', height: '1100px' }}>
-
+        <div style={{ position: "absolute", left: "-9999px", top: "0" }}>
+          <div
+            ref={ref}
+            className={classes.socialCardExport}
+            style={{ width: "950px", height: "1100px" }}
+          >
             <h1 className={classes.exportCompTitle}>{comp?.title}</h1>
-              <h2 className={classes.exportRound}>{izpisanNapis.toUpperCase()}</h2>            
-              <div className={classes.exportMatchArea}>
-              <div className={classes.exportTeam}><h3>{match.home?.name || match.home}</h3></div>
+            <h2 className={classes.exportRound}>
+              {izpisanNapis.toUpperCase()}
+            </h2>
+            <div className={classes.exportMatchArea}>
+              <div className={classes.exportTeam}>
+                <h3>{match.home?.name || match.home}</h3>
+              </div>
               <div className={classes.exportScore}>{match.homeScore ?? 0}</div>
               <div className={classes.exportScore}>{match.awayScore ?? 0}</div>
-              <div className={classes.exportTeam}><h3>{match.away?.name || match.away}</h3></div>
+              <div className={classes.exportTeam}>
+                <h3>{match.away?.name || match.away}</h3>
+              </div>
             </div>
           </div>
 
-          <div style={{ width: '800px' }}>
-            <div ref={refPlakat} className={classes.plakatExport} style={{ width: '850px', height: '1100px' }}>
+          <div style={{ width: "800px" }}>
+            <div
+              ref={refPlakat}
+              className={classes.plakatExport}
+              style={{ width: "850px", height: "1100px" }}
+            >
               <h1 className={classes.plakatTitle}>{comp?.title}</h1>
               <h1 className={classes.plakatRound}>{izpisanNapis}</h1>
               <div className={classes.plakatDate}>
-                <p>{match.date ? new Date(match.date).toLocaleDateString('sl-SI') : "Datum ni določen"}</p>
+                <p>
+                  {match.date
+                    ? new Date(match.date).toLocaleDateString("sl-SI")
+                    : "Datum ni določen"}
+                </p>
               </div>
               <div className={classes.plakatMatchRow}>
-                <span className={classes.plakatTeam}>{match.home?.name || match.home}</span>
+                <span className={classes.plakatTeam}>
+                  {match.home?.name || match.home}
+                </span>
                 <span className={classes.plakatVs}>VS</span>
-                <span className={classes.plakatTeam}>{match.away?.name || match.away}</span>
+                <span className={classes.plakatTeam}>
+                  {match.away?.name || match.away}
+                </span>
               </div>
               <div className={classes.plakatDetails}>
-                <p className={classes.textTime}>{match.time || "Ura ni določena"}</p>
+                <p className={classes.textTime}>
+                  {match.time || "Ura ni določena"}
+                </p>
               </div>
               <div className={classes.plakatDetails}>
                 <p className={classes.textDetails}>{match.location}</p>

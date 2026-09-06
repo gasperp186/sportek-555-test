@@ -49,12 +49,12 @@ export default function ScreenshotButton({ comp, contentToExport, width = "", he
       width: width, 
       height: height, 
       margin: '0',
-      padding: '40px 0', /* Malo paddinga zgoraj in spodaj, da naslovi dihajo */
+      padding: '40px 0', 
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
       boxSizing: 'border-box',
-      backgroundColor: '#1e293b' /* Za vsak slučaj še tukaj, da ni belih robov */
+      backgroundColor: '#1e293b' 
     }}
   >
     <h2 className={classes.naslov}>{comp.title}</h2>
@@ -81,7 +81,7 @@ export default function ScreenshotButton({ comp, contentToExport, width = "", he
       display: 'flex', 
       justifyContent: 'center',
       /* Če je liga, potisnemo vsebino bolj gor (manjši margin-top), če je bracket pa nižje */
-      marginTop: comp.mode === "ligaski" ? '0px' : '100px' 
+      marginTop: (comp.mode === "ligaski" || comp.mode === "hybrid") ? '0px' : '100px'
     }}>
       {contentToExport}
     </div>
