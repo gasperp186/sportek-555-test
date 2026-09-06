@@ -137,7 +137,6 @@
 
 .smallBtn:hover {
   background: #f8fafc;
-  transform: translateY(-1px);
 }
 
 .smallBtn:disabled {
