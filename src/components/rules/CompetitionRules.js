@@ -147,7 +147,7 @@ export default function CompetitionRules({ form, setForm, onBack }) {
           <div style={{
             textAlign: 'center',
             padding: '40px 20px',
-            color: '#10b981',
+            color: '#3b82f6',
             fontSize: '18px',
             fontWeight: '600'
           }}>
